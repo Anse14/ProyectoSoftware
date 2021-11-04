@@ -22,42 +22,42 @@ public class AuthController {
     @Inject
     AuthService authService;
 
-    @POST
-    @Path("/register")
-    @Transactional
-    public RegisterApi register(RegisterApi req) {
-        if(User.findByEmail(req.email).isPresent()) {
-            return new RegisterApi(req.email, "", 1, "", "");
-        }
-        (new User(req.email, req.password)).persist();
-
-        final String token = authService.genAccessToken(req.email);
-        final String refresh = authService.genRefreshToken();
-
-        (new RefreshToken(req.email, refresh)).persist();
-        return new RegisterApi(req.email, "", 0, token, refresh);
-    }
-
-    @POST
-    @Path("/login")
-    @Transactional
-    public LoginApi login(LoginApi req) {
-        var usr = User.findByEmail(req.email);
-        if(usr.isEmpty()) {
-            return new LoginApi("", 1, "", "");
-        }
-
-        if(!usr.get().password.equals(req.password)) {
-            return new LoginApi(req.email, 2, "", "");
-        }
-
-        final String token = authService.genAccessToken(req.email);
-        final String refresh = authService.genRefreshToken();
-
-        (new RefreshToken(req.email, refresh)).persist();
-
-        return new LoginApi(req.email, 0, token, refresh);
-    }
+//    @POST
+//    @Path("/register")
+//    @Transactional
+//    public RegisterApi register(RegisterApi req) {
+//        if(User.findByEmail(req.email).isPresent()) {
+//            return new RegisterApi(req.email, "", 1, "", "");
+//        }
+//        (new User(req.email, req.password)).persist();
+//
+//        final String token = authService.genAccessToken(req.email);
+//        final String refresh = authService.genRefreshToken();
+//
+//        (new RefreshToken(req.email, refresh)).persist();
+//        return new RegisterApi(req.email, "", 0, token, refresh);
+//    }
+//
+//    @POST
+//    @Path("/login")
+//    @Transactional
+//    public LoginApi login(LoginApi req) {
+//        var usr = User.findByEmail(req.email);
+//        if(usr.isEmpty()) {
+//            return new LoginApi("", 1, "", "");
+//        }
+//
+//        if(!usr.get().password.equals(req.password)) {
+//            return new LoginApi(req.email, 2, "", "");
+//        }
+//
+//        final String token = authService.genAccessToken(req.email);
+//        final String refresh = authService.genRefreshToken();
+//
+//        (new RefreshToken(req.email, refresh)).persist();
+//
+//        return new LoginApi(req.email, 0, token, refresh);
+//    }
 
     @POST
     @Path("/refresh")
