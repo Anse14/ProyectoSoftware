@@ -18,6 +18,7 @@ import { environment } from '../environments/environment';
 import { PrincipalComponent } from './pages/principal/principal.component';
 import { CallbackComponent } from './pages/auth/callback/callback.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [AppComponent, PrincipalComponent, CallbackComponent, DashboardComponent],
@@ -48,6 +49,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
         }),
       ],
     }),
+    GraphQLModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
