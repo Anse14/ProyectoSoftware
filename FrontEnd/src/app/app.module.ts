@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
+import { NbThemeModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import {
   NbAuthModule,
@@ -19,6 +19,7 @@ import { PrincipalComponent } from './pages/principal/principal.component';
 import { CallbackComponent } from './pages/auth/callback/callback.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { GraphQLModule } from './graphql.module';
+import { NebularModule } from './nebular.module';
 
 @NgModule({
   declarations: [AppComponent, PrincipalComponent, CallbackComponent, DashboardComponent],
@@ -27,9 +28,9 @@ import { GraphQLModule } from './graphql.module';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NbThemeModule.forRoot({ name: 'oscuro' }),
-    NbLayoutModule,
+    NbThemeModule.forRoot({ name: 'oscuro' }), 
     NbEvaIconsModule,
+    NebularModule,
     NbAuthModule.forRoot({
       strategies: [
         NbOAuth2AuthStrategy.setup({
