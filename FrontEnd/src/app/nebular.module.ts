@@ -5,9 +5,9 @@ import {
 } from '@nebular/theme';
 
 @NgModule({
-  exports: [
+  imports: [
     NbLayoutModule,
     NbCardModule
-  ],
+  ]
 })
 export class NebularModule {}
