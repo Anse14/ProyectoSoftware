@@ -28,7 +28,7 @@ import { NebularModule } from './nebular.module';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NbThemeModule.forRoot({ name: 'oscuro' }), 
+    NbThemeModule.forRoot({ name: 'corporate' }), 
     NbEvaIconsModule,
     NebularModule,
     NbAuthModule.forRoot({
