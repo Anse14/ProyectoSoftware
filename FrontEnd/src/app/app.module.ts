@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { NbThemeModule } from '@nebular/theme';
+import { NbCardModule, NbLayoutModule, NbThemeModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import {
   NbAuthModule,
@@ -18,11 +18,21 @@ import { environment } from '../environments/environment';
 import { PrincipalComponent } from './pages/principal/principal.component';
 import { CallbackComponent } from './pages/auth/callback/callback.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ProfessorComponent } from './pages/professor/professor.component';
 import { GraphQLModule } from './graphql.module';
-import { NebularModule } from './nebular.module';
+import { CourseCardComponent } from './shared/components/course-card/course-card.component';
+import { ProfessorDashboardComponent } from './pages/professor/professor-dashboard/professor-dashboard.component';
 
 @NgModule({
-  declarations: [AppComponent, PrincipalComponent, CallbackComponent, DashboardComponent],
+  declarations: [
+    AppComponent,
+    PrincipalComponent,
+    CallbackComponent,
+    DashboardComponent,
+    ProfessorComponent,
+    CourseCardComponent,
+    ProfessorDashboardComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -30,7 +40,8 @@ import { NebularModule } from './nebular.module';
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'corporate' }), 
     NbEvaIconsModule,
-    NebularModule,
+    NbLayoutModule,
+    NbCardModule,
     NbAuthModule.forRoot({
       strategies: [
         NbOAuth2AuthStrategy.setup({
@@ -41,7 +52,7 @@ import { NebularModule } from './nebular.module';
             endpoint: 'https://accounts.google.com/o/oauth2/v2/auth',
             responseType: NbOAuth2ResponseType.TOKEN,
             scope: 'https://www.googleapis.com/auth/userinfo.profile',
-            redirectUri: 'http://localhost:4200/callback'
+            redirectUri: 'http://localhost:4200/callback',
           },
           redirect: {
             success: '/dashboard',

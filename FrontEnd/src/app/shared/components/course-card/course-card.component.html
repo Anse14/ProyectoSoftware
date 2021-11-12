@@ -1,0 +1,21 @@
+<div
+  class="container m-5 px-0 cont-border"
+  [style.border-color]="color"
+  (click)="goToCourseView()"
+>
+  <div class="row">
+    <div class="col-1 cod-curso" [style.background-color]="color">
+      <div>
+        {{ codCurso }}
+      </div>
+    </div>
+    <div class="col-11 text-center p-5">
+      <h4>{{ nombreCurso }}</h4>
+      <div *ngFor="let aula of horario" class="row justify-content-center">
+        <div class="col text-center">
+          {{ aula }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
