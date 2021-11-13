@@ -1,21 +1,35 @@
-.main_container {
-  min-height: 100vh;
+.main-container{
+  height: 100%;
+  width: 100%;
+  margin: 0%;
+  padding:0%;
 }
-.sidebar {
+
+
+.main-sidebar {
   background-color: #82e1ff;
   position: fixed;
-  left: 0;
   top: 0;
-  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 220px;
+  z-index: 810;
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+  display: block;
+  box-shadow: 0 0 7px 0 rgb(0 0 0 / 35%);
+  color: #fff;
 }
+
 .dashboard {
   background-color: white;
 }
-.logoside {
-  margin-bottom: 10px;
-  border-radius: 5px;
-  height: auto;
+
+
+div.content {
+  margin-left: 220px;
+  position: relative;
 }
+
 .profile {
   padding: 20px 15px;
   border-top-left-radius: 5px;
@@ -23,16 +37,40 @@
   text-align: center;
 }
 
-.profile img {
-  margin-bottom: 10px;
-  border-radius: 5px;
-  max-width: 75%;
-  height: auto;
+.main-sidebar .sidebar .sidebar-footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  display: block;
+  padding: 0.75rem 0;
+  width: 220px;
+  z-index: 900;
+  border-top: 1px solid white;
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
 }
-.profile h3 {
-  margin-bottom: 10px;
-  height: auto;
+.sidebar-menu {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  flex-direction: column;
+  min-height: 100%;
 }
-.down {
-  transform: translate(0%, 100%);
+
+.sidebar-footer .sidebar-menu {
+  margin-bottom: 0;
+}
+
+.main-sidebar .sidebar .sidebar-menu>li>a {
+  color: #fff;
+  padding: 8px 10px;
+  display: block;
+  font-size: 14px;
+  text-decoration: none !important;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.main-sidebar .sidebar .sidebar-footer .sidebar-menu {
+  margin-bottom: 0;
 }
