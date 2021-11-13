@@ -5,6 +5,13 @@
   padding:0%;
 }
 
+.rubrica-content{
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 8%;
+  padding-bottom: 5%;
+}
+
 .main-sidebar {
   margin: 0;
   padding: 0;
@@ -24,5 +31,17 @@
 div.content {
   margin-left: 220px;
   position: relative;
+}
+
+body{
+  max-height: 100%;
+  height: 100%;
+  width: 100%;
+}
+
+.main-form{
+  height: 50%;
+
+  justify-content: center;
 }
 

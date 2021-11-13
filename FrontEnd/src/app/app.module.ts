@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
+import { NgModule  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { NbCardModule, NbLayoutModule, NbThemeModule } from '@nebular/theme';
+import { NbCardModule, NbLayoutModule, NbThemeModule, NbSidebarModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import {
   NbAuthModule,
@@ -22,6 +22,7 @@ import { ProfessorComponent } from './pages/professor/professor.component';
 import { GraphQLModule } from './graphql.module';
 import { CourseCardComponent } from './shared/components/course-card/course-card.component';
 import { ProfessorDashboardComponent } from './pages/professor/professor-dashboard/professor-dashboard.component';
+import { CreateRubricaComponent } from './pages/create-rubrica/create-rubrica.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,8 @@ import { ProfessorDashboardComponent } from './pages/professor/professor-dashboa
     ProfessorComponent,
     CourseCardComponent,
     ProfessorDashboardComponent,
+    CreateRubricaComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import { ProfessorDashboardComponent } from './pages/professor/professor-dashboa
     NbEvaIconsModule,
     NbLayoutModule,
     NbCardModule,
+    NbSidebarModule.forRoot(),
     NbAuthModule.forRoot({
       strategies: [
         NbOAuth2AuthStrategy.setup({
