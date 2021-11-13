@@ -11,3 +11,28 @@
 .dashboard {
   background-color: white;
 }
+.logoside {
+  margin-bottom: 10px;
+  border-radius: 5px;
+  height: auto;
+}
+.profile {
+  padding: 20px 15px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  text-align: center;
+}
+
+.profile img {
+  margin-bottom: 10px;
+  border-radius: 5px;
+  max-width: 75%;
+  height: auto;
+}
+.profile h3 {
+  margin-bottom: 10px;
+  height: auto;
+}
+.down {
+  transform: translate(0%, 100%);
+}

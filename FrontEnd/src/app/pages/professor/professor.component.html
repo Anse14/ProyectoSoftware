@@ -1,33 +1,22 @@
 <div class="container-fluid h-100">
   <div class="row main_container">
     <div class="col-2 sidebar text-center">
-      <div class="row-fluid m-1">
-        <img
-          src="assets/images/LOGO-UTEC-WHITE.png"
-          alt=""
-          height="300"
-          width="350"
-          class="img-fluid"
-        />
+      <div class="logoside">
+        <img src="assets/images/LOGO-UTEC-WHITE.png" alt="" class="img-fluid" />
+
+        <img src="assets/images/sidebar_gdc.png" alt="" class="img-fluid" />
       </div>
-      <div class="row-fluid m-1">
-        <img
-          src="assets/images/sidebar_gdc.png"
-          alt=""
-          height="100"
-          width="250"
-          class="img-fluid"
-        />
-      </div>
-      <div class="row p-2 text-center">
+
+      <div class="profile">
         <img
           src="assets/images/user_icon.png"
-          width="100"
-          class="rounded-circle"
+          alt="user"
+          class="img-fluid rounded-circle"
         />
-        <h5 class="mt-2 mb-0">Alexender Schidmt</h5>
+        <h3>Alexender Schidmt</h3>
       </div>
-      <div class="row-fluid m-1">
+
+      <div class="row-fluid">
         <div
           class="btn-group p-2"
           role="group"
@@ -40,15 +29,21 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Semestres
+            <b>S E M E S T R E S</b>
           </button>
           <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
             <li><a class="dropdown-item" href="#">2021-2</a></li>
-            <li><a class="dropdown-item" href="#">holi</a></li>
+            <li><a class="dropdown-item" href="#">2021-1</a></li>
           </ul>
         </div>
       </div>
+      <div class="row-fluid">
+        <button type="button" class="btn btn-outline-secondary down">
+          Cerrar Sesion
+        </button>
+      </div>
     </div>
+
     <div class="offset-2 col-10 dashboard">
       <router-outlet></router-outlet>
     </div>
