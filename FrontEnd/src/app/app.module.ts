@@ -19,9 +19,9 @@ import { PrincipalComponent } from './pages/principal/principal.component';
 import { CallbackComponent } from './pages/auth/callback/callback.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProfessorComponent } from './pages/professor/professor.component';
-import { GraphQLModule } from './graphql.module';
-import { CourseCardComponent } from './shared/components/course-card/course-card.component';
+import { CourseCardComponent } from './components/course-card/course-card.component';
 import { ProfessorDashboardComponent } from './pages/professor/professor-dashboard/professor-dashboard.component';
+import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +35,7 @@ import { ProfessorDashboardComponent } from './pages/professor/professor-dashboa
   ],
   imports: [
     BrowserModule,
+    GraphQLModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -61,7 +62,6 @@ import { ProfessorDashboardComponent } from './pages/professor/professor-dashboa
         }),
       ],
     }),
-    GraphQLModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
