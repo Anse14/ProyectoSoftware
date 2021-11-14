@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { NbCardModule, NbLayoutModule, NbThemeModule, NbSidebarModule } from '@nebular/theme';
+import { NbCardModule, NbLayoutModule, NbThemeModule, NbSidebarModule, NbIconModule} from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import {
   NbAuthModule,
@@ -38,6 +38,7 @@ import { CreateRubricaCreationComponent } from './pages/create-rubrica/create-ru
     CreateRubricaCreationComponent
   ],
   imports: [
+    NbIconModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule,

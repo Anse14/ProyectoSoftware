@@ -4,7 +4,17 @@
   margin: 0%;
   padding:0%;
 }
-
+.main-sidebar .sidebar .sidebar-footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  display: block;
+  padding: 0.75rem 0;
+  width: 220px;
+  z-index: 900;
+  border-top: 1px solid white;
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+}
 
 .main-sidebar {
   background-color: #82e1ff;
@@ -20,16 +30,6 @@
   color: #fff;
 }
 
-.dashboard {
-  background-color: white;
-}
-
-
-div.content {
-  margin-left: 220px;
-  position: relative;
-}
-
 .profile {
   padding: 20px 15px;
   border-top-left-radius: 5px;
@@ -37,17 +37,6 @@ div.content {
   text-align: center;
 }
 
-.main-sidebar .sidebar .sidebar-footer{
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  display: block;
-  padding: 0.75rem 0;
-  width: 220px;
-  z-index: 900;
-  border-top: 1px solid white;
-  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
-}
 .sidebar-menu {
   list-style: none;
   margin: 0 0 1.5rem;
@@ -64,13 +53,57 @@ div.content {
   color: #fff;
   padding: 8px 10px;
   display: block;
-  font-size: 14px;
+  font-size: 18px;
   text-decoration: none !important;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
 
+.icon {
+  font-family: 'icomoon' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.main-sidebar .sidebar .sidebar-menu>li>a>i, .main-sidebar .sidebar .sidebar-menu>li>a>.icon {
+  display: inline-block;
+  width: 23px;
+  margin: 0 0.5rem 0 0;
+  text-align: center;
+  vertical-align: bottom;
+  font-size: 25px !important;
+}
+
 .main-sidebar .sidebar .sidebar-footer .sidebar-menu {
   margin-bottom: 0;
+}
+
+body{
+  max-height: 100%;
+  height: 100%;
+  width: 100%;
+}
+
+div.content {
+  margin-left: 220px;
+  position: relative;
+}
+
+.dashboard {
+  background-color: white;
+}
+
+
+div.content {
+  margin-left: 220px;
+  position: relative;
 }

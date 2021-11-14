@@ -17,7 +17,10 @@ export class CreateRubricaCreationComponent implements OnInit {
   newendes: string;
   newnoacept: string;
 
+  alert = false;
+
   savedimension(){
+    if (this.newdim && this.newexc && this.newbueno && this.newendes && this.newnoacept){
       let dim = new Dimension();
       dim.cd="1.1"
       dim.dim = this.newdim;
@@ -26,7 +29,15 @@ export class CreateRubricaCreationComponent implements OnInit {
       dim.endesarrollo = this.newendes;
       dim.noaceptable = this.newnoacept;
       this.dimensiones.push(dim);
-
+      this.newdim = "";
+      this.newexc = "";
+      this.newbueno = "";
+      this.newendes = "";
+      this.newnoacept = "";
+    }
+    else{
+      alert("Please enter complete data");
+    }
   }
   constructor() { }
 
