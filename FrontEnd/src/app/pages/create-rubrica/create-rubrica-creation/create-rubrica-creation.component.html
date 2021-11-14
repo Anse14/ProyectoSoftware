@@ -1,0 +1,226 @@
+<div clasS="main-rubrica-content">
+  <form>
+    <!-- Boton Save -->
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <input class="btn btn-primary save-rubrica" type="submit"   (click)="savedimension()" value="GUARDAR" />
+    </div>
+    <div class="first-rubrica-content">
+      <div class="second-rubrica-content">
+        <div class="row mb-1">
+          <div class="col">
+            <div class="form-outline" style="display: inline;">
+              <div class="form-group">
+                <label class="form-label" for="form3Example1">Curso:</label>
+                <input type="text" id="form3Example1" class="col-form-control" disabled />
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <label class="form-label" for="form3Example2">Ciclo: </label>
+              <input type="text" id="form3Example2" class="col-form-control" disabled />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <label class="form-label" for="form3Example2">Semestre: </label>
+              <input type="text" id="form3Example3" class="col-form-control" disabled />
+            </div>
+          </div>
+        </div>
+        <!-- Actividad, Semana y Fecha input -->
+        <div class="row mb-2">
+          <div class="col">
+            <div class="form-outline" style="display: inline;">
+              <div class="form-group">
+                <label class="form-label" for="form3Example1">Actividad:</label>
+                <input type="text" id="form3Example1" class="col-form-control" disabled />
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <label class="form-label" for="form3Example2">Semana: </label>
+              <input type="text" id="form3Example2" class="col-form-control" disabled />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <label class="form-label" for="form3Example2">Fecha: </label>
+              <input type="text" id="form3Example3" class="col-form-control" disabled />
+            </div>
+          </div>
+        </div>
+
+        <!-- Competencia input -->
+        <div class="form-outline mb-2">
+          <label class="form-label" for="form3Example3">Competencia:</label>
+          <input type="email" id="form3Example3" class="col-form-control" style="width: 100%; max-width: 80%;"
+            disabled />
+        </div>
+
+        <!-- Alumno y Profesor input -->
+        <div class="row mb-2">
+          <div class="col">
+            <div class="form-outline" style="display: inline;">
+              <div class="form-group">
+                <label class="form-label" for="form3Example1">Alumno:</label>
+                <select class="col-form-select" aria-label="Default select example" disabled>
+                  <option selected>--------------</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <label class="form-label" for="form3Example2">Profesor:</label>
+              <input type="text" id="form3Example2" class="col-form-control" disabled />
+            </div>
+          </div>
+        </div>
+
+        <!-- Checkbox -->
+        <div class="row mb-2">
+          <div class="col-8">
+            <div class="row">
+              <div class="col">
+                <label class="form-label" for="form3Example2">Tipo de actividad: </label>
+              </div>
+              <div class="col">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                    value="option1" disabled>
+                  <label class="form-check-label" for="inlineRadio1">Proyecto</label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                    value="option2" disabled>
+                  <label class="form-check-label" for="inlineRadio2">Trabajo</label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                    value="option3" disabled>
+                  <label class="form-check-label" for="inlineRadio3">Laboratorio</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4"
+                disabled>
+              <label class="form-check-label" for="inlineRadio1">Otros:</label>
+              <input type="email" id="form3Example3" class="col-form-control" style="width: 100%; max-width: 80%;"
+                disabled />
+            </div>
+          </div>
+        </div>
+        <div class="row mb-2" style="width: 100%">
+          <label class="form-label" for="form3Example2" style="display:block; text-align:center;">COMPETENCIAS </label>
+        </div>
+      </div>
+      <div class="row mb-4" style="align-items: center; display: inline-flexbox;">
+        <div class="col-11"> 
+          <div class="row mb-4">
+            <div class="col">
+              <label class="form-label">CD </label>
+            </div>
+            <div class="col">
+              <label class="form-label">DIMENSION </label>
+            </div>
+            <div class="col">
+              <label class="form-label">EXCELENTE </label>
+            </div>
+            <div class="col">
+              <label class="form-label">BUENO </label>
+            </div>
+            <div class="col">
+              <label class="form-label">EN DESARROLLO </label>
+            </div>
+            <div class="col">
+              <label class="form-label">NO ACEPTABLE </label>
+            </div>
+            <div class="col">
+              <label class="form-label">NOTA </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-1">
+          <button class="btn btn-primary" style="width: auto;" type="button" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">+</button>
+        </div>
+      </div>
+      <div class="row mb-4" style="align-items: center; display: inline-flexbox;" *ngFor="let dim of dimensiones">
+        <div class="col-11">
+          <div class="row mb-4">
+            <div class="col">
+              <label class="form-label">{{dim.cd}} </label>
+            </div>
+            <div class="col">
+              <label class="form-label">{{dim.dim}} </label>
+            </div>
+            <div class="col">
+              <label class="form-label">{{dim.excelente}} </label>
+            </div>
+            <div class="col">
+              <label class="form-label">{{dim.bueno}} </label>
+            </div>
+            <div class="col">
+              <label class="form-label">{{dim.endesarrollo}} </label>
+            </div>
+            <div class="col">
+              <label class="form-label">{{dim.noaceptable}} </label>
+            </div>
+            <div class="col">
+              <label class="form-label"> 5  </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Dimensiones</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Dimension Nueva</label>
+            <input type="text" class="form-control" placeholder="Descripcion de dimension" [(ngModel)]="newdim" name="something"/>
+          </div>  
+          <div class="mb-3">
+            <label class="form-label">Excelente</label>
+            <input type="text" class="form-control" placeholder="Descripcion de excelente"  [(ngModel)]="newexc" name="something2"/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Bueno</label>
+            <input type="text" class="form-control" placeholder="Descripcion de bueno"  [(ngModel)]="newbueno" name="something3"/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">En desarrollo</label>
+            <input type="text" class="form-control"  placeholder="Descripcion de en desarrollo"  [(ngModel)]="newendes"  name="something4"/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">No aceptable</label> 
+            <input type="text" class="form-control" placeholder="Descripcion de no aceptable" [(ngModel)]="newnoacept" name="something5"/>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" 
+        (click)="savedimension()" data-bs-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -13,7 +13,7 @@ import {
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { FormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
 import { PrincipalComponent } from './pages/principal/principal.component';
 import { CallbackComponent } from './pages/auth/callback/callback.component';
@@ -23,6 +23,7 @@ import { GraphQLModule } from './graphql.module';
 import { CourseCardComponent } from './shared/components/course-card/course-card.component';
 import { ProfessorDashboardComponent } from './pages/professor/professor-dashboard/professor-dashboard.component';
 import { CreateRubricaComponent } from './pages/create-rubrica/create-rubrica.component';
+import { CreateRubricaCreationComponent } from './pages/create-rubrica/create-rubrica-creation/create-rubrica-creation.component';
 
 @NgModule({
   declarations: [
@@ -33,10 +34,11 @@ import { CreateRubricaComponent } from './pages/create-rubrica/create-rubrica.co
     ProfessorComponent,
     CourseCardComponent,
     ProfessorDashboardComponent,
-    CreateRubricaComponent
-    
+    CreateRubricaComponent,
+    CreateRubricaCreationComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

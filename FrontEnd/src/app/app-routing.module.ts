@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CallbackComponent } from './pages/auth/callback/callback.component';
 import { CreateRubricaComponent } from './pages/create-rubrica/create-rubrica.component';
+import { CreateRubricaCreationComponent } from './pages/create-rubrica/create-rubrica-creation/create-rubrica-creation.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { PrincipalComponent } from './pages/principal/principal.component';
 import { CoursesViewComponent } from './pages/professor/courses-view/courses-view.component';
@@ -38,7 +39,13 @@ const routes: Routes = [
   {
     path: 'create-rubrica',
     component: CreateRubricaComponent,
-  }
+    children:[
+      {
+        path: 'create-rubrica-creation',
+        component: CreateRubricaCreationComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
