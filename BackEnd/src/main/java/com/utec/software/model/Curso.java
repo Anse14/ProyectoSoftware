@@ -12,12 +12,8 @@ import java.util.List;
 public class Curso extends PanacheEntity {
     public String codigo;
     public String titulo;
-    public Integer semana;
-    public String actividad;
-    public Integer nivel;
-    public TipoDeCurso tipo;
-    public String evidencia;
-    public InstrumentoCurso instrumento;
+    public String ciclo;
+    public String semestre;
 
     @OneToMany(targetEntity = Rubrica.class)
     public List<Rubrica> rubricas;
