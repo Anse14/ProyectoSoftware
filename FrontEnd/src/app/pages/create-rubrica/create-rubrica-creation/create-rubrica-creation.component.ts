@@ -10,14 +10,30 @@ import { Dimension } from './dimension';
 
 export class CreateRubricaCreationComponent implements OnInit {
 
+  
+  Curso = "curso"
+  Ciclo = "ciclo"
+  Semestre = "semestre"
+  Actividad = "actividad"
+  Semana = "semana"
+  Fecha = "fecha"
+  Competencia = "competencia"
+  Alumno = "lista de alumnos"
+  Profesor = "profesor"
+  Tipoactividad = "proyecto"
+  proyecto = true;
+  trabajo = false; 
+  laboratorio = false;
+  otros = false; 
+  /* Deberia crear una clase para la informacion de la rubrica tipo dimension.ts? */
+
+  
   dimensiones: Dimension[] = [];
   newdim: string;
   newexc : string;
   newbueno: string;
   newendes: string;
   newnoacept: string;
-
-  alert = false;
 
   savedimension(){
     if (this.newdim && this.newexc && this.newbueno && this.newendes && this.newnoacept){

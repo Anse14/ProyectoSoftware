@@ -8,14 +8,16 @@
   
   .first-rubrica-content{
     padding-right: 8%;
-    padding-left: 8%;
+    padding-left: 2%;
     padding-top: 5%;
   }
   
   .second-rubrica-content{
     margin-right: 7%;
   }
-  
+  .third-rubrica-content{
+    margin-right: 0%;
+  }
   .criterios-rubrica-content{
     padding-right: 7%;
   }
@@ -29,6 +31,22 @@
     padding-left: 2%; 
     padding-right: 2%;
   }
+
+  .btn-primary {
+    color: #fff;
+    background-color: #00BFFF;
+    border-color: #00BFFF;
+}
+
   html{
     height: 100%;
   }
+
+
+  /* Radios */
+  .form-check-input:disabled {
+    opacity: 1;
+}
+  .form-check-input:disabled~.form-check-label, .form-check-input[disabled]~.form-check-label {
+  opacity: 1;
+}
