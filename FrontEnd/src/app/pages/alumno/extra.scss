@@ -1,0 +1,35 @@
+.main_container {
+    min-height: 100vh;
+}
+.sidebar {
+    background-color: #82e1ff;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+.dashboard {
+    background-color: white;
+}
+div[class|="col"]{
+    border: 1px solid #07c5ffd8;
+}
+div#cuadro{
+
+    margin-top: 30px;
+    float: left;
+    width: 50%;
+}
+div#grafico{
+    margin-top: 30px;
+    float:right;
+    width: 50%;
+}
+.flechi{
+    width: 10%;
+    height: auto;
+    display: block;
+    right: 0px;
+    bottom: 0px;
+}
+  
