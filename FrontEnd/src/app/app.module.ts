@@ -17,8 +17,8 @@ import { ProfessorComponent } from './pages/professor/professor.component';
 import { CourseCardComponent } from './components/course-card/course-card.component';
 import { ProfessorDashboardComponent } from './pages/professor/professor-dashboard/professor-dashboard.component';
 import { RubricaComponent } from './pages/rubrica/rubrica.component';
-import {RubricaCreationComponent } from './pages/rubrica/rubrica-creation/rubrica-creation.component';
-
+import { RubricaCreationComponent } from './pages/rubrica/rubrica-creation/rubrica-creation.component';
+import { AlumnoComponent } from './pages/alumno/alumno.component';
 
 import { GraphQLModule } from './graphql.module';
 import { NebularModule } from './nebular.module';
@@ -33,6 +33,7 @@ export function tokenGetter() {
     AppComponent,
     PrincipalComponent,
     DashboardComponent,
+    AlumnoComponent,
     ProfessorComponent,
     CourseCardComponent,
     ProfessorDashboardComponent,

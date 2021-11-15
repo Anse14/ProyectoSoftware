@@ -7,6 +7,7 @@ import { RubricaCreationComponent } from './pages/rubrica/rubrica-creation/rubri
 import { CoursesViewComponent } from './pages/professor/courses-view/courses-view.component';
 import { ProfessorDashboardComponent } from './pages/professor/professor-dashboard/professor-dashboard.component';
 import { ProfessorComponent } from './pages/professor/professor.component';
+import { AlumnoComponent } from './pages/alumno/alumno.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+  },
+  {
+    path: 'alumno',
+    component: AlumnoComponent, 
   },
   {
     path: 'professor',
