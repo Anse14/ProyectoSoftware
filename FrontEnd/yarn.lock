@@ -2383,9 +2383,9 @@
   resolved "https://registry.npmjs.org/@nebular/eva-icons/-/eva-icons-8.0.0.tgz"
   integrity sha512-eUNEQJP5w+XiAW1FyEVneno0qiNKoDZlobkglhdvVR1u7e3D4a5IxwnaKK0Izl/6j6eSs/qoBuzrBkJ4alaNjw==
 
-"@nebular/theme@8.0.0":
+"@nebular/theme@^8.0.0":
   version "8.0.0"
-  resolved "https://registry.npmjs.org/@nebular/theme/-/theme-8.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/@nebular/theme/-/theme-8.0.0.tgz#808ba716cd96dc02d14aeec5583daf6d71ddec26"
   integrity sha512-Lq1a3IgjfU1bqwCrsPQBd3nGmjK61fND+6r4lmXFWDRvXti18k5KMIvzY+KryNsTEhEOyby+V5R16T67MKZs6g==
   dependencies:
     intersection-observer "0.7.0"
