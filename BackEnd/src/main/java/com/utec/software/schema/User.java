@@ -6,6 +6,8 @@ public class User {
         this.name = name;
     }
 
+    public User() {}
+
     public String id;
     public String name;
 }

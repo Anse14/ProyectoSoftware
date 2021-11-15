@@ -1,7 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NbAuthToken, NbAuthResult, NbAuthService } from '@nebular/auth';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { AuthService } from '@shared/services/auth.service';
 
 @Component({
   selector: 'app-principal',
@@ -9,30 +7,14 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./principal.component.scss'],
 })
 export class PrincipalComponent implements OnInit, OnDestroy {
-  private destroy$ = new Subject<void>();
-
-  constructor(private authService: NbAuthService) {
-    this.authService
-      .onTokenChange()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((token: NbAuthToken) => {
-        if (token && token.isValid()) {
-          console.log(token);
-        }
-      });
-  }
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {}
 
   login() {
-    this.authService
-      .authenticate('google')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((authResult: NbAuthResult) => {});
+    this.authService.login();
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }

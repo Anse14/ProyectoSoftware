@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NbAuthService } from '@nebular/auth';
+import { AuthService } from '@shared/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,13 +8,13 @@ import { NbAuthService } from '@nebular/auth';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private authService: NbAuthService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
   logout() {
-    this.authService.logout('google');
+    this.authService.logout();
   }
 
 }

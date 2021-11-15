@@ -1,8 +1,6 @@
 package com.utec.software.controllers;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
-import com.google.api.client.json.gson.GsonFactory;
 import com.utec.software.api.*;
 import com.utec.software.model.RefreshToken;
 import com.utec.software.model.User;
@@ -14,7 +12,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
-import java.util.Collections;
 import java.util.Optional;
 
 @Path("/auth")
@@ -77,26 +74,19 @@ public class AuthController {
     }
 
     @POST
-    @Path("/logout")
-    @Transactional
-    public Boolean logout(LogoutApi req) {
-        Optional<RefreshToken> refresh = RefreshToken.findByIdOptional(req.email);
-        if(refresh.isPresent()) {
-            refresh.get().delete();
-            return true;
-        }
-        return false;
-    }
-
-    @POST
     @Path("/google-login")
     @Transactional
     public GLoginApi glogin(GLoginApi usr) throws GeneralSecurityException, IOException {
         if(usr.token.equals("")) {
             return new GLoginApi("", 1, "", "");
         }
-
-        GoogleIdToken idToken = authService.verifyGtoken(usr.token);
+        GoogleIdToken idToken = null;
+        try {
+            idToken = authService.verifyGtoken(usr.token);
+        } catch(IllegalArgumentException err) {
+            return new GLoginApi("", 3, "", "");
+        }
+        
         if(idToken != null) {
             var payload = idToken.getPayload();
             usr.email = payload.getEmail();
@@ -112,6 +102,9 @@ public class AuthController {
             usr.token = token;
             usr.refresh = refresh;
             usr.status = 0;
+
+            Optional<RefreshToken> refr = RefreshToken.findByIdOptional(usr.email);
+            refr.ifPresent(RefreshToken::delete);
 
             (new RefreshToken(usr.email, refresh)).persist();
 

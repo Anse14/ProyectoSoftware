@@ -257,6 +257,13 @@
   dependencies:
     tslib "~2.0.1"
 
+"@auth0/angular-jwt@5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@auth0/angular-jwt/-/angular-jwt-5.0.2.tgz#0a23f240e8c6ed37c5c7a354ad79a755a217936e"
+  integrity sha512-rSamC9mu+gUxoR86AXcIo+KD7xRIro+/iu1F2Ld85YAZEVKlpB5vYG+g0yGaEOqjtQWP/i0H6fi6XMGPVHSYYQ==
+  dependencies:
+    tslib "^2.0.0"
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.14.5", "@babel/code-frame@^7.15.8":
   version "7.15.8"
   resolved "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.15.8.tgz"
@@ -2371,11 +2378,6 @@
   resolved "https://registry.yarnpkg.com/@n1ru4l/graphql-live-query/-/graphql-live-query-0.8.2.tgz#b6e4a256f294f88c616a4c03c323860f803c96e0"
   integrity sha512-StBuj5gxoVbFx2axvJF6ArnHVqVnibYeekRjO2T1KbUWyR+SbxaqDg9E3Ch9XkJnQAb+7HKW2JSUc+jnuqsXxQ==
 
-"@nebular/auth@8.0.0":
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/@nebular/auth/-/auth-8.0.0.tgz#f34dccb80e7d34a4a75baf1a751952935ebdba9a"
-  integrity sha512-2bL4XsyoN3+Hb14fAFvxjnj3I5KX5Xi7QBSquiSfo5u1PDJKCTRA8TVuKmmOqSNJ7Y7ztbA+qR2Q5BY6KXTspg==
-
 "@nebular/eva-icons@8.0.0":
   version "8.0.0"
   resolved "https://registry.npmjs.org/@nebular/eva-icons/-/eva-icons-8.0.0.tgz"
@@ -2937,6 +2939,13 @@ alphanum-sort@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/alphanum-sort/-/alphanum-sort-1.0.2.tgz"
   integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
+
+angularx-social-login@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/angularx-social-login/-/angularx-social-login-4.0.1.tgz#fe1b7d60f7243554daa8dd0074ba7a20e9ccf15c"
+  integrity sha512-dL65y0HXlKd8hhuH70/FFTxWsndEBU5DX2I1x7AcJ1ZAYpU6LPtQMbnzy10eSOcWZNeZX8XzaRaIbc4P+GjmvA==
+  dependencies:
+    tslib "^2.0.0"
 
 ansi-colors@4.1.1:
   version "4.1.1"

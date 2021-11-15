@@ -5,7 +5,7 @@ import {
 } from '@nebular/theme';
 
 @NgModule({
-  imports: [
+  exports: [
     NbLayoutModule,
     NbCardModule
   ]
