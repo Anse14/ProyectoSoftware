@@ -7,16 +7,16 @@ import { Dimension } from './dimension';
   styleUrls: ['./rubrica-creation.component.scss']
 })
 export class RubricaCreationComponent implements OnInit {
-  Curso = "curso"
-  Ciclo = "ciclo"
-  Semestre = "semestre"
+  Curso = "curso";
+  Ciclo = "ciclo";
+  Semestre = "semestre";
   Actividad = "actividad"
-  Semana = "semana"
-  Fecha = "fecha"
-  Competencia = "competencia"
-  Alumno = "lista de alumnos"
-  Profesor = "profesor"
-  Tipoactividad = "proyecto"
+  Semana = "semana";
+  Fecha = "fecha";
+  Competencia = "competencia";
+  Alumno = "lista de alumnos";
+  Profesor = "profesor";
+  Tipoactividad = "proyecto";
   proyecto = true;
   trabajo = false; 
   laboratorio = false;
