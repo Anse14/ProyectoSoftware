@@ -3,11 +3,20 @@
     <section class="sidebar">
       <div class="text-center">
         <img
-        src="assets/images/LOGO-UTEC-WHITE.png"
-        alt=""
-        height="100"
-        width="150"
-        class="img-fluid m-3"
+          src="assets/images/LOGO-UTEC-WHITE.png"
+          alt=""
+          height="100"
+          width="150"
+          class="img-fluid m-3"
+        />
+      </div>
+      <div class="text-center">
+        <img
+          src="assets/images/sidebar_gdc.png"
+          alt=""
+          height="100"
+          width="150"
+          class="img-fluid m-3"
         />
       </div>
       <div class="profile">
@@ -18,34 +27,38 @@
         />
         <h3>{{Profesor}} </h3>
       </div>
-        <ul class="scrollbar-container sidebar-menu ps" style="height: 663px;">
-          <div class="row-fluid justify-content center">
-            <div
-              class="btn-group p-2"
-              role="group"
-              aria-label="Button group with nested dropdown"
+      <ul class="scrollbar-container sidebar-menu ps" style="height: 663px">
+        <div class="row-fluid justify-content center">
+          <div
+            class="btn-group p-2"
+            role="group"
+            aria-label="Button group with nested dropdown"
+          >
+            <button
+              id="btnGroupDrop1"
+              type="button"
+              class="btn btn-outline-light dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
             >
-              <button
-                id="btnGroupDrop1"
-                type="button"
-                class="btn btn-outline-light dropdown-toggle"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <b>S E M E S T R E S</b>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                <li><a class="dropdown-item" href="#">2021-2</a></li>
-                <li><a class="dropdown-item" href="#">2021-1</a></li>
-              </ul>
-            </div>
+              <b>S E M E S T R E S</b>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+              <li><a class="dropdown-item" href="#">2021-2</a></li>
+              <li><a class="dropdown-item" href="#">2021-1</a></li>
+            </ul>
           </div>
-        </ul>
+        </div>
+      </ul>
       <div class="sidebar-footer">
         <ul class="sidebar-menu">
-          <li >
-            <a href="#" >
-              <nb-icon icon="power-outline" class="icon" status="warning"></nb-icon>
+          <li>
+            <a href="#">
+              <nb-icon
+                icon="power-outline"
+                class="icon"
+                status="warning"
+              ></nb-icon>
               Cerrar sesion
             </a>
           </li>
@@ -54,6 +67,6 @@
     </section>
   </aside>
   <div class="content justify-content-md-center">
-    <router-outlet></router-outlet> 
+    <router-outlet></router-outlet>
   </div>
 </div>
