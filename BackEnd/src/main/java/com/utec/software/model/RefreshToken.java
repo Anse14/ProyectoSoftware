@@ -1,15 +1,19 @@
 package com.utec.software.model;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+@Data
 @Entity
+@EqualsAndHashCode(callSuper = true)
 public class RefreshToken extends PanacheEntityBase {
     @Id
-    public String id;
-    public String token;
+    private String id;
+    private String token;
 
     public RefreshToken(String id, String token) {
         this.id = id;
