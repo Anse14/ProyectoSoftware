@@ -23,6 +23,7 @@ import { AlumnoComponent } from './pages/alumno/alumno.component';
 import { GraphQLModule } from './graphql.module';
 import { NebularModule } from './nebular.module';
 import { GoogleLoginProvider, SocialLoginModule } from 'angularx-social-login';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -51,6 +52,7 @@ export function tokenGetter() {
     NbEvaIconsModule,
     NebularModule,
     SocialLoginModule,
+    NgxChartsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
