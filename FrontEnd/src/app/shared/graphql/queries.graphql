@@ -1,17 +1,6 @@
-query GetAlbums {
-  albums {
-    data {
-      id
-      title
-      user {
-        id
-        name
-        username
-        email
-      }
-    }
-    meta {
-      totalCount
-    }
+query GetUser {
+  getUser {
+    id
+    name
   }
 }

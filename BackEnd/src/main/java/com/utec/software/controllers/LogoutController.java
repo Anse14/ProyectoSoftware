@@ -22,7 +22,7 @@ public class LogoutController {
     @GET
     @Path("/logout")
     @Transactional
-    public Boolean logout(@RestHeader("Authorization") String token) {
+    public Boolean logout(@RestHeader("authorization") String token) {
         if(token == null) {
             return false;
         }

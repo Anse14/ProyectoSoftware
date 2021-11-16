@@ -7,11 +7,15 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import io.quarkus.vertx.web.RouteFilter;
 import io.vertx.ext.web.RoutingContext;
+import java.util.Objects;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 public class AuthFilter {
     @ConfigProperty(name = "jwt.secret")
     String secret;
+
+    @ConfigProperty(name = "masterKey")
+    String masterKey;
 
     @RouteFilter(100)
     void myFilter(RoutingContext rc) {
@@ -20,7 +24,7 @@ public class AuthFilter {
             return;
         }
 
-        String token = rc.request().headers().get("Authorization");
+        String token = rc.request().headers().get("authorization");
 
         if(token == null) {
             // DEBUG CODE
@@ -30,6 +34,11 @@ public class AuthFilter {
             // END OF DEBUG CODE
             // rc.fail(405);
             // return;
+        }
+
+        if(Objects.equals(token, masterKey)) {
+            rc.next();
+            return;
         }
 
         String[] tokens = token.split(" ");
