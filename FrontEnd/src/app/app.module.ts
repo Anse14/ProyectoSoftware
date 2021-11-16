@@ -24,6 +24,8 @@ import { GraphQLModule } from './graphql.module';
 import { NebularModule } from './nebular.module';
 import { GoogleLoginProvider, SocialLoginModule } from 'angularx-social-login';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { CalidadComponent } from './pages/calidad/calidad.component';
+import { CalidadDashboardComponent } from './pages/calidad/calidad-dashboard/calidad-dashboard.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -39,7 +41,9 @@ export function tokenGetter() {
     CourseCardComponent,
     ProfessorDashboardComponent,
     RubricaComponent,
-    RubricaCreationComponent
+    RubricaCreationComponent,
+    CalidadComponent,
+    CalidadDashboardComponent,
   ],
   imports: [
     BrowserModule,
