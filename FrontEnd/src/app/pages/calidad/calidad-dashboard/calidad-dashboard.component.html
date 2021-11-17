@@ -4,11 +4,14 @@
         <div class="col-md-5">
             <div class="filtros">
                 <h3>Filtros</h3>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                    Default checkbox
-                    </label>
+                <div class="listFiltros" *ngFor="let filtro of filtros">
+                    <p class="tiposFiltro">{{filtro.titulo}}</p>
+                    <div class="listOpciones">
+                        <div class="form-check" *ngFor="let opcion of filtro.lista">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">{{opcion}}</label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
