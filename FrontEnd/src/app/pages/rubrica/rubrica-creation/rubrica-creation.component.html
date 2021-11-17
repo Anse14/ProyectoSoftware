@@ -141,21 +141,21 @@
                 <div class="col">
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                      value="option1" checked disabled *ngIf ="proyecto; else defaultproyect">
+                      value="option1" [checked] = "Tipoactividad=='proyecto'" disabled>
                     <label class="form-check-label" for="inlineRadio1">Proyecto</label>
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                      value="option2" checked disabled *ngIf ="trabajo; else defaulttrabajo">
+                      value="option2" [checked] = "Tipoactividad=='trabajo'" disabled >
                     <label class="form-check-label" for="inlineRadio2">Trabajo</label>
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
-                      value="option3" checked disabled *ngIf ="laboratorio; else defaultlaboratorio">
+                      value="option3" [checked] = "Tipoactividad=='laboratorio'"  disabled >
                     <label class="form-check-label" for="inlineRadio3">Laboratorio</label>
                   </div>
                 </div>
@@ -164,7 +164,7 @@
             <div class="col-4">
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="formotrotext" value="option4"
-                  checked disabled *ngIf ="otros; else defaultotros">
+                [checked] = "Tipoactividad=='otros'" disabled >
                   <div class="row form-group">
                     <div class = "col-2">
                       <label class="form-check-label" for="formotrotext" >Otros:</label>
@@ -247,27 +247,26 @@
   
   
    <!-- Default checkbox -->
-  <ng-template  #defaultproyect>
+<ng-template  #defaultproyect>
     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
     value="option1" disabled>
   </ng-template>
-  <ng-template  #defaulttrabajo>
+<ng-template  #defaulttrabajo>
     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
     value="option2" disabled>
   </ng-template>
-  <ng-template  #defaultlaboratorio>
+<ng-template  #defaultlaboratorio>
     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
     value="option3" disabled>
   </ng-template>
-  <ng-template  #defaultotros>
+<ng-template  #defaultotros>
     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4"
     value="option4" disabled>
   </ng-template>
   
   
-  
-  
-  <div class="modal fade" id="modalsaverubrica" tabindex="-1" aria-labelledby="save" aria-hidden="true">
+
+<div class="modal fade" id="modalsaverubrica" tabindex="-1" aria-labelledby="save" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">

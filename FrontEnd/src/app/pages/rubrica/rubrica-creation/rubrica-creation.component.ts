@@ -16,11 +16,7 @@ export class RubricaCreationComponent implements OnInit {
   Competencia = "competencia";
   Alumno = "lista de alumnos";
   Profesor = "profesor";
-  Tipoactividad = "proyecto";
-  proyecto = true;
-  trabajo = false; 
-  laboratorio = false;
-  otros = false; 
+  Tipoactividad = "otros";
   /* Deberia crear una clase para la informacion de la rubrica tipo dimension.ts? */
 
   
