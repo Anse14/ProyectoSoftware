@@ -16,7 +16,11 @@ export class RubricaCreationComponent implements OnInit {
   Competencia = "competencia";
   Alumno = "lista de alumnos";
   Profesor = "profesor";
-  Tipoactividad = "otros";
+  Tipoactividad = "proyecto";
+  proyecto = true;
+  trabajo = false; 
+  laboratorio = false;
+  otros = false; 
   /* Deberia crear una clase para la informacion de la rubrica tipo dimension.ts? */
 
   
@@ -29,7 +33,7 @@ export class RubricaCreationComponent implements OnInit {
 
   savedimension(){
     if (this.newdim && this.newexc && this.newbueno && this.newendes && this.newnoacept){
-      let dim = new Dimension();
+      var dim= {} as Dimension
       dim.cd="1.1"
       dim.dim = this.newdim;
       dim.excelente = this.newexc;

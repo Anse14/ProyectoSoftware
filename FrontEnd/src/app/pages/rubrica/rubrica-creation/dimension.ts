@@ -1,4 +1,4 @@
-export class Dimension {
+export interface Dimension {
     cd:string;
     dim:string;
     excelente:string;

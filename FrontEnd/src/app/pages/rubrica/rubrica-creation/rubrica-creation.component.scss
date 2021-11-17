@@ -50,3 +50,8 @@
   .form-check-input:disabled~.form-check-label, .form-check-input[disabled]~.form-check-label {
   opacity: 1;
 }
+
+.form-check-input:checked {
+  background-color:#00BFFF;
+  border-color: #00BFFF;
+} 

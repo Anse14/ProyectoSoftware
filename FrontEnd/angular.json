@@ -15,7 +15,8 @@
         },
         "@schematics/angular:application": {
           "strict": true
-        }
+          }
+        
       },
       "root": "",
       "sourceRoot": "src",
