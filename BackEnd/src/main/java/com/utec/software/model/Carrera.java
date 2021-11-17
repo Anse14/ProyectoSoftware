@@ -12,6 +12,8 @@ import java.util.List;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 public class Carrera extends PanacheEntity {
+    private Integer codigoMalla;
+    private String malla;
     private String nombre;
 
     @OneToMany(targetEntity = Competencia.class)
@@ -19,4 +21,12 @@ public class Carrera extends PanacheEntity {
 
     @OneToMany(targetEntity = User.class)
     private List<User> alumnos;
+
+    public Carrera(Integer codigoMalla, String malla, String nombre) {
+        this.codigoMalla = codigoMalla;
+        this.malla = malla;
+        this.nombre = nombre;
+    }
+
+    public Carrera() {}
 }
