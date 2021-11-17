@@ -1,7 +1,7 @@
 <div class="main-container">
     <p class="titulo"><img class="flechi1" src="assets/images/flechi.png"/> Resultados</p>
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-3">
             <div class="filtros">
                 <h3>Filtros</h3>
                 <div class="listFiltros" *ngFor="let filtro of filtros">
@@ -15,7 +15,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-1">
+        <div class="col-md-5">
+            <app-grafica-calidad></app-grafica-calidad>
         </div>
     </div>
 </div>

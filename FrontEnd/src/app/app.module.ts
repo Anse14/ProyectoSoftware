@@ -34,6 +34,7 @@ import { CoursesViewComponent } from './pages/professor/courses-view/courses-vie
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import { GraficaCalidadComponent } from './pages/calidad/grafica-calidad/grafica-calidad.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -53,6 +54,7 @@ export function tokenGetter() {
     CalidadComponent,
     CalidadDashboardComponent,
     CoursesViewComponent,
+    GraficaCalidadComponent,
   ],
   imports: [
     BrowserModule,
