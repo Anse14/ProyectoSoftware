@@ -7,6 +7,7 @@ import {
   SocialUser,
 } from 'angularx-social-login';
 import { Router } from '@angular/router';
+import { GetUserGQL, RolEnum } from '@graphql';
 
 @Injectable({
   providedIn: 'root',
@@ -15,12 +16,14 @@ export class AuthService {
   user = {
     idToken: '',
     email: '',
+    rol: RolEnum.Alumno,
   };
 
   constructor(
     private http: HttpClient,
     private socialAuthService: SocialAuthService,
-    private router: Router
+    private router: Router,
+    private getUser: GetUserGQL
   ) {}
 
   login() {
@@ -59,6 +62,20 @@ export class AuthService {
   }
 
   private continueLogin() {
-    this.router.navigateByUrl('/dashboard');
+    this.getUser.fetch().subscribe((data) => {
+      if (data.data.getUser.status != 0) {
+        return;
+      }
+      this.user.rol = data.data.getUser.rol;
+      if (data.data.getUser.rol == RolEnum.Profesor) {
+        this.router.navigateByUrl('/professor/dashboard');
+      }
+      if (data.data.getUser.rol == RolEnum.Alumno) {
+        this.router.navigateByUrl('/alumno');
+      }
+      if (data.data.getUser.rol == RolEnum.Calidad) {
+        this.router.navigateByUrl('/calidad/dashboard');
+      }
+    });
   }
 }

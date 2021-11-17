@@ -1,6 +1,8 @@
 query GetUser {
   getUser {
-    id
+    email
     name
+    rol
+    status
   }
 }

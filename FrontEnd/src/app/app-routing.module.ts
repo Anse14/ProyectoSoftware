@@ -16,20 +16,22 @@ const routes: Routes = [
   {
     path: '',
     component: PrincipalComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard',
     component: DashboardComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'alumno',
-    component: AlumnoComponent, 
+    component: AlumnoComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'professor',
     component: ProfessorComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -44,6 +46,7 @@ const routes: Routes = [
   {
     path: 'rubrica',
     component: RubricaComponent,
+    canActivate: [AuthGuard],
     children:[
       {
         path: 'create-rubrica',
@@ -53,6 +56,7 @@ const routes: Routes = [
   },
   {
     path: 'calidad',
+    canActivate: [AuthGuard],
     component: CalidadComponent,
     children:[
       {

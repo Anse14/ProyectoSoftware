@@ -6,13 +6,15 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
+import { RolEnum } from '@graphql';
+import { AuthService } from '@shared/services/auth.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private auth: AuthService) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -57,6 +59,15 @@ export class AuthGuard implements CanActivate {
   }
 
   getNextRoute(): string {
+    if (this.auth.user.rol == RolEnum.Profesor) {
+      return '/professor/dashboard';
+    }
+    if (this.auth.user.rol == RolEnum.Alumno) {
+      return '/alumno';
+    }
+    if (this.auth.user.rol == RolEnum.Calidad) {
+      return '/calidad/dashboard';
+    }
     return '/dashboard';
   }
 }

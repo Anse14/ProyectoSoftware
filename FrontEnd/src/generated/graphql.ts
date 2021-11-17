@@ -17,45 +17,69 @@ export type Scalars = {
 /** Mutation root */
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Populate the database */
+  fillCursos?: Maybe<Scalars['Boolean']>;
+  /** Populate the database */
+  fillDebugUsers?: Maybe<Scalars['Boolean']>;
+  /** Populate the database */
+  fillMallas?: Maybe<Scalars['Boolean']>;
+  /** Populate the database */
+  fillProfes?: Maybe<Scalars['Boolean']>;
+  /** Populate the database */
+  fillRoles?: Maybe<Scalars['Boolean']>;
+  /** Populate the database */
+  fillSeccion?: Maybe<Scalars['Boolean']>;
   /** Updates an user based on email */
-  updateUserByEmail?: Maybe<User>;
+  updateUserByEmail?: Maybe<UserSchema>;
 };
 
 
 /** Mutation root */
 export type MutationUpdateUserByEmailArgs = {
   id?: Maybe<Scalars['String']>;
-  usr?: Maybe<UserInput>;
+  usr?: Maybe<UserSchemaInput>;
 };
 
 /** Query root */
 export type Query = {
   __typename?: 'Query';
   /** Brings a user */
-  getUser?: Maybe<User>;
+  getUser?: Maybe<UserSchema>;
 };
 
-export type User = {
-  __typename?: 'User';
-  id?: Maybe<Scalars['String']>;
+export enum RolEnum {
+  Alumno = 'ALUMNO',
+  Calidad = 'CALIDAD',
+  Profesor = 'PROFESOR'
+}
+
+export type UserSchema = {
+  __typename?: 'UserSchema';
+  email?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  rol?: Maybe<RolEnum>;
+  status?: Maybe<Scalars['Int']>;
 };
 
-export type UserInput = {
-  id?: Maybe<Scalars['String']>;
+export type UserSchemaInput = {
+  email?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  rol?: Maybe<RolEnum>;
+  status?: Maybe<Scalars['Int']>;
 };
 
 export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUserQuery = { __typename?: 'Query', getUser?: { __typename?: 'User', id?: string | null | undefined, name?: string | null | undefined } | null | undefined };
+export type GetUserQuery = { __typename?: 'Query', getUser?: { __typename?: 'UserSchema', email?: string | null | undefined, name?: string | null | undefined, rol?: RolEnum | null | undefined, status?: number | null | undefined } | null | undefined };
 
 export const GetUserDocument = gql`
     query GetUser {
   getUser {
-    id
+    email
     name
+    rol
+    status
   }
 }
     `;

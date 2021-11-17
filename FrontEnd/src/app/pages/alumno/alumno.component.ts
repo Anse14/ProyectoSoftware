@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '@shared/services/auth.service';
 
 @Component({
   selector: 'app-alumno',
@@ -157,7 +158,11 @@ export class AlumnoComponent implements OnInit {
     maintainAspectRatio: true,
   };
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {}
+
+  logout() {
+    this.authService.logout();
+  }
 }
