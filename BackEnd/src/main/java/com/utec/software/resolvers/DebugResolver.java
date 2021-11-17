@@ -22,6 +22,15 @@ public class DebugResolver {
     @ConfigProperty(name = "utec.datasource.jdbc.url")
     String dbUrl;
 
+    @ConfigProperty(name = "debug.users.prof")
+    String[] debugUsersProf;
+
+    @ConfigProperty(name = "debug.users.calidad")
+    String[] debugUsersCalidad;
+
+    @ConfigProperty(name = "debug.users.alumn")
+    String[] debugUsersAlumn;
+
     @Mutation("fillMallas")
     @Description("Populate the database")
     @Transactional
@@ -67,9 +76,10 @@ public class DebugResolver {
     public Boolean fillProfes() throws SQLException {
         DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
         List<User> profes = new ArrayList<>();
-        Rol rol = new Rol();
-        rol.setTipo(RolEnum.PROFESOR);
-        rol.persist();
+        Optional<Rol> rol = Rol.findByTipo(RolEnum.PROFESOR);
+        if(rol.isEmpty()){
+            return false;
+        }
         try (Connection con = DriverManager.getConnection(dbUrl,dbUsername,dbPassword);) {
             try (Statement stmt = con.createStatement();) {
                 ResultSet rs = stmt.executeQuery(QUERYPROFES);
@@ -78,7 +88,7 @@ public class DebugResolver {
                     usr.setCodigo(rs.getString(1));
                     usr.setNombre(rs.getString(2));
                     usr.setEmail(rs.getString(3).split("@")[0] + "@utec.edu.pe");
-                    usr.setRol(rol);
+                    usr.setRol(rol.get());
                     profes.add(usr);
                 }
             }
@@ -102,6 +112,58 @@ public class DebugResolver {
             }
         }
         Seccion.persist(secciones);
+        return true;
+    }
+
+    @Mutation("fillRoles")
+    @Description("Populate the database")
+    @Transactional
+    public Boolean fillRoles() {
+        Rol rol = new Rol();
+        rol.setTipo(RolEnum.ALUMNO);
+        rol.persist();
+        Rol rol2 = new Rol();
+        rol2.setTipo(RolEnum.PROFESOR);
+        rol2.persist();
+        Rol rol3 = new Rol();
+        rol3.setTipo(RolEnum.CALIDAD);
+        rol3.persist();
+        return true;
+    }
+
+    @Mutation("fillDebugUsers")
+    @Description("Populate the database")
+    @Transactional
+    public Boolean fillDebugUsers() {
+        Optional<Rol> r = Rol.findByTipo(RolEnum.PROFESOR);
+        if(r.isEmpty()){
+            return false;
+        }
+        Optional<Rol> r1 = Rol.findByTipo(RolEnum.ALUMNO);
+        if(r1.isEmpty()){
+            return false;
+        }
+        Optional<Rol> r2 = Rol.findByTipo(RolEnum.CALIDAD);
+        if(r2.isEmpty()){
+            return false;
+        }
+        List<User> users = new ArrayList<>();
+        for (var usr : debugUsersProf) {
+            var name = usr.split("@")[0].split("\\.")[0];
+            var lname = usr.split("@")[0].split("\\.")[1];
+            users.add(new User(usr.split("@")[0], name + lname, usr, r.get()));
+        }
+        for (var usr : debugUsersAlumn) {
+            var name = usr.split("@")[0].split("\\.")[0];
+            var lname = usr.split("@")[0].split("\\.")[1];
+            users.add(new User(usr.split("@")[0], name + lname, usr, r1.get()));
+        }
+        for (var usr : debugUsersCalidad) {
+            var name = usr.split("@")[0].split("\\.")[0];
+            var lname = usr.split("@")[0].split("\\.")[1];
+            users.add(new User(usr.split("@")[0], name + lname, usr, r2.get()));
+        }
+        User.persist(users);
         return true;
     }
 

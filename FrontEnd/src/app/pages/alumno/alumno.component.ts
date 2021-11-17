@@ -58,7 +58,7 @@ export class AlumnoComponent implements OnInit {
         titulos: ["EXAMEN", "NOTA"],
         elementos: [
           ["PC1", 12],
-          ["PC2", 15],
+          ["PC2", 20],
           ["PC3", 10.5],
           ["PC4", 20],
           ["P", "-"],

@@ -8,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Data
@@ -27,4 +28,8 @@ public class Rol extends PanacheEntityBase {
 
     @OneToMany(targetEntity = User.class)
     private List<User> usuarios;
+
+    public static Optional<Rol> findByTipo(RolEnum r) {
+        return find("tipo", r).firstResultOptional();
+    }
 }

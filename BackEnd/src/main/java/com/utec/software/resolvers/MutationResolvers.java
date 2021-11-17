@@ -1,6 +1,6 @@
 package com.utec.software.resolvers;
 
-import com.utec.software.schema.User;
+import com.utec.software.schema.UserSchema;
 import io.quarkus.vertx.http.runtime.CurrentVertxRequest;
 import org.eclipse.microprofile.graphql.Description;
 import org.eclipse.microprofile.graphql.GraphQLApi;
@@ -15,7 +15,7 @@ public class MutationResolvers {
 
     @Mutation("updateUserByEmail")
     @Description("Updates an user based on email")
-    public User updateUser(String id, User usr) {
+    public UserSchema updateUser(String id, UserSchema usr) {
 //        String email = request.getCurrent().request().getHeader("email");
         return usr;
     }

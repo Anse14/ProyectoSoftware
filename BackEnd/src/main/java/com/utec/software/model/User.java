@@ -43,6 +43,13 @@ public class User extends PanacheEntityBase {
 
     public User() {}
 
+    public User(String codigo, String nombre, String email, Rol rol) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.email = email;
+        this.rol = rol;
+    }
+
     public static Optional<User> findByEmail(String email) {
         return find("email", email).firstResultOptional();
     }
