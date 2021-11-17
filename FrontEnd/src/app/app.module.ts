@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,6 +27,14 @@ import { GoogleLoginProvider, SocialLoginModule } from 'angularx-social-login';
 import { CalidadComponent } from './pages/calidad/calidad.component';
 import { CalidadDashboardComponent } from './pages/calidad/calidad-dashboard/calidad-dashboard.component';
 
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CoursesViewComponent } from './pages/professor/courses-view/courses-view.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+
 export function tokenGetter() {
   return localStorage.getItem('access_token');
 }
@@ -44,6 +52,7 @@ export function tokenGetter() {
     RubricaCreationComponent,
     CalidadComponent,
     CalidadDashboardComponent,
+    CoursesViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,11 +69,18 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        authScheme: "Bearer ",
+        authScheme: 'Bearer ',
         allowedDomains: [environment.serverPath.replace('http://', '')],
         // disallowedRoutes: [environment.serverPath + "/auth/*"],
       },
     }),
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatMenuModule,
+    MatButtonModule,
   ],
   providers: [
     {

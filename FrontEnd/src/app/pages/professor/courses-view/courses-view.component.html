@@ -1,14 +1,31 @@
-<div class="container">
-  <div class="row">
-    <h1>{{ codCurso }}</h1>
+<div class="container-fluid main-container">
+  <div class="row text-center colorname">
+    <div class="col-2 colorcourse">
+      <h1>{{ codCurso }}</h1>
+    </div>
+    <div class="col-10">
+      <h1>{{ nombreCurso }}</h1>
+    </div>
   </div>
   <div class="row">
-    <div class="row">
-      <h3>Evaluaciones</h3>
-    </div>
-
     <div class="col-6">
-      <div class="row-fluid">
+      <div class="row text-align p-3">
+        <div class="col-8">
+          <h3>Evaluaciones</h3>
+        </div>
+        <div class="col-4">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#modalcreaterubrica"
+          >
+            Crear rubrica
+          </button>
+        </div>
+      </div>
+
+      <div class="row-fluid p-3">
         <div class="input-group rounded">
           <input
             type="search"
@@ -17,57 +34,98 @@
             aria-label="Search"
             aria-describedby="search-addon"
           />
-          <span class="input-group-text border-0" id="search-addon">
-            <i class="fas fa-search"></i>
-          </span>
         </div>
       </div>
 
-      <div class="row">
-        <div class="myaccordion" id="accordion">
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
+      <div class="row-fluid">
+        <div class="accordion accordion-flush" id="accordionWeeks">
+          <div
+            class="accordion-item"
+            *ngFor="let semana of semanas; let i = index"
+          >
+            <h2 class="accordion-header" [id]="'flush-heading-' + i">
               <button
-                class="accordion-button"
+                class="panel accordion-button collapsed"
                 type="button"
                 data-bs-toggle="collapse"
-                data-bs-target="#collapseOne"
-                aria-expanded="true"
-                aria-controls="collapseOne"
+                [attr.data-bs-target]="'#flush-collapse-' + i"
+                aria-expanded="false"
+                [attr.aria-controls]="'#flush-collapse-' + i"
               >
-                SEMANA 1
-                <div class="div-fluid">
-                  <button class="btn btn-link">+</button>
-                </div>
+                {{ semana.titulo }}
               </button>
             </h2>
             <div
-              id="collapseOne"
-              class="accordion-collapse collapse show"
-              aria-labelledby="headingOne"
-              data-bs-parent="#accordionExample"
+              [id]="'flush-collapse-' + i"
+              class="accordion-collapse collapse"
+              [attr.aria-labelledby]="'flush-heading-' + i"
+              data-bs-parent="#accordionWeeks"
             >
               <div class="accordion-body">
-                <ul>
-                  <li>Evaluacion 1</li>
-                  <li>Evaluacion 2</li>
+                <ul
+                  *ngFor="
+                    let evaluaciones of evaluaciones_semanales;
+                    let j = index
+                  "
+                >
+                  <li>
+                    <div class="row-fluid">
+                      <div class="btn-group dropright">
+                        <button
+                          [id]="'btnGroupDrop-' + j"
+                          type="button"
+                          class="btn btn-outline-link dropdown-toggle"
+                          data-bs-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          <b> {{ evaluaciones.titulo }}</b>
+                        </button>
+                        <ul
+                          class="dropdown-menu"
+                          [attr.aria-labelledby]="'btnGroupDrop-' + j"
+                        >
+                          <li>
+                            <a class="dropdown-item" href="#">Modificar</a>
+                          </li>
+                          <li>
+                            <a class="dropdown-item" href="#">Calificar</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="col-6">
-          <div class="row">
-            <h3>Secciones</h3>
-            <ul>
-              <li>SECCION 1 | HORARIO: MIE 1-3PM</li>
-              <li>SECCION 2 | HORARIO: JUE 5-8PM</li>
-            </ul>
-          </div>
+    <div class="col-6">
+      <div class="row p-3">
+        <h3>Secciones</h3>
+        <ul *ngFor="let seccion of secciones; let j = index">
+          <li>
+            {{ seccion.titulo }} | {{ seccion.horario.dia1 }}
+            {{ seccion.horario.hora1 }} {{ seccion.horario.dia2 }}
+            {{ seccion.horario.hora2 }}
+          </li>
+        </ul>
+      </div>
 
-          <div class="row">
-            <h3>Estadisticas</h3>
+      <div class="row-fluid p-3">
+        <h3>Estadisticas</h3>
+        <div class="row-fluid p-2">
+          <div class="input-group rounded">
+            <input
+              type="search"
+              class="form-control rounded"
+              placeholder="Buscar"
+              aria-label="Search"
+              aria-describedby="search-addon"
+            />
           </div>
         </div>
       </div>
