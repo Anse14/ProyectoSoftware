@@ -11,5 +11,11 @@
       </nb-card-body>
     </nb-card>
   </nb-layout-column>
-  <nb-layout-column>Right column</nb-layout-column>
+  <nb-layout-column>
+    <nb-card>
+      <nb-card-body>
+        <chart [type]="type" [data]="data" [options]="options"></chart>
+      </nb-card-body>
+    </nb-card>
+  </nb-layout-column>
 </nb-layout>
