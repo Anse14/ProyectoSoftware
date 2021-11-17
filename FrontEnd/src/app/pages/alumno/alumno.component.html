@@ -110,7 +110,9 @@
             </div>
             <div class="container double" id="grafico">
               COMPETENCIAS
-
+              <nb-card-body>
+                <chart [type]="type" [data]="data" [options]="options"></chart>
+              </nb-card-body>
             </div>
           </div>
         </div>
