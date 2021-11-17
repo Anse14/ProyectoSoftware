@@ -10,15 +10,18 @@ import { ProfessorComponent } from './pages/professor/professor.component';
 import { AlumnoComponent } from './pages/alumno/alumno.component';
 import { CalidadComponent } from './pages/calidad/calidad.component';
 import { CalidadDashboardComponent } from './pages/calidad/calidad-dashboard/calidad-dashboard.component';
+import { AuthGuard } from '@shared/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: PrincipalComponent,
+    // canActivate: [AuthGuard]
   },
   {
     path: 'dashboard',
     component: DashboardComponent,
+    // canActivate: [AuthGuard]
   },
   {
     path: 'alumno',

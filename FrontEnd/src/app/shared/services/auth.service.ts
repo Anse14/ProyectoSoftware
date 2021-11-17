@@ -40,7 +40,7 @@ export class AuthService {
           localStorage.setItem('refresh_token', res.refresh);
           this.user.idToken = token;
           this.user.email = res.email;
-          this.router.navigateByUrl('/dashboard');
+          this.continueLogin();
         }
       });
   }
@@ -56,5 +56,9 @@ export class AuthService {
       this.user.email = '';
       this.router.navigateByUrl('/');
     });
+  }
+
+  private continueLogin() {
+    this.router.navigateByUrl('/dashboard');
   }
 }
