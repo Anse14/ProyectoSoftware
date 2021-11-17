@@ -7,6 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalidadDashboardComponent implements OnInit {
 
+    filtros = [
+    {
+      titulo: "Semestre",
+      lista: ['2021-2', '2021-1'],
+    },
+    {
+      titulo: "Carreras",
+      lista: ['BIOINGENIERÍA', 'ADMINISTRACIÓN Y NEGOCIOS DIGITALES', 'CIENCIA DE LA COMPUTACIÓN', 'CIENCIA DE DATOS', 'INGENIERÍA AMBIENTAL', 'INGENIERÍA CIVIL', 'INGENIERÍA ELECTRÓNICA', 'INGENIERÍA DE LA ENERGÍA', 'INGENIERÍA INDUSTRIAL', 'INGENIERÍA MECÁNICA', 'INGENIERÍA MECATRÓNICA', 'INGENIERÍA QUÍMICA'],
+    },
+    {
+      titulo: "Cursos",
+      lista: ['Fisica 1', 'Fisica 2', 'Matematica 1', 'Matematica 2', 'Matematica Discreta 1', 'Matematica Discreta 2', 'Compiladores', 'Teoria de la Computacion'],
+    },
+  ]
+
   constructor() { }
 
   ngOnInit(): void {
