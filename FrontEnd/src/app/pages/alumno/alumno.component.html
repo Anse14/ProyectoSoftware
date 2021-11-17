@@ -3,11 +3,11 @@
     <section class="sidebar">
       <div class="text-center">
         <img
-        src="assets/images/LOGO-UTEC-WHITE.png"
-        alt=""
-        height="100"
-        width="150"
-        class="img-fluid m-3"
+          src="assets/images/LOGO-UTEC-WHITE.png"
+          alt=""
+          height="100"
+          width="150"
+          class="img-fluid m-3"
         />
       </div>
       <div class="text-center">
@@ -25,36 +25,40 @@
           alt="user"
           class="img-fluid rounded-circle"
         />
-        <h3>{{Alumno}} </h3>
+        <h3>{{ Alumno }}</h3>
       </div>
-        <ul class="scrollbar-container sidebar-menu ps" style="height: 663px;">
-          <div class="row-fluid justify-content center">
-            <div
-              class="btn-group p-2"
-              role="group"
-              aria-label="Button group with nested dropdown"
+      <ul class="scrollbar-container sidebar-menu ps" style="height: 663px">
+        <div class="row-fluid justify-content center">
+          <div
+            class="btn-group p-2"
+            role="group"
+            aria-label="Button group with nested dropdown"
+          >
+            <button
+              id="btnGroupDrop1"
+              type="button"
+              class="btn btn-outline-light dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
             >
-              <button
-                id="btnGroupDrop1"
-                type="button"
-                class="btn btn-outline-light dropdown-toggle"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <b>S E M E S T R E S</b>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                <li><a class="dropdown-item" href="#">2021-2</a></li>
-                <li><a class="dropdown-item" href="#">2021-1</a></li>
-              </ul>
-            </div>
+              <b>S E M E S T R E S</b>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+              <li><a class="dropdown-item" href="#">2021-2</a></li>
+              <li><a class="dropdown-item" href="#">2021-1</a></li>
+            </ul>
           </div>
-        </ul>
+        </div>
+      </ul>
       <div class="sidebar-footer">
         <ul class="sidebar-menu">
-          <li >
-            <a href="#" >
-              <nb-icon icon="power-outline" class="icon" status="warning"></nb-icon>
+          <li>
+            <a href="#">
+              <nb-icon
+                icon="power-outline"
+                class="icon"
+                status="warning"
+              ></nb-icon>
               Cerrar sesion
             </a>
           </li>
@@ -64,392 +68,50 @@
   </aside>
   <div class="content justify-content-md-center">
     <div class="row">
-      <img class="flechi1"
-      src="assets/images/flechi.png"
-      />
+      <img class="flechi1" src="assets/images/flechi.png" />
     </div>
-        <div class="accordion accordion-flush" id="accordionFlushExample">
-          <div class="accordion-item">
+    <div class="accordion accordion-flush" id="accordionFlushExample">
 
-            <h2 class="accordion-header" id="flush-headingOne">
-              <button class="panel accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                CÓDIGO - Curso 1
-              </button>               
-            </h2>
-            
-            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-              <div class="accordion-body">
-                
-                <div class="container first" id="cuadro">
-                  SISTEMA DE EVALUACIÓN
-                  <div class="row">
-                      <div class="col">EXAMEN</div>
-                      <div class="col">PORCENTAJE</div>
-                      <div class="col">NOTA</div>
-                      <div class="col">ACUMULADO</div>
-                  </div>
-                  <div class="row">
-                      <div class="col">PC1</div>
-                      <div class="col">20%</div>
-                      <div class="col">12</div>
-                      <div class="col">2.4</div>
-                  </div>
-                  <div class="row">
-                      <div class="col">PC2</div>
-                      <div class="col">20%</div>
-                      <div class="col">15</div>
-                      <div class="col">3</div>
-                  </div>
-                  <div class="row">
-                      <div class="col">PC3</div>
-                      <div class="col">20%</div>
-                      <div class="col">10.5</div>
-                      <div class="col">2.1</div>
-                  </div>
-                  <div class="row">
-                      <div class="col">PC4</div>
-                      <div class="col">20%</div>
-                      <div class="col">20</div>
-                      <div class="col">4</div>
-                  </div>
-                  <div class="row">
-                      <div class="col">P</div>
-                      <div class="col">20%</div>
-                      <div class="col">-</div>
-                      <div class="col">-</div>
-                  </div>
-                  <div class="row">
-                      <div class="col">NOTA FINAL</div>
-                      <div class="col-3">-</div>
-                  </div>
-                  <p>PC = Practica calificada</p>
-                  <p>P = Proyecto</p>
-                  
-                </div>
-                <div class="container double" id="grafico">
-                  COMPETENCIAS                    
-                </div>
-              
+      <div class="accordion-item" *ngFor="let curso of cursos; let i=index">
+        <h2 class="accordion-header" [id]="'flush-heading-' + i">
+          <button
+            class="panel accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            [attr.data-bs-target]="'#flush-collapse-' + i"
+            aria-expanded="false"
+            [attr.aria-controls]="'flush-collapse-' + i"
+          >
+            {{curso.titulo}}
+          </button>
+        </h2>
+
+        <div
+          [id]="'flush-collapse-' + i"
+          class="accordion-collapse collapse"
+          [attr.aria-labelledby]="'flush-heading-' + i"
+          data-bs-parent="#accordionFlushExample"
+        >
+          <div class="accordion-body">
+            <div class="container first" id="cuadro">
+              {{curso.rubrica.titulo}}
+              <div class="row">
+                <div class="col" *ngFor="let titulo of curso.rubrica.titulos"> {{titulo}} </div>
               </div>
+              <div class="row" *ngFor="let row of curso.rubrica.elementos">
+                <div class="col" *ngFor="let elm of row"> {{elm}} </div>
+              </div>
+              <div class="row">
+                <div class="col">NOTA FINAL</div>
+                <div class="col-3">-</div>
+              </div>
+              <p>PC = Practica calificada</p>
+              <p>P = Proyecto</p>
             </div>
+            <div class="container double" id="grafico">COMPETENCIAS</div>
           </div>
-
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingTwo">
-              <button class="panel accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                CÓDIGO - Curso 2
-              </button>
-            </h2>
-            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-              <div class="accordion-body">
-                <div class="container first" id="cuadro">
-                  SISTEMA DE EVALUACIÓN
-                  <div class="row">
-                      <div class="col">EXAMEN</div>
-                      <div class="col">PORCENTAJE</div>
-                      <div class="col">NOTA</div>
-                      <div class="col">ACUMULADO</div>
-                  </div>
-                  <div class="row">
-                      <div class="col">PC1</div>
-                      <div class="col">20%</div>
-                      <div class="col">12</div>
-                      <div class="col">2.4</div>
-                  </div>
-                  <div class="row">
-                      <div class="col">PC2</div>
-                      <div class="col">20%</div>
-                      <div class="col">15</div>
-                      <div class="col">3</div>
-                  </div>
-                  <div class="row">
-                      <div class="col">PC3</div>
-                      <div class="col">20%</div>
-                      <div class="col">10.5</div>
-                      <div class="col">2.1</div>
-                  </div>
-                  <div class="row">
-                      <div class="col">PC4</div>
-                      <div class="col">20%</div>
-                      <div class="col">20</div>
-                      <div class="col">4</div>
-                  </div>
-                  <div class="row">
-                      <div class="col">P</div>
-                      <div class="col">20%</div>
-                      <div class="col">-</div>
-                      <div class="col">-</div>
-                  </div>
-                  <div class="row">
-                      <div class="col">NOTA FINAL</div>
-                      <div class="col-3">-</div>
-                  </div>
-                  <p>PC = Practica calificada</p>
-                  <p>P = Proyecto</p>
-                  
-                </div>
-                <div class="container double" id="grafico">
-                  COMPETENCIAS                    
-                </div>
-                
-              
-              </div>
-            </div>
-          </div>
-
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingThree">
-              <button class="panel accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                  CÓDIGO - Curso 3
-              </button>
-            </h2>
-            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-              <div class="accordion-body">
-
-                <div class="container first" id="cuadro">
-                  SISTEMA DE EVALUACIÓN
-                  <div class="row">
-                      <div class="col">EXAMEN</div>
-                      <div class="col">PORCENTAJE</div>
-                      <div class="col">NOTA</div>
-                      <div class="col">ACUMULADO</div>
-                  </div>
-                  <div class="row">
-                      <div class="col">PC1</div>
-                      <div class="col">20%</div>
-                      <div class="col">12</div>
-                      <div class="col">2.4</div>
-                  </div>
-                  <div class="row">
-                      <div class="col">PC2</div>
-                      <div class="col">20%</div>
-                      <div class="col">15</div>
-                      <div class="col">3</div>
-                  </div>
-                  <div class="row">
-                      <div class="col">PC3</div>
-                      <div class="col">20%</div>
-                      <div class="col">10.5</div>
-                      <div class="col">2.1</div>
-                  </div>
-                  <div class="row">
-                      <div class="col">PC4</div>
-                      <div class="col">20%</div>
-                      <div class="col">20</div>
-                      <div class="col">4</div>
-                  </div>
-                  <div class="row">
-                      <div class="col">P</div>
-                      <div class="col">20%</div>
-                      <div class="col">-</div>
-                      <div class="col">-</div>
-                  </div>
-                  <div class="row">
-                      <div class="col">NOTA FINAL</div>
-                      <div class="col-3">-</div>
-                  </div>
-                  <p>PC = Practica calificada</p>
-                  <p>P = Proyecto</p>
-                  
-                </div>
-                <div class="container double" id="grafico">
-                  COMPETENCIAS                    
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-          <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingFour">
-                <button class="panel accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                  CÓDIGO - Curso 4
-                </button>
-              </h2>
-              <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">
-
-                  <div class="container first" id="cuadro">
-                    SISTEMA DE EVALUACIÓN
-                    <div class="row">
-                        <div class="col">EXAMEN</div>
-                        <div class="col">PORCENTAJE</div>
-                        <div class="col">NOTA</div>
-                        <div class="col">ACUMULADO</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">PC1</div>
-                        <div class="col">20%</div>
-                        <div class="col">12</div>
-                        <div class="col">2.4</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">PC2</div>
-                        <div class="col">20%</div>
-                        <div class="col">15</div>
-                        <div class="col">3</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">PC3</div>
-                        <div class="col">20%</div>
-                        <div class="col">10.5</div>
-                        <div class="col">2.1</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">PC4</div>
-                        <div class="col">20%</div>
-                        <div class="col">20</div>
-                        <div class="col">4</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">P</div>
-                        <div class="col">20%</div>
-                        <div class="col">-</div>
-                        <div class="col">-</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">NOTA FINAL</div>
-                        <div class="col-3">-</div>
-                    </div>
-                    <p>PC = Practica calificada</p>
-                    <p>P = Proyecto</p>
-                    
-                  </div>
-                  <div class="container double" id="grafico">
-                    COMPETENCIAS                    
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingFive">
-                <button class="panel accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-                  CÓDIGO - Curso 5
-                </button>
-              </h2>
-              <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">
-                  
-                  <div class="container first" id="cuadro">
-                    SISTEMA DE EVALUACIÓN
-                    <div class="row">
-                        <div class="col">EXAMEN</div>
-                        <div class="col">PORCENTAJE</div>
-                        <div class="col">NOTA</div>
-                        <div class="col">ACUMULADO</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">PC1</div>
-                        <div class="col">20%</div>
-                        <div class="col">12</div>
-                        <div class="col">2.4</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">PC2</div>
-                        <div class="col">20%</div>
-                        <div class="col">15</div>
-                        <div class="col">3</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">PC3</div>
-                        <div class="col">20%</div>
-                        <div class="col">10.5</div>
-                        <div class="col">2.1</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">PC4</div>
-                        <div class="col">20%</div>
-                        <div class="col">20</div>
-                        <div class="col">4</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">P</div>
-                        <div class="col">20%</div>
-                        <div class="col">-</div>
-                        <div class="col">-</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">NOTA FINAL</div>
-                        <div class="col-3">-</div>
-                    </div>
-                    <p>PC = Practica calificada</p>
-                    <p>P = Proyecto</p>
-                    
-                  </div>
-                  <div class="container double" id="grafico">
-                    COMPETENCIAS                    
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingSix">
-                <button class="panel accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
-                  CÓDIGO - Curso 6
-                </button>
-              </h2>
-
-              <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">
-                  
-                  <div class="container first" id="cuadro">
-                    SISTEMA DE EVALUACIÓN
-                    <div class="row">
-                        <div class="col">EXAMEN</div>
-                        <div class="col">PORCENTAJE</div>
-                        <div class="col">NOTA</div>
-                        <div class="col">ACUMULADO</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">PC1</div>
-                        <div class="col">20%</div>
-                        <div class="col">12</div>
-                        <div class="col">2.4</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">PC2</div>
-                        <div class="col">20%</div>
-                        <div class="col">15</div>
-                        <div class="col">3</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">PC3</div>
-                        <div class="col">20%</div>
-                        <div class="col">10.5</div>
-                        <div class="col">2.1</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">PC4</div>
-                        <div class="col">20%</div>
-                        <div class="col">20</div>
-                        <div class="col">4</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">P</div>
-                        <div class="col">20%</div>
-                        <div class="col">-</div>
-                        <div class="col">-</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">NOTA FINAL</div>
-                        <div class="col-3">-</div>
-                    </div>
-                    <p>PC = Practica calificada</p>
-                    <p>P = Proyecto</p>
-                    
-                  </div>
-                  <div class="container double" id="grafico">
-                    COMPETENCIAS                    
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
         </div>
+      </div>
+    </div>
   </div>
 </div>

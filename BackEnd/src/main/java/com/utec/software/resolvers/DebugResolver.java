@@ -1,11 +1,14 @@
 package com.utec.software.resolvers;
 
+import com.utec.software.model.Carrera;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.graphql.Description;
 import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Mutation;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @GraphQLApi
 public class DebugResolver {
@@ -22,14 +25,22 @@ public class DebugResolver {
     @Description("Populate the database")
     public Boolean fillData() throws SQLException {
         DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
+        List<Carrera> carreras = new ArrayList<>();
         try (Connection con = DriverManager.getConnection(dbUrl,dbUsername,dbPassword);) {
             try (Statement stmt = con.createStatement();) {
                 ResultSet rs = stmt.executeQuery(QUERY);
                 while(rs.next()) {
-                    System.out.println(rs.getInt(1) + "\t" + rs.getString(2) + "\t" + rs.getInt(3) + "\t" + rs.getString(4));
+                    Integer a = rs.getInt(1);
+                    String b = rs.getString(2);
+                    String c =  rs.getString(4);
+                    Carrera carrera = new Carrera(a, b, c);
+                    carreras.add(carrera);
                 }
             }
         }
+        System.out.println("ANTESDE");
+        Carrera.persist(carreras);
+        System.out.println("DESPUESDE");
         return true;
     }
 
