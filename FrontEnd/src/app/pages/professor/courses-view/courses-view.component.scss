@@ -1,0 +1,30 @@
+.myaccordion {
+  margin: 50px auto;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.myaccordion .accordion-header {
+  border-bottom-color: #edeff0;
+  background: transparent;
+}
+
+.myaccordion .btn {
+  width: 100%;
+  font-weight: bold;
+  color: #004987;
+  padding: 0;
+}
+
+.myaccordion .btn-link:hover,
+.myaccordion .btn-link:focus {
+  text-decoration: none;
+}
+
+.myaccordion li + li {
+  margin-top: 10px;
+}
+
+.myaccordion .accordion-header {
+  border-bottom-color: #edeff0;
+  background: transparent;
+}
