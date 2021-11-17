@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NbThemeModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { ChartModule } from 'angular2-chartjs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,7 +24,6 @@ import { AlumnoComponent } from './pages/alumno/alumno.component';
 import { GraphQLModule } from './graphql.module';
 import { NebularModule } from './nebular.module';
 import { GoogleLoginProvider, SocialLoginModule } from 'angularx-social-login';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CalidadComponent } from './pages/calidad/calidad.component';
 import { CalidadDashboardComponent } from './pages/calidad/calidad-dashboard/calidad-dashboard.component';
 
@@ -56,7 +56,7 @@ export function tokenGetter() {
     NbEvaIconsModule,
     NebularModule,
     SocialLoginModule,
-    NgxChartsModule,
+    ChartModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
