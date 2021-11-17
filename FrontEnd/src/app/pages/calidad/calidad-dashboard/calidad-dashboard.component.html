@@ -1,7 +1,7 @@
 <div class="main-container">
     <p class="titulo"><img class="flechi1" src="assets/images/flechi.png"/> Resultados</p>
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-3">
             <div class="filtros">
                 <h3>Filtros</h3>
                 <div class="listFiltros" *ngFor="let filtro of filtros">
@@ -15,7 +15,24 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-1">
+        <div class="col-md-5">
+            <p style="text-align:center;background-color:rgb(161, 214, 250);">ESTADÍSTICA DE DESEMPEÑO - CS - TEORÍA DE LA COMPUTACIÓN</p>
+            <app-grafica-calidad></app-grafica-calidad>
+        </div>
+        <div class="col-md-3">
+            <p style="text-align:center;background-color:rgb(161, 214, 250);">SEMESTRE: 2021-2</p>
+            <p style="text-align:center;background-color:rgb(65, 168, 236);">PORCENTAJE DE LOGRO > 75%</p>
+            <div class="logros">
+                <div class="listFiltros" *ngFor="let logro of logros">
+                    <p class="tiposFiltro">{{logro.titulo}}</p>
+                    <div class="listOpciones">
+                        <div class="form-check" *ngFor="let opcion of logro.lista">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">{{opcion}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
