@@ -20,6 +20,7 @@ export class CourseCardComponent implements OnInit {
     this.router.navigateByUrl('/professor/course-view', {
       state: {
         codCurso: this.codCurso,
+        nombreCurso: this.nombreCurso,
       },
     });
   }

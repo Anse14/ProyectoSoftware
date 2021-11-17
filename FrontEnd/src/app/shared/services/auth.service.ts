@@ -49,6 +49,7 @@ export class AuthService {
     this.http.get(environment.serverPath + '/logout').subscribe((res) => {
       if (this.user.idToken != '') {
         this.socialAuthService.signOut();
+        this.user.idToken = '';
       }
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
