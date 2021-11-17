@@ -25,6 +25,7 @@
     "@nebular/eva-icons": "8.0.0",
     "@nebular/theme": "^8.0.0",
     "@popperjs/core": "^2.10.2",
+    "@swimlane/ngx-charts": "^19.1.0",
     "@types/graphql": "^14.5.0",
     "angularx-social-login": "^4.0.1",
     "apollo-angular": "^2.6.0",

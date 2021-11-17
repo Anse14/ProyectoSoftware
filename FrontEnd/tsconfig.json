@@ -18,6 +18,7 @@
     "lib": ["es2018", "dom", "esnext.asynciterable"],
     "allowSyntheticDefaultImports": true,
     "paths": {
+      "@graphql": ["src/generated/graphql.ts"],
       "@shared/*": ["src/app/shared/*"],
       "@environment/*": ["src/environments/*"]
     }

@@ -8,6 +8,8 @@ import { CoursesViewComponent } from './pages/professor/courses-view/courses-vie
 import { ProfessorDashboardComponent } from './pages/professor/professor-dashboard/professor-dashboard.component';
 import { ProfessorComponent } from './pages/professor/professor.component';
 import { AlumnoComponent } from './pages/alumno/alumno.component';
+import { CalidadComponent } from './pages/calidad/calidad.component';
+import { CalidadDashboardComponent } from './pages/calidad/calidad-dashboard/calidad-dashboard.component';
 
 const routes: Routes = [
   {
@@ -43,6 +45,16 @@ const routes: Routes = [
       {
         path: 'create-rubrica',
         component: RubricaCreationComponent,
+      },
+    ],
+  },
+  {
+    path: 'calidad',
+    component: CalidadComponent,
+    children:[
+      {
+        path: 'dashboard',
+        component: CalidadDashboardComponent,
       },
     ],
   },
