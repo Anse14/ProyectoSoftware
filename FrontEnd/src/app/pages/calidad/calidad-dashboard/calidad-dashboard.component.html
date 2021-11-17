@@ -16,7 +16,23 @@
             </div>
         </div>
         <div class="col-md-5">
+            <p>ESTADÍSTICA DE DESEMPEÑO - CS - TEORÍA DE LA COMPUTACIÓN</p>
             <app-grafica-calidad></app-grafica-calidad>
+        </div>
+        <div class="col-md-3">
+            <p>SEMESTRE: 2021-2</p>
+            <p>PORCENTAJE DE LOGRO > 75%</p>
+            <div class="logros">
+                <div class="listFiltros" *ngFor="let logro of logros">
+                    <p class="tiposFiltro">{{logro.titulo}}</p>
+                    <div class="listOpciones">
+                        <div class="form-check" *ngFor="let opcion of logro.lista">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">{{opcion}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -22,6 +22,17 @@ export class CalidadDashboardComponent implements OnInit {
     },
   ]
 
+  logros = [
+    {
+      titulo: "Competencias",
+      lista: ['RE 01', 'RE 02', 'RE 03', 'RE 04'],
+    },
+    {
+      titulo: "Niveles",
+      lista: ['Nivel 1', 'Nivel 2', 'Nivel 3'],
+    },
+  ]
+
   constructor() { }
 
   ngOnInit(): void {
