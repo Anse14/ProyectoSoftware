@@ -13,12 +13,12 @@ export class AlumnoComponent implements OnInit {
       titulo: "CÓDIGO - Curso 1",
       rubrica: {
         titulo: "SISTEMA DE EVALUACIÓN",
-        titulos: ["EXAMEN", "PORCENTAJE", "NOTA", "ACUMULADO"],
+        titulos: ["EXAMEN", "NOTA"],
         elementos: [
-          ["PC1", "20%", 12, "2.4"],
-          ["PC2", "20%", 15, "2.4"],
-          ["PC3", "20%", 10.5, "2.4"],
-          ["PC4", "20%", 20, "2.4"],
+          ["PC1", 12],
+          ["PC2", 15],
+          ["PC3", 10.5],
+          ["PC4", 20],
         ]
       }
     },
@@ -26,12 +26,12 @@ export class AlumnoComponent implements OnInit {
       titulo: "CÓDIGO - Curso 2",
       rubrica: {
         titulo: "SISTEMA DE EVALUACIÓN",
-        titulos: ["EXAMEN", "PORCENTAJE", "NOTA", "ACUMULADO"],
+        titulos: ["EXAMEN", "NOTA"],
         elementos: [
-          ["PC1", "20%", 12, "2.4"],
-          ["PC2", "20%", 15, "2.4"],
-          ["PC3", "20%", 10.5, "2.4"],
-          ["PC4", "20%", 20, "2.4"],
+          ["PC1", 12],
+          ["PC2", 15],
+          ["PC3", 10.5],
+          ["PC4", 20],
         ]
       }
     },
@@ -39,12 +39,12 @@ export class AlumnoComponent implements OnInit {
       titulo: "CÓDIGO - Curso 3",
       rubrica: {
         titulo: "SISTEMA DE EVALUACIÓN",
-        titulos: ["EXAMEN", "PORCENTAJE", "NOTA", "ACUMULADO"],
+        titulos: ["EXAMEN", "NOTA"],
         elementos: [
-          ["PC1", "20%", 12, "2.4"],
-          ["PC2", "20%", 15, "2.4"],
-          ["PC3", "20%", 10.5, "2.4"],
-          ["PC4", "20%", 20, "2.4"],
+          ["PC1", 12],
+          ["PC2", 15],
+          ["PC3", 10.5],
+          ["PC4", 20],
         ]
       }
     },
@@ -52,12 +52,12 @@ export class AlumnoComponent implements OnInit {
       titulo: "CÓDIGO - Curso 4",
       rubrica: {
         titulo: "SISTEMA DE EVALUACIÓN",
-        titulos: ["EXAMEN", "PORCENTAJE", "NOTA", "ACUMULADO"],
+        titulos: ["EXAMEN", "NOTA"],
         elementos: [
-          ["PC1", "20%", 12, "2.4"],
-          ["PC2", "20%", 15, "2.4"],
-          ["PC3", "20%", 10.5, "2.4"],
-          ["PC4", "20%", 20, "2.4"],
+          ["PC1", 12],
+          ["PC2", 15],
+          ["PC3", 10.5],
+          ["PC4", 20],
         ]
       }
     },
@@ -65,12 +65,12 @@ export class AlumnoComponent implements OnInit {
       titulo: "CÓDIGO - Curso 5",
       rubrica: {
         titulo: "SISTEMA DE EVALUACIÓN",
-        titulos: ["EXAMEN", "PORCENTAJE", "NOTA", "ACUMULADO"],
+        titulos: ["EXAMEN", "NOTA"],
         elementos: [
-          ["PC1", "20%", 12, "2.4"],
-          ["PC2", "20%", 15, "2.4"],
-          ["PC3", "20%", 10.5, "2.4"],
-          ["PC4", "20%", 20, "2.4"],
+          ["PC1", 12],
+          ["PC2", 15],
+          ["PC3", 10.5],
+          ["PC4", 20],
         ]
       }
     },
@@ -78,12 +78,12 @@ export class AlumnoComponent implements OnInit {
       titulo: "CÓDIGO - Curso 6",
       rubrica: {
         titulo: "SISTEMA DE EVALUACIÓN",
-        titulos: ["EXAMEN", "PORCENTAJE", "NOTA", "ACUMULADO"],
+        titulos: ["EXAMEN", "NOTA"],
         elementos: [
-          ["PC1", "20%", 12, "2.4"],
-          ["PC2", "20%", 15, "2.4"],
-          ["PC3", "20%", 10.5, "2.4"],
-          ["PC4", "20%", 20, "2.4"],
+          ["PC1", 12],
+          ["PC2", 15],
+          ["PC3", 10.5],
+          ["PC4", 20],
         ]
       }
     },
