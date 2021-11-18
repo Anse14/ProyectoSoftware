@@ -14,4 +14,6 @@ public class GLoginApi {
         this.token = token;
         this.refresh = refresh;
     }
+
+    public GLoginApi() {}
 }

@@ -1,7 +1,7 @@
 package com.utec.software.model.enums;
 
 public enum RolEnum {
-    ESTUDIANTE,
+    ALUMNO,
     PROFESOR,
-    ADMIN
+    CALIDAD
 }

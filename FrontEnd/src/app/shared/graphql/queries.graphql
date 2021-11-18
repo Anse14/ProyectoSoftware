@@ -1,0 +1,8 @@
+query GetUser {
+  getUser {
+    email
+    name
+    rol
+    status
+  }
+}

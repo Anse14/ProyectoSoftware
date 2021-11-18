@@ -5,3 +5,10 @@
 .maxh {
   height: 100vh;
 }
+
+.img-centro-vertical {
+  display: table-cell;
+  height: 100vh;
+  vertical-align: middle;
+  text-align: center;
+}

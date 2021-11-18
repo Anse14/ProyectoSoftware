@@ -1,26 +1,74 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CallbackComponent } from './pages/auth/callback/callback.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { PrincipalComponent } from './pages/principal/principal.component';
+import { RubricaComponent } from './pages/rubrica/rubrica.component';
+import { RubricaCreationComponent } from './pages/rubrica/rubrica-creation/rubrica-creation.component';
+import { CoursesViewComponent } from './pages/professor/courses-view/courses-view.component';
+import { ProfessorDashboardComponent } from './pages/professor/professor-dashboard/professor-dashboard.component';
+import { ProfessorComponent } from './pages/professor/professor.component';
+import { AlumnoComponent } from './pages/alumno/alumno.component';
+import { CalidadComponent } from './pages/calidad/calidad.component';
+import { CalidadDashboardComponent } from './pages/calidad/calidad-dashboard/calidad-dashboard.component';
+import { AuthGuard } from '@shared/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: PrincipalComponent
-  },
-  {
-    path: 'callback',
-    component: CallbackComponent
+    component: PrincipalComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
-  }
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'alumno',
+    component: AlumnoComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'professor',
+    component: ProfessorComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'dashboard',
+        component: ProfessorDashboardComponent,
+      },
+      {
+        path: 'course-view',
+        component: CoursesViewComponent,
+      },
+    ],
+  },
+  {
+    path: 'rubrica',
+    component: RubricaComponent,
+    canActivate: [AuthGuard],
+    children:[
+      {
+        path: 'create-rubrica',
+        component: RubricaCreationComponent,
+      },
+    ],
+  },
+  {
+    path: 'calidad',
+    canActivate: [AuthGuard],
+    component: CalidadComponent,
+    children:[
+      {
+        path: 'dashboard',
+        component: CalidadDashboardComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
