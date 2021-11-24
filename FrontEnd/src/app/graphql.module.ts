@@ -2,31 +2,46 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
-import { InMemoryCache,ApolloLink } from '@apollo/client/core';
+import { InMemoryCache, ApolloLink } from '@apollo/client/core';
 import { setContext } from '@apollo/client/link/context';
 import { environment } from '@environment/environment';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { UserService } from '@shared/services/user.service';
 
-const uri = environment.serverPath + "/graphql";
+const uri = environment.serverPath + '/graphql';
 
-export function createApollo(httpLink: HttpLink) {
+export function createApollo(httpLink: HttpLink, userService: UserService) {
   const basic = setContext((operation, context) => ({
     headers: {
-      Accept: 'charset=utf-8'
-    }
+      Accept: 'charset=utf-8',
+    },
   }));
 
-  const auth = setContext((operation, context) => {
-    const token = localStorage.getItem('access_token');
+  const auth = setContext(async (operation, context) => {
+    const helper = new JwtHelperService();
+    let token = localStorage.getItem('access_token');
 
     if (token === null) {
       return {};
-    } else {
-      return {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      };
     }
+
+    const isExpired = helper.isTokenExpired(token);
+
+    if (isExpired) {
+      let status = await userService.refresh();
+      if (status == 0) {
+        token = localStorage.getItem('access_token');
+      } else {
+        console.log(status)
+        return {};
+      }
+    }
+
+    return {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
   });
 
   const link = ApolloLink.from([basic, auth, httpLink.create({ uri })]);
@@ -34,18 +49,18 @@ export function createApollo(httpLink: HttpLink) {
 
   return {
     link,
-    cache
-  }
+    cache,
+  };
 }
 
 @NgModule({
-  exports: [
-    HttpClientModule,
+  exports: [HttpClientModule],
+  providers: [
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory: createApollo,
+      deps: [HttpLink, UserService],
+    },
   ],
-  providers: [{
-    provide: APOLLO_OPTIONS,
-    useFactory: createApollo,
-    deps: [HttpLink]
-  }]
 })
 export class GraphQLModule {}

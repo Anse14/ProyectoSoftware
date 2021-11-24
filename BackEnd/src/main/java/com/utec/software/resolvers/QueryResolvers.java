@@ -28,4 +28,6 @@ public class QueryResolvers {
         var u = usr.get();
         return Uni.createFrom().item(new UserSchema(u.getEmail(), u.getNombre(), u.getRol().getTipo()));
     }
+
+
 }

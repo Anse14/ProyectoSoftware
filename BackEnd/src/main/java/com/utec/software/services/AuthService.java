@@ -32,7 +32,7 @@ public class AuthService {
         return JWT.create()
                 .withSubject(subject)
                 .withIssuedAt(Date.from(now))
-                .withExpiresAt(Date.from(now.plus(15, ChronoUnit.MINUTES)))
+                .withExpiresAt(Date.from(now.plus(1, ChronoUnit.MINUTES)))
                 .sign(algorithm);
     }
 
