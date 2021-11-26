@@ -7,14 +7,14 @@ import {
   UrlTree,
 } from '@angular/router';
 import { RolEnum } from '@graphql';
-import { AuthService } from '@shared/services/auth.service';
+import { UserService } from '@shared/services/user.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router, private auth: AuthService) {}
+  constructor(private router: Router, private user: UserService) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -59,13 +59,13 @@ export class AuthGuard implements CanActivate {
   }
 
   getNextRoute(): string {
-    if (this.auth.user.rol == RolEnum.Profesor) {
+    if (this.user.user.rol == RolEnum.Profesor) {
       return '/professor/dashboard';
     }
-    if (this.auth.user.rol == RolEnum.Alumno) {
+    if (this.user.user.rol == RolEnum.Alumno) {
       return '/alumno';
     }
-    if (this.auth.user.rol == RolEnum.Calidad) {
+    if (this.user.user.rol == RolEnum.Calidad) {
       return '/calidad/dashboard';
     }
     return '/dashboard';

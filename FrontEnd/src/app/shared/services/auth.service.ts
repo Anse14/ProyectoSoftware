@@ -8,23 +8,31 @@ import {
 } from 'angularx-social-login';
 import { Router } from '@angular/router';
 import { GetUserGQL, RolEnum } from '@graphql';
+import { UserService } from './user.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  user = {
-    idToken: '',
-    email: '',
-    rol: RolEnum.Alumno,
-  };
+  // user = {
+  //   idToken: '',
+  //   email: '',
+  //   rol: RolEnum.Alumno,
+  // };
 
   constructor(
     private http: HttpClient,
     private socialAuthService: SocialAuthService,
     private router: Router,
-    private getUser: GetUserGQL
-  ) {}
+    private getUser: GetUserGQL,
+    private userService: UserService
+  ) {
+    let token = localStorage.getItem('refresh_token');
+    if (token != null) {
+      this.continueLogin();
+    }
+  }
 
   login() {
     this.socialAuthService
@@ -41,22 +49,33 @@ export class AuthService {
         if (res.status == 0) {
           localStorage.setItem('access_token', res.token);
           localStorage.setItem('refresh_token', res.refresh);
-          this.user.idToken = token;
-          this.user.email = res.email;
+          this.userService.user.idToken = token;
+          this.userService.user.email = res.email;
           this.continueLogin();
         }
       });
   }
 
-  logout() {
+  async logout() {
+    const helper = new JwtHelperService();
+    let token = localStorage.getItem('access_token');
+    if (token === null) {
+      await this.userService.refresh();
+    } else {
+      const isExpired = helper.isTokenExpired(token);
+      if (isExpired) {
+        await this.userService.refresh();
+      }
+    }
+
     this.http.get(environment.serverPath + '/logout').subscribe((res) => {
-      if (this.user.idToken != '') {
+      if (this.userService.user.idToken != '') {
         this.socialAuthService.signOut();
-        this.user.idToken = '';
+        this.userService.user.idToken = '';
       }
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
-      this.user.email = '';
+      this.userService.user.email = '';
       this.router.navigateByUrl('/');
     });
   }
@@ -66,7 +85,8 @@ export class AuthService {
       if (data.data.getUser.status != 0) {
         return;
       }
-      this.user.rol = data.data.getUser.rol;
+      this.userService.user.email = data.data.getUser.email;
+      this.userService.user.rol = data.data.getUser.rol;
       if (data.data.getUser.rol == RolEnum.Profesor) {
         this.router.navigateByUrl('/professor/dashboard');
       }

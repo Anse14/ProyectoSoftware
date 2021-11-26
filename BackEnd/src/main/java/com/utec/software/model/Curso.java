@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Data
@@ -40,4 +41,8 @@ public class Curso extends PanacheEntityBase {
         this.semestre = periodo;
         this.titulo = titulo;
     }
+    public static Optional<Curso> findByCodigo(String codigo) {
+        return find("codigo", codigo).firstResultOptional();
+    }
+
 }
