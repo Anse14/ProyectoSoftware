@@ -126,4 +126,22 @@ export class CoursesViewComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  goToRubricaCreation() {
+    this.router.navigateByUrl('/professor/rubrica-creation', {
+      state: {
+        codCurso: this.codCurso,
+        nombreCurso: this.nombreCurso,
+      },
+    });
+  }
+
+  goToRubricaCalificar() {
+    this.router.navigateByUrl('/professor/rubrica-calificar', {
+      state: {
+        codCurso: this.codCurso,
+        nombreCurso: this.nombreCurso,
+      },
+    });
+  }
 }
