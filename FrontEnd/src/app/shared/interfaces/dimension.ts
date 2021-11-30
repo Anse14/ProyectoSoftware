@@ -1,5 +1,4 @@
 export interface Dimension {
-    cd:string;
     dim:string;
     excelente:string;
     bueno:string;

@@ -44,6 +44,13 @@
     flex-direction: column;
     min-height: 100%;
   }
+  .sidebar-bottons {
+    list-style: none;
+    margin: 0 0 1.5rem;
+    padding: 0;
+    flex-direction:row;
+    min-height: 100%;
+  }
   
   .sidebar-footer .sidebar-menu {
     margin-bottom: 0;
@@ -108,3 +115,8 @@
     position: relative;
   }
   
+  a{
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+  }

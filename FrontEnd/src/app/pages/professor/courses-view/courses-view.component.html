@@ -1,10 +1,10 @@
 <div class="container-fluid main-container">
   <div class="row text-center colorname">
     <div class="col-2 colorcourse">
-      <h1>{{ codCurso }}</h1>
+      <h1>{{ curso.codigo }}</h1>
     </div>
     <div class="col-10">
-      <h1>{{ nombreCurso }}</h1>
+      <h1>{{ curso.name }}</h1>
     </div>
   </div>
   <div class="row">
@@ -108,9 +108,7 @@
         <h3>Secciones</h3>
         <ul *ngFor="let seccion of secciones; let j = index">
           <li>
-            {{ seccion.titulo }} | {{ seccion.horario.dia1 }}
-            {{ seccion.horario.hora1 }} {{ seccion.horario.dia2 }}
-            {{ seccion.horario.hora2 }}
+            {{ seccion.titulo }}
           </li>
         </ul>
       </div>

@@ -82,18 +82,19 @@ export class AuthService {
 
   private continueLogin() {
     this.getUser.fetch().subscribe((data) => {
-      if (data.data.getUser.status != 0) {
+      if (data.data.getUser == null) {
         return;
       }
-      this.userService.user.email = data.data.getUser.email;
-      this.userService.user.rol = data.data.getUser.rol;
-      if (data.data.getUser.rol == RolEnum.Profesor) {
+      this.userService.user.codigo = data.data.getUser.codigo;
+      this.userService.user.email = data.data.getUser.correo;
+      this.userService.user.rol = data.data.getUser.tipo;
+      if (data.data.getUser.tipo == RolEnum.Profesor) {
         this.router.navigateByUrl('/professor/dashboard');
       }
-      if (data.data.getUser.rol == RolEnum.Alumno) {
-        this.router.navigateByUrl('/alumno');
+      if (data.data.getUser.tipo == RolEnum.Alumno) {
+        this.router.navigateByUrl('/professor/dashboard');
       }
-      if (data.data.getUser.rol == RolEnum.Calidad) {
+      if (data.data.getUser.tipo == RolEnum.Calidad) {
         this.router.navigateByUrl('/calidad/dashboard');
       }
     });

@@ -11,6 +11,7 @@ export class UserService {
   user = {
     idToken: '',
     email: '',
+    codigo: '',
     rol: RolEnum.Alumno,
   };
 

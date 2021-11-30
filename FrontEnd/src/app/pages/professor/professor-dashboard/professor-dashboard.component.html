@@ -2,10 +2,9 @@
   <div class="row h-100">
     <div *ngFor="let card of cursos" class="col-6 d-flex align-items-center">
       <course-card
-        [color]="card.color"
-        [codCurso]="card.codCurso"
-        [nombreCurso]="card.nombreCurso"
-        [horario]="card.horario"
+        [color]="'#FFDE59'"
+        [codCurso]="card.codigo"
+        [nombreCurso]="card.nombre"
       ></course-card>
     </div>
   </div>

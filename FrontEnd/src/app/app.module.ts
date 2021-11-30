@@ -26,6 +26,7 @@ import { NebularModule } from './nebular.module';
 import { GoogleLoginProvider, SocialLoginModule } from 'angularx-social-login';
 import { CalidadComponent } from './pages/calidad/calidad.component';
 import { CalidadDashboardComponent } from './pages/calidad/calidad-dashboard/calidad-dashboard.component';
+import { CalidadVerificacionComponent } from './pages/calidad/calidad-verificacion/calidad-verificacion.component';
 
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
@@ -55,6 +56,7 @@ export function tokenGetter() {
     CalidadDashboardComponent,
     CoursesViewComponent,
     GraficaCalidadComponent,
+    CalidadVerificacionComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,5 @@
 package com.utec.software.model;
 
-import com.utec.software.model.enums.RolEnum;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,13 +7,12 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Data
 @Entity
 @EqualsAndHashCode(callSuper = true)
-public class Rol extends PanacheEntityBase {
+public class RubricaUsuario extends PanacheEntityBase {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -23,13 +21,21 @@ public class Rol extends PanacheEntityBase {
     )
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
+    private float evaluacionTotal;
 
-    private RolEnum tipo;
+    @ManyToOne(targetEntity = Rubrica.class)
+    private Rubrica rubrica;
 
-    @OneToMany(targetEntity = User.class)
-    private List<User> usuarios;
+    @ManyToOne(targetEntity = Alumno.class)
+    private Alumno alumno;
 
-    public static Optional<Rol> findByTipo(RolEnum r) {
-        return find("tipo", r).firstResultOptional();
-    }
+    // error
+    @OneToOne(targetEntity = Seccion.class)
+    private Seccion seccion;
+
+    
+    @OneToMany(mappedBy = "rubricaUsuario")
+    private List<DimensionUsuario> dimensionUsuarios;
+
+    public RubricaUsuario(){}
 }

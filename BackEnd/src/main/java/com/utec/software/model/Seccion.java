@@ -24,17 +24,29 @@ public class Seccion extends PanacheEntityBase {
     private UUID id;
 
     private String codigo;
+    private String semestre;
 
-    @ManyToMany(targetEntity = Curso.class)
-    private List<Curso> cursos;
+    // ??
+    @ManyToOne(targetEntity = Curso.class)
+    private Curso curso;
 
-    @OneToMany(targetEntity = User.class)
-    private List<User> usuarios;
+    @ManyToMany(mappedBy = "secciones")
+    private List<Profesor> profesores;
+
+    @OneToOne(targetEntity = RubricaUsuario.class)
+    private RubricaUsuario rubricaUsuario;
 
     public Seccion() {}
 
-    public Seccion(String codigo) {
+    public Seccion(String codigo, String semestre) {
         this.codigo = codigo;
+        this.semestre = semestre;
     }
+
     public static Optional<Seccion> findByCodigo(String codigo) { return find("codigo", codigo).firstResultOptional();}
+
+    public void updateAttributes(Seccion seccion){
+        this.semestre = seccion.semestre == null ? this.semestre : seccion.semestre;
+        this.codigo = seccion.codigo == null ? this.codigo : seccion.codigo;
+    }
 }

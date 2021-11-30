@@ -3,7 +3,6 @@ package com.utec.software.controllers;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.utec.software.api.*;
 import com.utec.software.model.RefreshToken;
-import com.utec.software.model.User;
 import com.utec.software.services.AuthService;
 
 import javax.inject.Inject;
@@ -49,31 +48,7 @@ public class AuthController {
         } catch(IllegalArgumentException err) {
             return new GLoginApi("", 3, "", "");
         }
-        
-        if(idToken != null) {
-            var payload = idToken.getPayload();
-            usr.email = payload.getEmail();
-            var user = User.findByEmail(usr.email);
 
-            if(user.isEmpty()) {
-                (new User(usr.email, "")).persist();
-            }
-
-            final String token = authService.genAccessToken(usr.email);
-            final String refresh = authService.genRefreshToken();
-
-            usr.token = token;
-            usr.refresh = refresh;
-            usr.status = 0;
-
-            Optional<RefreshToken> refr = RefreshToken.findByIdOptional(usr.email);
-            refr.ifPresent(RefreshToken::delete);
-
-            (new RefreshToken(usr.email, refresh)).persist();
-
-            return usr;
-        }
-
-        return new GLoginApi("", 2, "", "");
+        return authService.loginWithGoogle(idToken);
     }
 }

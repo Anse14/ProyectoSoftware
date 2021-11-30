@@ -6,6 +6,12 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
+import com.utec.software.api.GLoginApi;
+import com.utec.software.model.Alumno;
+import com.utec.software.model.CalidadEducativa;
+import com.utec.software.model.Profesor;
+import com.utec.software.model.RefreshToken;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -17,6 +23,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Optional;
 
 @ApplicationScoped
 public class AuthService {
@@ -49,5 +56,44 @@ public class AuthService {
                 .setAudience(Collections.singletonList(clientID))
                 .build();
         return verifier.verify(token);
+    }
+
+    public void saveUser(String email) {
+        var alumno = Alumno.findByEmail(email);
+        if(alumno.isPresent()) {
+            return;
+        }
+
+        var profesor = Profesor.findByEmail(email);
+        if(profesor.isPresent()) {
+            return;
+        }
+
+        var calidad = CalidadEducativa.findByEmail(email);
+        if (calidad.isPresent()) {
+            return;
+        }
+
+        (new Alumno(email)).persist();
+    }
+
+    public GLoginApi loginWithGoogle(GoogleIdToken token) {
+        if(token == null) {
+            return new GLoginApi("", 2, "", "");
+        }
+        var payload = token.getPayload();
+        var email = payload.getEmail();
+
+        saveUser(email);
+
+        final String accessToken = genAccessToken(email);
+        final String refreshToken = genRefreshToken();
+
+        Optional<RefreshToken> refr = RefreshToken.findByIdOptional(email);
+        refr.ifPresent(RefreshToken::delete);
+
+        (new RefreshToken(email, refreshToken)).persist();
+
+        return new GLoginApi(email, 0, accessToken, refreshToken);
     }
 }

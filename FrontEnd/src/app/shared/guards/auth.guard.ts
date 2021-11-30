@@ -15,7 +15,6 @@ import { Observable } from 'rxjs';
 })
 export class AuthGuard implements CanActivate {
   constructor(private router: Router, private user: UserService) {}
-
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -63,10 +62,10 @@ export class AuthGuard implements CanActivate {
       return '/professor/dashboard';
     }
     if (this.user.user.rol == RolEnum.Alumno) {
-      return '/alumno';
+      return '/professor/dashboard';
     }
     if (this.user.user.rol == RolEnum.Calidad) {
-      return '/calidad/dashboard';
+      return '/professor/dashboard';
     }
     return '/dashboard';
   }

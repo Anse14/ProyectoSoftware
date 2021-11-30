@@ -7,6 +7,7 @@ import { setContext } from '@apollo/client/link/context';
 import { environment } from '@environment/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserService } from '@shared/services/user.service';
+import { ShowcursosprofesorService } from '@shared/services/showcursosprofesor.service';
 
 const uri = environment.serverPath + '/graphql';
 

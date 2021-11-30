@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Seccion } from '@shared/interfaces/Seccion';
 
 @Component({
   selector: 'course-card',
@@ -10,7 +11,7 @@ export class CourseCardComponent implements OnInit {
   @Input() color: string;
   @Input() codCurso: string;
   @Input() nombreCurso: string;
-  @Input() horario: string[];
+  @Input() horario: Seccion[];
 
   constructor(private router: Router) {}
 
