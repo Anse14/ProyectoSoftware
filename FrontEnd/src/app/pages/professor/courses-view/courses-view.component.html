@@ -19,6 +19,7 @@
             class="btn btn-primary"
             data-bs-toggle="modal"
             data-bs-target="#modalcreaterubrica"
+            (click)="goToRubricaCreation()"
           >
             Crear rubrica
           </button>
@@ -86,10 +87,20 @@
                           [attr.aria-labelledby]="'btnGroupDrop-' + j"
                         >
                           <li>
-                            <a class="dropdown-item" href="#">Modificar</a>
+                            <a
+                              class="dropdown-item"
+                              href="#"
+                              (click)="goToRubricaCreation()"
+                              >Modificar</a
+                            >
                           </li>
                           <li>
-                            <a class="dropdown-item" href="#">Calificar</a>
+                            <a
+                              class="dropdown-item"
+                              href="#"
+                              (click)="goToRubricaCalificar()"
+                              >Calificar</a
+                            >
                           </li>
                         </ul>
                       </div>
