@@ -1,0 +1,660 @@
+mutation insert_profesor_one($profesor: ProfesorInput) {
+  insert_profesor_one(profesor: $profesor) {
+    codigo
+    correo
+    nombre
+  }
+}
+
+query profesor {
+  profesor {
+    id
+    codigo
+    correo
+    nombre
+    secciones {
+      id,
+      codigo,
+      curso{
+        nombre
+      }
+    }
+  }
+}
+
+query profesor_by_pk {
+  profesor_by_pk(id: "b4576260-5a93-4b59-b30c-ef48f84cb3eb") {
+    id
+    codigo
+    correo
+    nombre,
+    secciones {
+      id
+    }
+  }
+}
+
+mutation update_profesor_by_pk($profesor2: ProfesorInput) {
+  update_profesor_by_pk(
+    profesor: $profesor2
+    id: "0fd99903-76ae-4fd7-83c0-5db84e1adad4"
+  ) {
+    codigo
+    correo
+    nombre
+  }
+}
+
+mutation insert_carrera_one($carrera: CarreraInput) {
+  insert_carrera_one(carrera: $carrera) {
+    nombre
+  }
+}
+
+query carrera {
+  carrera {
+    id
+    nombre
+    cursos {
+      nombre
+    }
+  }
+}
+
+query carrera_by_pk {
+  carrera_by_pk(id: "fa2e7e3e-02cc-4d30-b3db-4e5cce6d8839") {
+    id
+    nombre
+  }
+}
+
+mutation update_carrera_by_pk($carrera2: CarreraInput) {
+  update_carrera_by_pk(
+    carrera: $carrera2
+    id: "fa2e7e3e-02cc-4d30-b3db-4e5cce6d8839"
+  ) {
+    nombre
+  }
+}
+
+mutation insert_calidad_educativa_one($calidadEducativa: CalidadEducativaInput) {
+  insert_calidad_educativa_one(calidadEducativa: $calidadEducativa) {
+    codigo
+    correo
+    nombre
+  }
+}
+
+query calidad_educativa {
+  calidad_educativa {
+    id
+    codigo
+    correo
+    nombre
+  }
+}
+
+query calidad_educativa_by_pk {
+  calidad_educativa_by_pk(id: "b1f327fe-8d60-4420-aad5-c6a3bd7bd387") {
+    id
+    codigo
+    correo
+    nombre
+  }
+}
+
+mutation update_calidad_educativa_by_pk($calidadEducativa2: CalidadEducativaInput) {
+  update_calidad_educativa_by_pk(
+    calidadEducativa: $calidadEducativa2
+    id: "b1f327fe-8d60-4420-aad5-c6a3bd7bd387"
+  ) {
+    codigo
+    correo
+    nombre
+  }
+}
+
+mutation insert_curso_one($curso: CursoInput) {
+  insert_curso_one(
+    curso: $curso
+    carreraId: "7ab1e368-7679-4ed7-9ae0-39b3217fa2a2"
+  ) {
+    codigo
+    carrera {
+      nombre
+      id
+    }
+    nombre
+  }
+}
+
+query curso {
+  curso {
+    id
+    codigo
+    carrera {
+      nombre
+      id
+    }
+    nombre
+  }
+}
+
+query curso_by_pk {
+  curso_by_pk(id: "ecd5e30c-354b-4b3b-8dbe-3cd0482a178f") {
+    id
+    codigo
+    carrera {
+      nombre
+      id
+    }
+    nombre
+  }
+}
+
+mutation update_curso_by_pk($curso2: CursoInput) {
+  update_curso_by_pk(curso: $curso2, id: "ecd5e30c-354b-4b3b-8dbe-3cd0482a178f") {
+    codigo
+    carrera {
+      nombre
+      id
+    }
+    nombre
+  }
+}
+
+mutation insert_seccion_one($seccion: SeccionInput) {
+  insert_seccion_one(
+    seccion: $seccion
+    cursoId: "7c8b7eb9-f836-482f-8065-a388bf87592c"
+  ) {
+    codigo
+    semestre
+    curso {
+      id
+      codigo
+      carrera {
+        nombre
+        id
+      }
+      nombre
+    }
+  }
+}
+
+query seccion {
+  seccion {
+    id
+    codigo
+    semestre
+    curso {
+      id
+      codigo
+      carrera {
+        nombre
+        id
+      }
+      nombre
+    }
+  }
+}
+
+query seccion_by_pk {
+  seccion_by_pk(id: "900b2822-8680-445c-acc3-307e04b4549c") {
+    id
+    codigo
+    semestre
+    curso {
+      id
+      codigo
+      carrera {
+        nombre
+        id
+      }
+      nombre
+    }
+  }
+}
+
+mutation update_seccion_by_pk($seccion2: SeccionInput) {
+  update_seccion_by_pk(
+    seccion: $seccion2
+    id: "900b2822-8680-445c-acc3-307e04b4549c"
+  ) {
+    id
+    codigo
+    semestre
+    curso {
+      id
+      codigo
+      carrera {
+        nombre
+        id
+      }
+      nombre
+    }
+  }
+}
+
+mutation insert_rubrica_one($rubrica: RubricaInput) {
+  insert_rubrica_one(
+    rubrica: $rubrica
+    cursoId: "7c8b7eb9-f836-482f-8065-a388bf87592c"
+  ) {
+    codigo
+    nivel
+    actividadBase
+    evidencia
+    criterioDeDesempenho
+    tipo
+    semana
+    status
+    ciclo
+    semestre
+    fecha
+    numCritDesemp
+    curso {
+      id
+      codigo
+      carrera {
+        nombre
+        id
+      }
+      nombre
+    }
+  }
+}
+
+query rubrica {
+  rubrica {
+    id
+    codigo
+    nivel
+    actividadBase
+    evidencia
+    criterioDeDesempenho
+    tipo
+    semana
+    status
+    ciclo
+    semestre
+    fecha
+    numCritDesemp
+    curso {
+      id
+      codigo
+      carrera {
+        nombre
+        id
+      }
+      nombre
+    }
+  }
+}
+
+query rubrica_by_pk {
+  rubrica_by_pk(id: "b878a0eb-7977-4b3d-b249-95fdbba28a43") {
+    id
+    codigo
+    nivel
+    actividadBase
+    evidencia
+    criterioDeDesempenho
+    tipo
+    semana
+    status
+    ciclo
+    semestre
+    fecha
+    numCritDesemp
+    curso {
+      id
+      codigo
+      carrera {
+        nombre
+        id
+      }
+      nombre
+    }
+  }
+}
+
+mutation update_rubrica_by_pk($rubrica2: RubricaInput) {
+  update_rubrica_by_pk(
+    rubrica: $rubrica2
+    id: "b878a0eb-7977-4b3d-b249-95fdbba28a43"
+  ) {
+    id
+    codigo
+    nivel
+    actividadBase
+    evidencia
+    criterioDeDesempenho
+    tipo
+    semana
+    status
+    ciclo
+    semestre
+    fecha
+    numCritDesemp
+    curso {
+      id
+      codigo
+      carrera {
+        nombre
+        id
+      }
+      nombre
+    }
+  }
+}
+
+mutation insert_dimension_one($dimension: DimensionInput) {
+  insert_dimension_one(
+    dimension: $dimension
+    rubricaId: "fa535cfc-7fc1-4b40-ae36-6ee8479f572b"
+  ) {
+    descripcion
+    rubrica {
+      codigo
+      nivel
+      actividadBase
+      evidencia
+      criterioDeDesempenho
+      tipo
+      semana
+      status
+      ciclo
+      semestre
+      fecha
+      numCritDesemp
+      curso {
+        id
+        codigo
+        carrera {
+          nombre
+          id
+        }
+        nombre
+      }
+    }
+  }
+}
+
+query dimension {
+  dimension {
+    id
+    descripcion
+    rubrica {
+      codigo
+      nivel
+      actividadBase
+      evidencia
+      criterioDeDesempenho
+      tipo
+      semana
+      status
+      ciclo
+      semestre
+      fecha
+      numCritDesemp
+      curso {
+        id
+        codigo
+        carrera {
+          nombre
+          id
+        }
+        nombre
+      }
+    }
+  }
+}
+
+query dimension_by_pk {
+  dimension_by_pk(id: "b878a0eb-7977-4b3d-b249-95fdbba28a43") {
+    id
+    descripcion
+    rubrica {
+      codigo
+      nivel
+      actividadBase
+      evidencia
+      criterioDeDesempenho
+      tipo
+      semana
+      status
+      ciclo
+      semestre
+      fecha
+      numCritDesemp
+      curso {
+        id
+        codigo
+        carrera {
+          nombre
+          id
+        }
+        nombre
+      }
+    }
+  }
+}
+
+mutation update_dimension_by_pk($dimension2: DimensionInput) {
+  update_dimension_by_pk(
+    dimension: $dimension2
+    id: "b878a0eb-7977-4b3d-b249-95fdbba28a43"
+  ) {
+    id
+    descripcion
+    rubrica {
+      codigo
+      nivel
+      actividadBase
+      evidencia
+      criterioDeDesempenho
+      tipo
+      semana
+      status
+      ciclo
+      semestre
+      fecha
+      numCritDesemp
+      curso {
+        id
+        codigo
+        carrera {
+          nombre
+          id
+        }
+        nombre
+      }
+    }
+  }
+}
+
+mutation insert_calificacion_one($calificacion: CalificacionInput) {
+  insert_calificacion_one(
+    calificacion: $calificacion
+    dimensionId: "84e5a5e0-c9de-45dd-9dcb-0f33f8015cb3"
+  ) {
+    titulo
+    nota
+    dimension {
+      descripcion
+      rubrica {
+        codigo
+        nivel
+        actividadBase
+        evidencia
+        criterioDeDesempenho
+        tipo
+        semana
+        status
+        ciclo
+        semestre
+        fecha
+        numCritDesemp
+        curso {
+          id
+          codigo
+          carrera {
+            nombre
+            id
+          }
+          nombre
+        }
+      }
+    }
+  }
+}
+
+query calificacion {
+  calificacion {
+    id
+    titulo
+    nota
+    dimension {
+      descripcion
+      rubrica {
+        codigo
+        nivel
+        actividadBase
+        evidencia
+        criterioDeDesempenho
+        tipo
+        semana
+        status
+        ciclo
+        semestre
+        fecha
+        numCritDesemp
+        curso {
+          id
+          codigo
+          carrera {
+            nombre
+            id
+          }
+          nombre
+        }
+      }
+    }
+  }
+}
+
+query calificacion_by_pk {
+  calificacion_by_pk(id: "b878a0eb-7977-4b3d-b249-95fdbba28a43") {
+    id
+    titulo
+    nota
+    dimension {
+      descripcion
+      rubrica {
+        codigo
+        nivel
+        actividadBase
+        evidencia
+        criterioDeDesempenho
+        tipo
+        semana
+        status
+        ciclo
+        semestre
+        fecha
+        numCritDesemp
+        curso {
+          id
+          codigo
+          carrera {
+            nombre
+            id
+          }
+          nombre
+        }
+      }
+    }
+  }
+}
+
+mutation update_calificacion_by_pk($calificacion2: CalificacionInput) {
+  update_calificacion_by_pk(
+    calificacion: $calificacion2
+    id: "b878a0eb-7977-4b3d-b249-95fdbba28a43"
+  ) {
+    id
+    titulo
+    nota
+    dimension {
+      descripcion
+      rubrica {
+        codigo
+        nivel
+        actividadBase
+        evidencia
+        criterioDeDesempenho
+        tipo
+        semana
+        status
+        ciclo
+        semestre
+        fecha
+        numCritDesemp
+        curso {
+          id
+          codigo
+          carrera {
+            nombre
+            id
+          }
+          nombre
+        }
+      }
+    }
+  }
+}
+#########################
+mutation insert_profesor_seccion_one($profesorSeccion: ProfesorSeccionSchemaInput) {
+  insert_profesor_seccion_one(profesorSeccion: $profesorSeccion) {
+    id
+    codigo
+    correo
+    nombre
+    secciones {
+      codigo
+      semestre
+      curso {
+        id
+        codigo
+        carrera {
+          nombre
+          id
+        }
+        nombre
+      }
+    }
+  }
+}
+
+mutation delete_profesor_seccion_one($profesorSeccion: ProfesorSeccionSchemaInput) {
+  delete_profesor_seccion_one(profesorSeccion: $profesorSeccion) {
+    id
+    codigo
+    correo
+    nombre
+    secciones {
+      codigo
+      semestre
+      curso {
+        id
+        codigo
+        carrera {
+          nombre
+          id
+        }
+        nombre
+      }
+    }
+  }
+}

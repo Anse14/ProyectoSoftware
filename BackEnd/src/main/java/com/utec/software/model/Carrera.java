@@ -22,21 +22,19 @@ public class Carrera extends PanacheEntityBase {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-    private Integer codigoMalla;
-    private String malla;
+    @Column(name = "nombre", unique = true)
     private String nombre;
 
-    @OneToMany(targetEntity = Competencia.class)
-    private List<Competencia> competencias;
+    @OneToMany(mappedBy = "carrera",fetch = FetchType.EAGER)
+    private List<Curso> cursos;
 
-    @OneToMany(targetEntity = User.class)
-    private List<User> alumnos;
+    public Carrera(){}
 
-    public Carrera(Integer codigoMalla, String malla, String nombre) {
-        this.codigoMalla = codigoMalla;
-        this.malla = malla;
+    public Carrera(String nombre) {
         this.nombre = nombre;
     }
 
-    public Carrera() {}
+    public void updateAttributes(Carrera carrera){
+        this.nombre = carrera.nombre == null ? this.nombre : carrera.nombre;
+    }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Curso } from '@shared/interfaces/cursoborrable';
 
 @Component({
   selector: 'app-courses-view',
@@ -8,6 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./courses-view.component.scss'],
 })
 export class CoursesViewComponent implements OnInit {
+  
+
   semanas = [
     { titulo: 'Semana 1' },
     { titulo: 'Semana 2' },
@@ -116,14 +119,34 @@ export class CoursesViewComponent implements OnInit {
     },
   ];
 
-  codCurso: string;
-  nombreCurso: string;
+  curso: Curso;
+
   expandedIndex = 0;
   constructor(private router: Router) {
-    this.codCurso = this.router.getCurrentNavigation().extras.state.codCurso;
-    this.nombreCurso =
+    console.log(this.curso);
+    this.curso.codigo = this.router.getCurrentNavigation().extras.state.codCurso;
+    this.curso.name =
       this.router.getCurrentNavigation().extras.state.nombreCurso;
+
   }
 
   ngOnInit(): void {}
+
+  goToRubricaCreation() {
+    this.router.navigateByUrl('/professor/rubrica-creation', {
+      state: {
+        codCurso: this.codCurso,
+        nombreCurso: this.nombreCurso,
+      },
+    });
+  }
+
+  goToRubricaCalificar() {
+    this.router.navigateByUrl('/professor/rubrica-calificar', {
+      state: {
+        codCurso: this.codCurso,
+        nombreCurso: this.nombreCurso,
+      },
+    });
+  }
 }

@@ -10,28 +10,25 @@ import { ProfessorComponent } from './pages/professor/professor.component';
 import { AlumnoComponent } from './pages/alumno/alumno.component';
 import { CalidadComponent } from './pages/calidad/calidad.component';
 import { CalidadDashboardComponent } from './pages/calidad/calidad-dashboard/calidad-dashboard.component';
+import { CalidadVerificacionComponent } from './pages/calidad/calidad-verificacion/calidad-verificacion.component';
 import { AuthGuard } from '@shared/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: PrincipalComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: 'alumno',
     component: AlumnoComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: 'professor',
     component: ProfessorComponent,
-    canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -46,7 +43,6 @@ const routes: Routes = [
   {
     path: 'rubrica',
     component: RubricaComponent,
-    canActivate: [AuthGuard],
     children:[
       {
         path: 'create-rubrica',
@@ -56,12 +52,15 @@ const routes: Routes = [
   },
   {
     path: 'calidad',
-    canActivate: [AuthGuard],
     component: CalidadComponent,
     children:[
       {
         path: 'dashboard',
         component: CalidadDashboardComponent,
+      },
+      {
+        path: 'verificacion',
+        component: CalidadVerificacionComponent,
       },
     ],
   },

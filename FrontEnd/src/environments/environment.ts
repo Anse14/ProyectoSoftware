@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   cliendId: "260697162666-8ji995p83k842hbipsuir8ovogbhcrhf.apps.googleusercontent.com",
-  serverPath: "http://0.0.0.0:8000"
+  serverPath: "http://localhost:8000"
 };
 
 /*

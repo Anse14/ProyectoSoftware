@@ -1,10 +1,10 @@
 <div class="container-fluid main-container">
   <div class="row text-center colorname">
     <div class="col-2 colorcourse">
-      <h1>{{ codCurso }}</h1>
+      <h1>{{ curso.codigo }}</h1>
     </div>
     <div class="col-10">
-      <h1>{{ nombreCurso }}</h1>
+      <h1>{{ curso.name }}</h1>
     </div>
   </div>
   <div class="row">
@@ -19,6 +19,7 @@
             class="btn btn-primary"
             data-bs-toggle="modal"
             data-bs-target="#modalcreaterubrica"
+            (click)="goToRubricaCreation()"
           >
             Crear rubrica
           </button>
@@ -86,10 +87,20 @@
                           [attr.aria-labelledby]="'btnGroupDrop-' + j"
                         >
                           <li>
-                            <a class="dropdown-item" href="#">Modificar</a>
+                            <a
+                              class="dropdown-item"
+                              href="#"
+                              (click)="goToRubricaCreation()"
+                              >Modificar</a
+                            >
                           </li>
                           <li>
-                            <a class="dropdown-item" href="#">Calificar</a>
+                            <a
+                              class="dropdown-item"
+                              href="#"
+                              (click)="goToRubricaCalificar()"
+                              >Calificar</a
+                            >
                           </li>
                         </ul>
                       </div>
@@ -108,9 +119,7 @@
         <h3>Secciones</h3>
         <ul *ngFor="let seccion of secciones; let j = index">
           <li>
-            {{ seccion.titulo }} | {{ seccion.horario.dia1 }}
-            {{ seccion.horario.hora1 }} {{ seccion.horario.dia2 }}
-            {{ seccion.horario.hora2 }}
+            {{ seccion.titulo }}
           </li>
         </ul>
       </div>

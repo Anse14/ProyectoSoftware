@@ -6,13 +6,12 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.UUID;
 
 @Data
 @Entity
 @EqualsAndHashCode(callSuper = true)
-public class Competencia extends PanacheEntityBase {
+public class Calificacion extends PanacheEntityBase {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -21,13 +20,17 @@ public class Competencia extends PanacheEntityBase {
     )
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
+    private String titulo;
+    private Integer nota;
 
-    private String codigo;
-    private String descripcion;
+    // Esta bien?
+    @ManyToOne(targetEntity = Dimension.class)
+    private Dimension dimension;
 
-    @OneToMany(targetEntity = Rubrica.class)
-    private List<Rubrica> rubricas;
+    public Calificacion(){}
 
-    @ManyToOne(targetEntity = Carrera.class)
-    private Carrera carrera;
+    public void updateAttributes(Calificacion calificacion){
+        this.titulo = calificacion.titulo == null ? this.titulo : calificacion.titulo;
+
+    }
 }

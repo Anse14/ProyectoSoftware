@@ -1,8 +1,42 @@
 query GetUser {
-  getUser {
-    email
-    name
-    rol
-    status
+  getUser { 
+    codigo
+    correo
+    nombre
+    tipo
   }
 }
+
+
+query GetProfesor($ID: String){
+  profesor_by_pk(id: $ID){
+    id,
+    nombre,
+    secciones{
+      codigo,
+      curso{
+        codigo,
+        nombre,
+        secciones{
+          codigo,
+        }
+        rubricas{
+          actividadBase,
+          ciclo,
+          codigo,
+          criterioDeDesempenho,
+          numCritDesemp,
+          evidencia,	
+          fecha,
+          semana,
+          semestre,
+          status,
+          tipo,
+        }
+      }
+    }
+  }
+}
+
+
+

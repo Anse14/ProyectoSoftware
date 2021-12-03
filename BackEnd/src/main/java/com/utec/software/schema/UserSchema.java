@@ -1,23 +1,21 @@
 package com.utec.software.schema;
 
-import com.utec.software.model.enums.RolEnum;
+import com.utec.software.schema.enums.RolEnum;
+import lombok.Data;
 
+@Data
 public class UserSchema {
+    private String codigo;
+    private String nombre;
+    private String correo;
+    private RolEnum tipo;
+
     public UserSchema() {}
 
-    public String email;
-    public String name;
-    public RolEnum rol;
-    public Integer status;
-
-    public UserSchema(String email, String name, RolEnum rol) {
-        this.email = email;
-        this.name = name;
-        this.rol = rol;
-        this.status = 0;
-    }
-
-    public UserSchema(Integer status) {
-        this.status = status;
+    public UserSchema(String codigo, String nombre, String correo, RolEnum tipo) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.tipo = tipo;
     }
 }

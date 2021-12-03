@@ -22,27 +22,29 @@ public class Curso extends PanacheEntityBase {
     )
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
-
     private String codigo;
-    private String titulo;
-    private String ciclo;
-    private String semestre;
+    private String nombre;
 
-    @OneToMany(targetEntity = Rubrica.class)
-    private List<Rubrica> rubricas;
+    @ManyToOne
+    private Carrera carrera;
 
-    @ManyToMany(targetEntity = Seccion.class)
+    @OneToMany(mappedBy = "curso",fetch = FetchType.LAZY)
     private List<Seccion> secciones;
+    @OneToMany()
+    private List<Rubrica> rubricas;
 
     public Curso() {}
 
-    public Curso(String codigo, String periodo, String titulo) {
+    public Curso(String codigo, String nombre) {
         this.codigo = codigo;
-        this.semestre = periodo;
-        this.titulo = titulo;
+        this.nombre = nombre;
     }
     public static Optional<Curso> findByCodigo(String codigo) {
         return find("codigo", codigo).firstResultOptional();
     }
 
+    public void updateAttributes(Curso curso){
+        this.nombre = curso.nombre == null ? this.nombre : curso.nombre;
+        this.codigo = curso.codigo == null ? this.codigo : curso.codigo;
+    }
 }

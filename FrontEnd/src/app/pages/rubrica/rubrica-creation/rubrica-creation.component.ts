@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Dimension } from './dimension';
+import { Dimension } from '../../../shared/interfaces/dimension';
 
 @Component({
   selector: 'app-rubrica-creation',
@@ -34,7 +34,6 @@ export class RubricaCreationComponent implements OnInit {
   savedimension(){
     if (this.newdim && this.newexc && this.newbueno && this.newendes && this.newnoacept){
       var dim= {} as Dimension
-      dim.cd="1.1"
       dim.dim = this.newdim;
       dim.excelente = this.newexc;
       dim.bueno = this.newbueno;

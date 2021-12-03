@@ -1,0 +1,88 @@
+{
+  "profesor": {
+    "nombre": "Andress",
+    "codigo": "1234567ss",
+    "correo": "andres.riveros@utec.edu.pes"
+  },
+  "profesor2": {
+    "nombre": "Andres",
+    "codigo": "12345678",
+    "correo": "andres.riveros@utec.edu.pe"
+  },
+  "carrera": {
+    "nombre": "Computer Sciences"
+  },
+  "carrera2": {
+    "nombre": "CS"
+  },
+  "calidadEducativa": {
+    "nombre": "Andre",
+    "codigo": "1234567",
+    "correo": "andres.riveros@utec.edu.pe"
+  },
+  "calidadEducativa2": {
+    "nombre": "Andres",
+    "codigo": "12345678",
+    "correo": "andres.riveros@utec.edu.pe"
+  },
+  "curso": {
+    "nombre": "Ingenieria de Software",
+    "codigo": "987654321"
+  },
+  "curso2": {
+    "nombre": "Ing de Software",
+    "codigo": "123456789"
+  },
+  "seccion": {
+    "codigo": "1",
+    "semestre": "2021-2"
+  },
+  "seccion2": {
+    "codigo": "2",
+    "semestre": "2022-1"
+  },
+  "rubrica": {
+    "codigo": "A-001",
+    "nivel": 1,
+    "actividadBase": "hacer tarea",
+    "evidencia": "la hicieron",
+    "criterioDeDesempenho": "corre su codigo",
+    "tipo": "programar",
+    "semana": "1",
+    "ciclo": "1",
+    "semestre": "2022-1",
+    "fecha": "27 de noviembre 2022",
+    "numCritDesemp": "1"
+  },
+  "rubrica2": {
+    "codigo": "B-002",
+    "nivel": 2,
+    "actividadBase": "hacer tarea2",
+    "evidencia": "la hicieron2",
+    "criterioDeDesempenho": "corre su codigo2",
+    "tipo": "testear",
+    "semana": "2",
+    "ciclo": "2",
+    "semestre": "2022-2",
+    "fecha": "27 de noviembre 2022",
+    "numCritDesemp": "1"
+  },
+  "dimension": {
+    "descripcion": "Sabe hacer testing"
+  },
+  "dimension2": {
+    "descripcion": "Sabe hacer loops"
+  },
+  "calificacion": {
+    "titulo": "Sobresaliente",
+    "nota": 1
+  },
+  "calificacion2": {
+    "titulo": "Bueno",
+    "nota": 2
+  },
+  "profesorSeccion": {
+    "profesorId": "5f6ec3e8-ae7c-48ab-8080-016453fe5ade",
+    "seccionId": "571324f0-e1a9-4e51-a526-a8ecd3a83408"
+  }
+}
