@@ -46,6 +46,7 @@ export class AuthService {
     this.http
       .post(environment.serverPath + '/auth/google-login', { token: token })
       .subscribe((res: any) => {
+        console.log(res);
         if (res.status == 0) {
           localStorage.setItem('access_token', res.token);
           localStorage.setItem('refresh_token', res.refresh);
@@ -77,6 +78,7 @@ export class AuthService {
       localStorage.removeItem('refresh_token');
       this.userService.user.email = '';
       this.router.navigateByUrl('/');
+      this.userService.userEmmiter.next(null);
     });
   }
 
@@ -85,14 +87,17 @@ export class AuthService {
       if (data.data.getUser == null) {
         return;
       }
+      this.userService.user.nombre = data.data.getUser.nombre;
+      this.userService.user.id = data.data.getUser.id;
       this.userService.user.codigo = data.data.getUser.codigo;
       this.userService.user.email = data.data.getUser.correo;
       this.userService.user.rol = data.data.getUser.tipo;
+      this.userService.userEmmiter.next(this.userService.user);
       if (data.data.getUser.tipo == RolEnum.Profesor) {
         this.router.navigateByUrl('/professor/dashboard');
       }
       if (data.data.getUser.tipo == RolEnum.Alumno) {
-        this.router.navigateByUrl('/professor/dashboard');
+        this.router.navigateByUrl('/alumno');
       }
       if (data.data.getUser.tipo == RolEnum.Calidad) {
         this.router.navigateByUrl('/calidad/dashboard');

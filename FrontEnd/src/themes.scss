@@ -1,7 +1,7 @@
 @import '~@nebular/theme/styles/theming';
 @import '~@nebular/theme/styles/themes/cosmic';
-@import '~@nebular/theme/styles/themes/corporate';
+@import '~@nebular/theme/styles/themes/default';
 
 
 $nb-themes: nb-register-theme((
-), corporate, corporate);
+), corporate, default);

@@ -1,10 +1,10 @@
-<div class="container-fluid main-container">
+<div class="container-fluid main-container" *ngIf="rubricaservice.available">
   <div class="row text-center colorname">
     <div class="col-2 colorcourse">
-      <h1>{{ curso.codigo }}</h1>
+      <h1>{{ rubricaservice.curso.codigo }}</h1>
     </div>
     <div class="col-10">
-      <h1>{{ curso.name }}</h1>
+      <h1>{{ rubricaservice.curso.nombre }}</h1>
     </div>
   </div>
   <div class="row">
@@ -13,36 +13,29 @@
         <div class="col-8">
           <h3>Evaluaciones</h3>
         </div>
-        <div class="col-4">
+        <!--<div class="col-4">
           <button
             type="button"
             class="btn btn-primary"
             data-bs-toggle="modal"
-            data-bs-target="#modalcreaterubrica"
-            (click)="goToRubricaCreation()"
-          >
+            data-bs-target="#modalcreaterubrica">
             Crear rubrica
           </button>
-        </div>
+        </div>-->
       </div>
 
-      <div class="row-fluid p-3">
+      <!--<div class="row-fluid p-3">
         <div class="input-group rounded">
-          <input
-            type="search"
-            class="form-control rounded"
-            placeholder="Buscar"
-            aria-label="Search"
-            aria-describedby="search-addon"
-          />
+          <input type="search" class="form-control rounded" placeholder="Buscar" aria-label="Search"
+            aria-describedby="search-addon" />
         </div>
-      </div>
+      </div>-->
 
       <div class="row-fluid">
         <div class="accordion accordion-flush" id="accordionWeeks">
           <div
             class="accordion-item"
-            *ngFor="let semana of semanas; let i = index"
+            *ngFor="let rubrica of rubricaservice.curso.rubricas; let i = index"
           >
             <h2 class="accordion-header" [id]="'flush-heading-' + i">
               <button
@@ -53,7 +46,7 @@
                 aria-expanded="false"
                 [attr.aria-controls]="'#flush-collapse-' + i"
               >
-                {{ semana.titulo }}
+                Rubrica {{ i + 1 }}
               </button>
             </h2>
             <div
@@ -63,46 +56,50 @@
               data-bs-parent="#accordionWeeks"
             >
               <div class="accordion-body">
-                <ul
-                  *ngFor="
-                    let evaluaciones of evaluaciones_semanales;
-                    let j = index
-                  "
-                >
+                <ul>
                   <li>
                     <div class="row-fluid">
-                      <div class="btn-group dropright">
-                        <button
-                          [id]="'btnGroupDrop-' + j"
-                          type="button"
-                          class="btn btn-outline-link dropdown-toggle"
-                          data-bs-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
-                          <b> {{ evaluaciones.titulo }}</b>
-                        </button>
-                        <ul
-                          class="dropdown-menu"
-                          [attr.aria-labelledby]="'btnGroupDrop-' + j"
-                        >
-                          <li>
-                            <a
-                              class="dropdown-item"
-                              href="#"
-                              (click)="goToRubricaCreation()"
-                              >Modificar</a
-                            >
-                          </li>
-                          <li>
-                            <a
-                              class="dropdown-item"
-                              href="#"
-                              (click)="goToRubricaCalificar()"
-                              >Calificar</a
-                            >
-                          </li>
+                      <div class="row btn-group dropright">
+                        <p class="col-9">{{ rubrica.criterioDeDesempenho }}</p>
+                        <ul class="list-group col-3">
+                          <button
+                            [id]="'btnGroupDrop-1'"
+                            type="button"
+                            class="btn btn-outline-link"
+                            data-bs-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            (click)="goToRubricaCreation(rubrica.id)"
+                            [disabled]="rubrica.status != null"
+                          >
+                            <b> Modificar</b>
+                          </button>
+                          <button
+                            [id]="'btnGroupDrop-2'"
+                            type="button"
+                            class="btn btn-outline-link"
+                            data-bs-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            style="margin-top: 1%"
+                            (click)="goToRubricaCalificar(rubrica.id)"
+                            [disabled]="rubrica.status != true"
+                          >
+                            <b> Calificar</b>
+                          </button>
                         </ul>
+                        <!--<ul class="dropdown-menu"
+                          [attr.aria-labelledby]="'btnGroupDrop-0'"
+                        >
+                          <li>
+                            <a class="dropdown-item"
+                            (click)="goToRubricaCreation(rubrica)">Modificar</a>
+                          </li>
+                          <li>
+                            <a class="dropdown-item"
+                            (click)="goToRubricaCalificar(rubrica)">Calificar</a>
+                          </li>
+                        </ul>-->
                       </div>
                     </div>
                   </li>
@@ -117,9 +114,11 @@
     <div class="col-6">
       <div class="row p-3">
         <h3>Secciones</h3>
-        <ul *ngFor="let seccion of secciones; let j = index">
+        <ul
+          *ngFor="let seccion of rubricaservice.curso.secciones; let j = index"
+        >
           <li>
-            {{ seccion.titulo }}
+            {{ seccion.codigo }}
           </li>
         </ul>
       </div>
@@ -139,17 +138,17 @@
         </div>
         <div
           class="container double"
-          *ngFor="let dat of dati; let i = index"
           id="grafico"
+          *ngIf="rubricaservice.graphicready"
         >
-          {{ dat.rubrica.titulo }}
-
           <nb-card-body>
-            <chart [type]="type" [data]="data" [options]="options"> </chart>
+            <chart
+              [data]="rubricaservice.barChartData"
+              [options]="rubricaservice.barChartOptions"
+              [type]="rubricaservice.barChartType"
+            >
+            </chart>
           </nb-card-body>
-          <!--<nb-card-body>
-                <chart [type]="type" [data]="data" [options]="options"></chart>
-              </nb-card-body>-->
         </div>
       </div>
     </div>

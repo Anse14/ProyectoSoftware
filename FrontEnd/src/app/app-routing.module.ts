@@ -12,12 +12,18 @@ import { CalidadComponent } from './pages/calidad/calidad.component';
 import { CalidadDashboardComponent } from './pages/calidad/calidad-dashboard/calidad-dashboard.component';
 import { CalidadVerificacionComponent } from './pages/calidad/calidad-verificacion/calidad-verificacion.component';
 import { AuthGuard } from '@shared/guards/auth.guard';
+import { RubricaCalificarComponent } from './pages/rubrica/rubrica-calificar/rubrica-calificar.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 const routes: Routes = [
   {
     path: '',
     component: PrincipalComponent,
   },
+  // {
+  //   path: 'carga',
+  //   component: LoadingComponent
+  // },
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -35,25 +41,23 @@ const routes: Routes = [
         component: ProfessorDashboardComponent,
       },
       {
-        path: 'course-view',
+        path: 'course-view/:id',
         component: CoursesViewComponent,
       },
-    ],
-  },
-  {
-    path: 'rubrica',
-    component: RubricaComponent,
-    children:[
       {
-        path: 'create-rubrica',
+        path: 'create-rubrica/:id',
         component: RubricaCreationComponent,
+      },
+      {
+        path: 'calificate-rubrica/:id',
+        component: RubricaCalificarComponent,
       },
     ],
   },
   {
     path: 'calidad',
     component: CalidadComponent,
-    children:[
+    children: [
       {
         path: 'dashboard',
         component: CalidadDashboardComponent,

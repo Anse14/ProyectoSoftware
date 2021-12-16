@@ -1,5 +1,6 @@
 import { Dimension } from "./dimension";
 export interface Rubrica{
+    id?: string
     actividadBase?: string
     ciclo?: string
     codigo?: string
@@ -11,4 +12,5 @@ export interface Rubrica{
     semestre?: string
     status?: boolean
     tipo?: string
+    dimensiones?: Dimension[]
 }

@@ -4,6 +4,8 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,7 +17,7 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true)
 public class Curso extends PanacheEntityBase {
     @Id
-    @GeneratedValue(generator = "UUID")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "UUID")
     @GenericGenerator(
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator"
@@ -25,12 +27,16 @@ public class Curso extends PanacheEntityBase {
     private String codigo;
     private String nombre;
 
-    @ManyToOne
-    private Carrera carrera;
+    @LazyCollection(LazyCollectionOption.TRUE)
+    @ManyToMany(targetEntity = Carrera.class)
+    private List<Carrera> carreras;
 
-    @OneToMany(mappedBy = "curso",fetch = FetchType.LAZY)
+    @LazyCollection(LazyCollectionOption.TRUE)
+    @OneToMany(mappedBy = "curso")
     private List<Seccion> secciones;
-    @OneToMany()
+
+    @LazyCollection(LazyCollectionOption.TRUE)
+    @OneToMany(mappedBy = "curso")
     private List<Rubrica> rubricas;
 
     public Curso() {}

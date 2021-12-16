@@ -6,3 +6,12 @@ tasks:
   run:
     cmds:
       - gradle quarkusDev
+
+  build:
+    cmds:
+      - gradle build -Dquarkus.package.type=uber-jar
+
+  deploy:
+    deps: [build]
+    cmds:
+      - heroku deploy:jar build/proyecto-software-1.0.0-SNAPSHOT-runner.jar --app meowproyecto-software --jdk 11

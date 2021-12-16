@@ -1,10 +1,10 @@
 <div class="container-fluid h-100">
   <div class="row h-100">
-    <div *ngFor="let card of cursos" class="col-6 d-flex align-items-center">
+    <div *ngFor="let card of profesorservice.cursos" class="col-6 d-flex align-items-center">
       <course-card
         [color]="'#FFDE59'"
-        [codCurso]="card.codigo"
-        [nombreCurso]="card.nombre"
+        [curso]="card"
+        [nombreProf]="profesor.id"
       ></course-card>
     </div>
   </div>

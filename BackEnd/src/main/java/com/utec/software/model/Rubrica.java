@@ -4,8 +4,11 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,31 +40,31 @@ public class Rubrica extends PanacheEntityBase {
     
     private Boolean status;  // null = en modificacion  false = calidadEducativa debe revisarlo true = revisado
 
-    @OneToMany(mappedBy = "rubrica",fetch = FetchType.LAZY)
+    @LazyCollection(LazyCollectionOption.TRUE)
+    @OneToOne
+    private Profesor lastUpdateProfesor;
+
+    @LazyCollection(LazyCollectionOption.TRUE)
+    @OneToMany(mappedBy = "rubrica")
     private List<Dimension> dimensiones;
 
+    @LazyCollection(LazyCollectionOption.TRUE)
     @ManyToOne(targetEntity = Curso.class)
     private Curso curso;
 
+    @LazyCollection(LazyCollectionOption.TRUE)
     @ManyToOne(targetEntity = CalidadEducativa.class)
     private CalidadEducativa calidadEducativa;
 
-    public Rubrica(){}
+    public Rubrica() {}
+
+    public void insertDimension(Dimension dimension){
+        this.dimensiones.add(dimension);
+        //no status because it has to also link a CalidadEducativa object
+    }
 
     public void updateAttributes(Rubrica rubrica){
-        this.nivel = rubrica.nivel == null ? this.nivel : rubrica.nivel;
-        this.codigo = rubrica.codigo == null ? this.codigo : rubrica.codigo;
-        this.actividadBase = rubrica.actividadBase == null ? this.actividadBase : rubrica.actividadBase;
-        this.evidencia = rubrica.evidencia == null ? this.evidencia : rubrica.evidencia;
-        this.criterioDeDesempenho = rubrica.criterioDeDesempenho == null ? this.criterioDeDesempenho : rubrica.criterioDeDesempenho;
-        this.tipo = rubrica.tipo == null ? this.tipo : rubrica.tipo;
-        this.semana = rubrica.semana == null ? this.semana : rubrica.semana;
-        
-        this.ciclo = rubrica.ciclo == null ? this.ciclo: rubrica.ciclo;
-        this.semestre = rubrica.semestre == null ? this.semestre: rubrica.semestre;
-        this.fecha = rubrica.fecha == null ? this.fecha: rubrica.fecha;
-        this.numCritDesemp = rubrica.numCritDesemp== null ? this.numCritDesemp: rubrica.numCritDesemp;
-        
+        this.dimensiones = rubrica.dimensiones;
         //no status because it has to also link a CalidadEducativa object
     }
 }

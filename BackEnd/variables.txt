@@ -1,8 +1,8 @@
 {
   "profesor": {
-    "nombre": "Andress",
-    "codigo": "1234567ss",
-    "correo": "andres.riveros@utec.edu.pes"
+    "nombre": "Andresss",
+    "codigo": "1234567sss",
+    "correo": "andres.riveros@utec.edu.pess"
   },
   "profesor2": {
     "nombre": "Andres",
@@ -10,15 +10,15 @@
     "correo": "andres.riveros@utec.edu.pe"
   },
   "carrera": {
-    "nombre": "Computer Sciences"
+    "nombre": "Computer Sciences2"
   },
   "carrera2": {
     "nombre": "CS"
   },
   "calidadEducativa": {
-    "nombre": "Andre",
-    "codigo": "1234567",
-    "correo": "andres.riveros@utec.edu.pe"
+    "nombre": "Andres",
+    "codigo": "1234567s",
+    "correo": "andres.riveros@utec.edu.pes"
   },
   "calidadEducativa2": {
     "nombre": "Andres",
@@ -65,24 +65,50 @@
     "ciclo": "2",
     "semestre": "2022-2",
     "fecha": "27 de noviembre 2022",
-    "numCritDesemp": "1"
+    "numCritDesemp": "1",
+    "dimensiones":
+      [
+        {
+          "descripcion":"Sabe hacer testing",
+          "calficaciones": [{
+            "titulo": "Sobresaliente",
+            "nota": 5
+          },{
+            "titulo": "bueno",
+            "nota": 4
+          },{
+            "titulo": "regular",
+            "nota": 3
+          },{
+            "titulo": "malo",
+            "nota": 1
+          },{
+            "titulo": "pesimo",
+            "nota": 0
+          }
+        ]
+        },{
+          "descripcion":"Sabe hacer loops",
+          "calficaciones": [{
+            "titulo": "bueno",
+            "nota": 3
+          },{
+            "titulo": "regular",
+            "nota": 2
+          },{
+            "titulo": "malo",
+            "nota": 1
+          },{
+            "titulo": "pesimo",
+            "nota": 0
+          }
+        ]
+      }
+    ]
   },
-  "dimension": {
-    "descripcion": "Sabe hacer testing"
-  },
-  "dimension2": {
-    "descripcion": "Sabe hacer loops"
-  },
-  "calificacion": {
-    "titulo": "Sobresaliente",
-    "nota": 1
-  },
-  "calificacion2": {
-    "titulo": "Bueno",
-    "nota": 2
-  },
+
   "profesorSeccion": {
-    "profesorId": "5f6ec3e8-ae7c-48ab-8080-016453fe5ade",
-    "seccionId": "571324f0-e1a9-4e51-a526-a8ecd3a83408"
+    "profesorId": "8d4a5769-1c1d-4c44-bdee-3be0be4bba48",
+    "seccionId": "e0de4ed2-a962-47ea-9c9f-2f63aefb5318"
   }
 }

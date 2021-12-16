@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@shared/services/auth.service';
+import { UserService } from '@shared/services/user.service';
 
 @Component({
   selector: 'app-calidad',
@@ -8,9 +9,7 @@ import { AuthService } from '@shared/services/auth.service';
 })
 export class CalidadComponent implements OnInit {
 
-  Calidad = "Alexender Schidmt"
-
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, public user: UserService) { }
 
   ngOnInit(): void {
   }

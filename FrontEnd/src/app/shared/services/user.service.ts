@@ -3,17 +3,23 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '@environment/environment';
 import { RolEnum } from '@graphql';
+import { User } from '@shared/interfaces/user';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   user = {
+    id: '',
     idToken: '',
     email: '',
     codigo: '',
+    nombre: '',
     rol: RolEnum.Alumno,
   };
+
+  userEmmiter = new BehaviorSubject<User>(null);
 
   constructor(private http: HttpClient) { }
 

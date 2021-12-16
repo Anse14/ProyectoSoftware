@@ -1,13 +1,15 @@
 package com.utec.software.resolvers.models;
 
+import com.utec.software.model.Alumno;
 import com.utec.software.model.Carrera;
+import com.utec.software.services.DBService;
 import io.quarkus.vertx.http.runtime.CurrentVertxRequest;
-import org.eclipse.microprofile.graphql.Description;
-import org.eclipse.microprofile.graphql.GraphQLApi;
-import org.eclipse.microprofile.graphql.Mutation;
-import org.eclipse.microprofile.graphql.Query;
+import io.smallrye.graphql.api.Context;
+import org.eclipse.microprofile.graphql.*;
 
 import javax.inject.Inject;
+import javax.persistence.EntityGraph;
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
@@ -17,10 +19,19 @@ public class CarreraResolver {
     @Inject
     CurrentVertxRequest request;
 
+    @Inject
+    Context context;
+
+    @Inject
+    EntityManager em;
+
+    @Inject
+    DBService dbService;
+
     @Mutation("insert_carrera_one")
     @Description("Inserta una carrera")
     @Transactional
-    public Carrera createCarrera(Carrera carrera) {
+    public Carrera createCarrera(@NonNull Carrera carrera) {
         try{
             carrera.persist();
             return carrera;
@@ -34,24 +45,27 @@ public class CarreraResolver {
     @Description("Trae todas las carreras")
     @Transactional
     public List<Carrera> getCarreraes() {
-        return Carrera.findAll().list();
+        var arr = context.getSelectedFields();
+        EntityGraph<Carrera> graph = dbService.parseJsonArrayIntoGraph(arr, em.createEntityGraph(Carrera.class));
+
+        return dbService.findAll(graph, Carrera.class);
     }
 
     @Query("carrera_by_pk")
     @Description("Trae una carrera basado en la llave primaria")
     @Transactional
-    public Carrera getCarrera(String id) {
-        try{
-            return Carrera.findById(UUID.fromString(id));
-        }catch (Exception e ){
-            return null;
-        }
+    public Carrera getCarrera(@NonNull String id) {
+        var arr = context.getSelectedFields();
+
+        EntityGraph<Carrera> graph = dbService.parseJsonArrayIntoGraph(arr, em.createEntityGraph(Carrera.class));
+
+        return dbService.findById(graph, Carrera.class, id);
     }
 
     @Mutation("update_carrera_by_pk")
     @Description("Actualiza una carrera basandose en la llave primaria")
     @Transactional
-    public Carrera updateCarrera(Carrera carrera, String id) {
+    public Carrera updateCarrera(@NonNull Carrera carrera, @NonNull String id) {
         try{
             Carrera actual = Carrera.findById(UUID.fromString(id));
             actual.updateAttributes(carrera);

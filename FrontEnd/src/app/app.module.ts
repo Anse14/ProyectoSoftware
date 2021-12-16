@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt';
-import { NbThemeModule } from '@nebular/theme';
+import { NbThemeModule, NbToastrModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ChartModule } from 'angular2-chartjs';
 
@@ -36,6 +36,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { GraficaCalidadComponent } from './pages/calidad/grafica-calidad/grafica-calidad.component';
+import { RubricaCalificarComponent } from './pages/rubrica/rubrica-calificar/rubrica-calificar.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { RubricaCalidadComponent } from './pages/calidad/rubrica-calidad/rubrica-calidad.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -52,11 +55,14 @@ export function tokenGetter() {
     ProfessorDashboardComponent,
     RubricaComponent,
     RubricaCreationComponent,
+    RubricaCalificarComponent,
     CalidadComponent,
     CalidadDashboardComponent,
     CoursesViewComponent,
     GraficaCalidadComponent,
-    CalidadVerificacionComponent
+    RubricaCalidadComponent,
+    CalidadVerificacionComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +72,7 @@ export function tokenGetter() {
     HttpClientModule,
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'corporate' }),
+    NbToastrModule.forRoot(),
     NbEvaIconsModule,
     NebularModule,
     SocialLoginModule,

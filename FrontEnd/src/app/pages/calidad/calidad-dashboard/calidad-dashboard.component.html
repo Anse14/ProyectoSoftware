@@ -8,8 +8,30 @@
                     <p class="tiposFiltro">{{filtro.titulo}}</p>
                     <div class="listOpciones">
                         <div class="form-check" *ngFor="let opcion of filtro.lista">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">{{opcion}}</label>
+                            <input class="form-check-input" type="radio" name="flexRadioSemestre" id="flexsemestre" checked>
+                            <label class="form-check-label" for="flexsemestre">{{opcion}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="listFiltros">
+                    <p class="tiposFiltro">Carreras</p>
+                    <div class="listOpciones">
+                        <div class="form-check" *ngFor="let carrera of calidadresultados.allcarreras; let i=index">
+                            <input class="form-check-input" 
+                            type="radio" name="flexRadioCarrera" [id]="'flexcarrera'+i"
+                            (change)="calidadresultados.getcursosbycarreraid(carrera.id)">
+                            <label class="form-check-label" [for]="'flexcarrera'+i">{{carrera.nombre}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="listFiltros">
+                    <p class="tiposFiltro">Cursos</p>
+                    <div class="listOpciones">
+                        <div class="form-check" *ngFor="let curso of calidadresultados.cursosbycarrera; let j=index">
+                            <input class="form-check-input"
+                             type="radio" name="flexRadioCurso" [id]="'flexcurso'+j"
+                             (change)="calidadresultados.getcursobycursos(curso.id)">
+                            <label class="form-check-label" [for]="'flexcurso'+j">{{curso.nombre}}</label>
                         </div>
                     </div>
                 </div>
@@ -19,20 +41,6 @@
             <p style="text-align:center;background-color:rgb(161, 214, 250);">ESTADÍSTICA DE DESEMPEÑO - CS - TEORÍA DE LA COMPUTACIÓN</p>
             <app-grafica-calidad></app-grafica-calidad>
         </div>
-        <div class="col-md-3">
-            <p style="text-align:center;background-color:rgb(161, 214, 250);">SEMESTRE: 2021-2</p>
-            <p style="text-align:center;background-color:rgb(65, 168, 236);">PORCENTAJE DE LOGRO > 75%</p>
-            <div class="logros">
-                <div class="listFiltros" *ngFor="let logro of logros">
-                    <p class="tiposFiltro">{{logro.titulo}}</p>
-                    <div class="listOpciones">
-                        <div class="form-check" *ngFor="let opcion of logro.lista">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">{{opcion}}</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
     </div>
 </div>

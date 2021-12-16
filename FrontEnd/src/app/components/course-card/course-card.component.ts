@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Seccion } from '@shared/interfaces/Seccion';
+import { Curso } from '@shared/interfaces/curso';
 
 @Component({
   selector: 'course-card',
@@ -9,20 +9,15 @@ import { Seccion } from '@shared/interfaces/Seccion';
 })
 export class CourseCardComponent implements OnInit {
   @Input() color: string;
-  @Input() codCurso: string;
-  @Input() nombreCurso: string;
-  @Input() horario: Seccion[];
+  @Input() curso: Curso;
+  @Input() nombreProf: string;
 
-  constructor(private router: Router) {}
-
+  constructor(
+    private router: Router) {}
+  
   ngOnInit(): void {}
 
-  goToCourseView() {
-    this.router.navigateByUrl('/professor/course-view', {
-      state: {
-        codCurso: this.codCurso,
-        nombreCurso: this.nombreCurso,
-      },
-    });
+  goToCourseView(id: string) {
+    this.router.navigate(['/professor/course-view', id]);
   }
 }

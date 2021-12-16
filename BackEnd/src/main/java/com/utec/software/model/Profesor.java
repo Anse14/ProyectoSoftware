@@ -6,12 +6,11 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Data
 @Entity
@@ -34,12 +33,11 @@ public class Profesor extends PanacheEntityBase {
     @Column(name = "correo", unique = true)
     private String correo; // Username
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @LazyCollection(LazyCollectionOption.TRUE)
+    @ManyToMany(mappedBy = "profesores")
     private List<Seccion> secciones;
 
-    public Profesor(){
-        secciones = new ArrayList<>();
-    }
+    public Profesor() {}
 
     public Profesor(String codigo, String nombre, String correo) {
         this.codigo = codigo;

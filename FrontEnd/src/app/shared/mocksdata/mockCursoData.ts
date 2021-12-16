@@ -26,7 +26,7 @@ export const CURSOS: Curso[] = [
                 numCritDesemp: "1.1",
             },
             {
-                codigo: "123",
+                codigo: "456",
                 actividadBase: "actividad0",
                 criterioDeDesempenho: "competencia0",
                 tipo: "otros",
@@ -38,7 +38,7 @@ export const CURSOS: Curso[] = [
                 numCritDesemp: "1.1",
             },
             {
-                codigo: "123",
+                codigo: "789",
                 actividadBase: "actividad0",
                 criterioDeDesempenho: "competencia0",
                 tipo: "otros",

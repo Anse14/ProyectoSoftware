@@ -4,6 +4,8 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,10 +27,11 @@ public class Carrera extends PanacheEntityBase {
     @Column(name = "nombre", unique = true)
     private String nombre;
 
-    @OneToMany(mappedBy = "carrera",fetch = FetchType.EAGER)
+    @LazyCollection(LazyCollectionOption.TRUE)
+    @ManyToMany(targetEntity = Curso.class)
     private List<Curso> cursos;
 
-    public Carrera(){}
+    public Carrera() {}
 
     public Carrera(String nombre) {
         this.nombre = nombre;

@@ -4,8 +4,11 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -30,10 +33,11 @@ public class CalidadEducativa extends PanacheEntityBase {
     @Column(name = "correo", unique = true)
     private String correo; // Username
 
-    @OneToMany(mappedBy = "calidadEducativa",fetch = FetchType.EAGER)
+    @LazyCollection(LazyCollectionOption.TRUE)
+    @OneToMany(mappedBy = "calidadEducativa")
     private List<Rubrica> rubricas;
 
-    public CalidadEducativa(){}
+    public CalidadEducativa() {}
 
     public CalidadEducativa(String codigo, String nombre, String correo) {
         this.codigo = codigo;

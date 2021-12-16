@@ -2,14 +2,15 @@ import { NgModule } from '@angular/core';
 import { 
   NbLayoutModule, 
   NbCardModule, 
-  NbIconModule
+  NbIconModule,
+  NbToastrModule
 } from '@nebular/theme';
 
 @NgModule({
   exports: [
     NbLayoutModule,
     NbCardModule,
-    NbIconModule
+    NbIconModule,
   ]
 })
 export class NebularModule {}

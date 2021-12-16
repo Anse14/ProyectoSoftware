@@ -31,13 +31,6 @@ export type AlumnoInput = {
   rubricas?: Maybe<Array<Maybe<RubricaUsuarioInput>>>;
 };
 
-export type AlumnoSchema = {
-  __typename?: 'AlumnoSchema';
-  codigo?: Maybe<Scalars['String']>;
-  correo?: Maybe<Scalars['String']>;
-  nombre?: Maybe<Scalars['String']>;
-};
-
 export type CalidadEducativa = {
   __typename?: 'CalidadEducativa';
   codigo?: Maybe<Scalars['String']>;
@@ -57,16 +50,18 @@ export type CalidadEducativaInput = {
 
 export type Calificacion = {
   __typename?: 'Calificacion';
+  descripcion?: Maybe<Scalars['String']>;
   dimension?: Maybe<Dimension>;
   id?: Maybe<Scalars['String']>;
-  nota?: Maybe<Scalars['Int']>;
+  nota: Scalars['Int'];
   titulo?: Maybe<Scalars['String']>;
 };
 
 export type CalificacionInput = {
+  descripcion?: Maybe<Scalars['String']>;
   dimension?: Maybe<DimensionInput>;
   id?: Maybe<Scalars['String']>;
-  nota?: Maybe<Scalars['Int']>;
+  nota: Scalars['Int'];
   titulo?: Maybe<Scalars['String']>;
 };
 
@@ -85,7 +80,7 @@ export type CarreraInput = {
 
 export type Curso = {
   __typename?: 'Curso';
-  carrera?: Maybe<Carrera>;
+  carreras?: Maybe<Array<Maybe<Carrera>>>;
   codigo?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   nombre?: Maybe<Scalars['String']>;
@@ -94,7 +89,7 @@ export type Curso = {
 };
 
 export type CursoInput = {
-  carrera?: Maybe<CarreraInput>;
+  carreras?: Maybe<Array<Maybe<CarreraInput>>>;
   codigo?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   nombre?: Maybe<Scalars['String']>;
@@ -104,45 +99,70 @@ export type CursoInput = {
 
 export type Dimension = {
   __typename?: 'Dimension';
-  calficaciones?: Maybe<Array<Maybe<Calificacion>>>;
+  calificaciones?: Maybe<Array<Maybe<Calificacion>>>;
   descripcion?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   rubrica?: Maybe<Rubrica>;
 };
 
 export type DimensionInput = {
-  calficaciones?: Maybe<Array<Maybe<CalificacionInput>>>;
+  calificaciones?: Maybe<Array<Maybe<CalificacionInput>>>;
   descripcion?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   rubrica?: Maybe<RubricaInput>;
+};
+
+export type DimensionSchemaInput = {
+  calficaciones?: Maybe<Array<Maybe<CalificacionInput>>>;
+  descripcion?: Maybe<Scalars['String']>;
 };
 
 export type DimensionUsuario = {
   __typename?: 'DimensionUsuario';
   calificacion?: Maybe<Calificacion>;
   descripcion?: Maybe<Scalars['String']>;
+  dimension?: Maybe<Dimension>;
   id?: Maybe<Scalars['String']>;
+  nota?: Maybe<Scalars['Float']>;
   rubricaUsuario?: Maybe<RubricaUsuario>;
-  username?: Maybe<Scalars['String']>;
 };
 
 export type DimensionUsuarioInput = {
   calificacion?: Maybe<CalificacionInput>;
   descripcion?: Maybe<Scalars['String']>;
+  dimension?: Maybe<DimensionInput>;
   id?: Maybe<Scalars['String']>;
+  nota?: Maybe<Scalars['Float']>;
   rubricaUsuario?: Maybe<RubricaUsuarioInput>;
-  username?: Maybe<Scalars['String']>;
 };
 
 /** Mutation root */
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Mutacion para calificar a un alumno */
+  calificar_alumno?: Maybe<DimensionUsuario>;
   /** Elimina una relacion profesor-seccion basandose en la llave primaria */
   delete_profesor_seccion_one?: Maybe<Profesor>;
+  /** Actualiza una rubrica basandose en la llave primaria */
+  evaluate_rubrica_by_pk?: Maybe<Rubrica>;
+  /** Populate the database */
+  fillAlumnos?: Maybe<Scalars['Boolean']>;
+  /** Populate the database */
+  fillCalidad?: Maybe<Scalars['Boolean']>;
+  /** Populate the database */
+  fillCarreras?: Maybe<Scalars['Boolean']>;
+  /** Populate the database */
+  fillCursos?: Maybe<Scalars['Boolean']>;
+  /** Populate the database */
+  fillDebugUsers?: Maybe<Scalars['Boolean']>;
+  /** Populate the database */
+  fillProfes?: Maybe<Scalars['Boolean']>;
+  /** Populate the database */
+  fillSeccion?: Maybe<Scalars['Boolean']>;
+  /** Inserta un alumno */
+  insert_alumno_one?: Maybe<Alumno>;
   /** Inserta un usuario de tipo calidad educativa */
   insert_calidad_educativa_one?: Maybe<CalidadEducativa>;
-  /** Inserta una calificacion */
-  insert_calificacion_one?: Maybe<Calificacion>;
   /** Inserta una carrera */
   insert_carrera_one?: Maybe<Carrera>;
   /** Inserta un curso */
@@ -155,145 +175,199 @@ export type Mutation = {
   insert_profesor_seccion_one?: Maybe<Profesor>;
   /** Inserta una rubrica */
   insert_rubrica_one?: Maybe<Rubrica>;
+  /** Inserta un valor de tipo rubrica usuario */
+  insert_rubrica_usuario_one?: Maybe<RubricaUsuario>;
   /** Inserta una seccion */
   insert_seccion_one?: Maybe<Seccion>;
+  /** Actualiza un alumno basandose en la llave primaria */
+  update_alumno_by_pk?: Maybe<Alumno>;
   /** Actualiza un usuario de calidad educativa basandose en la llave primaria */
   update_calidad_educativa_by_pk?: Maybe<CalidadEducativa>;
-  /** Actualiza una calificacion basandose en la llave primaria */
-  update_calificacion_by_pk?: Maybe<Calificacion>;
   /** Actualiza una carrera basandose en la llave primaria */
   update_carrera_by_pk?: Maybe<Carrera>;
   /** Actualiza un curso basandose en la llave primaria */
   update_curso_by_pk?: Maybe<Curso>;
   /** Actualiza una dimension basandose en la llave primaria */
   update_dimension_by_pk?: Maybe<Dimension>;
+  /** Actualiza una calificacion de una dimension */
+  update_dimensioncalificacion_by_pk?: Maybe<Dimension>;
   /** Actualiza un profesor basandose en la llave primaria */
   update_profesor_by_pk?: Maybe<Profesor>;
   /** Actualiza una rubrica basandose en la llave primaria */
-  update_rubrica_by_pk?: Maybe<Rubrica>;
+  update_rubrica_by_pk: Scalars['Boolean'];
+  /** Inserta una dimension de la rubrica */
+  update_rubrica_dimension_by_pk?: Maybe<Dimension>;
   /** Actualiza una seccion basandose en la llave primaria */
   update_seccion_by_pk?: Maybe<Seccion>;
 };
 
 
 /** Mutation root */
+export type MutationCalificar_AlumnoArgs = {
+  calificacion_id: Scalars['String'];
+  descripcion?: Maybe<Scalars['String']>;
+  nota: Scalars['Float'];
+  rubrica_usuario_id: Scalars['String'];
+};
+
+
+/** Mutation root */
 export type MutationDelete_Profesor_Seccion_OneArgs = {
-  profesorSeccion?: Maybe<ProfesorSeccionSchemaInput>;
+  profesorSeccion: ProfesorSeccionSchemaInput;
+};
+
+
+/** Mutation root */
+export type MutationEvaluate_Rubrica_By_PkArgs = {
+  calidadEducativaId?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  status: Scalars['Boolean'];
+};
+
+
+/** Mutation root */
+export type MutationFillAlumnosArgs = {
+  end: Scalars['Int'];
+  start: Scalars['Int'];
+};
+
+
+/** Mutation root */
+export type MutationInsert_Alumno_OneArgs = {
+  alumno: AlumnoInput;
 };
 
 
 /** Mutation root */
 export type MutationInsert_Calidad_Educativa_OneArgs = {
-  calidadEducativa?: Maybe<CalidadEducativaInput>;
-};
-
-
-/** Mutation root */
-export type MutationInsert_Calificacion_OneArgs = {
-  calificacion?: Maybe<CalificacionInput>;
-  dimensionId?: Maybe<Scalars['String']>;
+  calidadEducativa: CalidadEducativaInput;
 };
 
 
 /** Mutation root */
 export type MutationInsert_Carrera_OneArgs = {
-  carrera?: Maybe<CarreraInput>;
+  carrera: CarreraInput;
 };
 
 
 /** Mutation root */
 export type MutationInsert_Curso_OneArgs = {
-  carreraId?: Maybe<Scalars['String']>;
-  curso?: Maybe<CursoInput>;
+  carreraId: Scalars['String'];
+  curso: CursoInput;
 };
 
 
 /** Mutation root */
 export type MutationInsert_Dimension_OneArgs = {
-  dimension?: Maybe<DimensionInput>;
-  rubricaId?: Maybe<Scalars['String']>;
+  dimension: DimensionInput;
 };
 
 
 /** Mutation root */
 export type MutationInsert_Profesor_OneArgs = {
-  profesor?: Maybe<ProfesorInput>;
+  profesor: ProfesorInput;
 };
 
 
 /** Mutation root */
 export type MutationInsert_Profesor_Seccion_OneArgs = {
-  profesorSeccion?: Maybe<ProfesorSeccionSchemaInput>;
+  profesorSeccion: ProfesorSeccionSchemaInput;
 };
 
 
 /** Mutation root */
 export type MutationInsert_Rubrica_OneArgs = {
-  cursoId?: Maybe<Scalars['String']>;
-  rubrica?: Maybe<RubricaInput>;
+  cursoId: Scalars['String'];
+  rubrica: RubricaInput;
+};
+
+
+/** Mutation root */
+export type MutationInsert_Rubrica_Usuario_OneArgs = {
+  alumnoId?: Maybe<Scalars['String']>;
+  rubricaId?: Maybe<Scalars['String']>;
+  rubricaUsuario: RubricaUsuarioInput;
+  seccionId?: Maybe<Scalars['String']>;
 };
 
 
 /** Mutation root */
 export type MutationInsert_Seccion_OneArgs = {
-  cursoId?: Maybe<Scalars['String']>;
-  seccion?: Maybe<SeccionInput>;
+  cursoId: Scalars['String'];
+  seccion: SeccionInput;
+};
+
+
+/** Mutation root */
+export type MutationUpdate_Alumno_By_PkArgs = {
+  alumno: AlumnoInput;
+  id: Scalars['String'];
 };
 
 
 /** Mutation root */
 export type MutationUpdate_Calidad_Educativa_By_PkArgs = {
-  calidadEducativa?: Maybe<CalidadEducativaInput>;
-  id?: Maybe<Scalars['String']>;
-};
-
-
-/** Mutation root */
-export type MutationUpdate_Calificacion_By_PkArgs = {
-  calificacion?: Maybe<CalificacionInput>;
-  id?: Maybe<Scalars['String']>;
+  calidadEducativa: CalidadEducativaInput;
+  id: Scalars['String'];
 };
 
 
 /** Mutation root */
 export type MutationUpdate_Carrera_By_PkArgs = {
-  carrera?: Maybe<CarreraInput>;
-  id?: Maybe<Scalars['String']>;
+  carrera: CarreraInput;
+  id: Scalars['String'];
 };
 
 
 /** Mutation root */
 export type MutationUpdate_Curso_By_PkArgs = {
-  curso?: Maybe<CursoInput>;
-  id?: Maybe<Scalars['String']>;
+  curso: CursoInput;
+  id: Scalars['String'];
 };
 
 
 /** Mutation root */
 export type MutationUpdate_Dimension_By_PkArgs = {
-  dimension?: Maybe<DimensionInput>;
+  dimension: DimensionInput;
+  id: Scalars['String'];
+};
+
+
+/** Mutation root */
+export type MutationUpdate_Dimensioncalificacion_By_PkArgs = {
+  descripcion?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  nota: Scalars['Int'];
+  option: Scalars['Boolean'];
+  title?: Maybe<Scalars['String']>;
 };
 
 
 /** Mutation root */
 export type MutationUpdate_Profesor_By_PkArgs = {
-  id?: Maybe<Scalars['String']>;
-  profesor?: Maybe<ProfesorInput>;
+  id: Scalars['String'];
+  profesor: ProfesorInput;
 };
 
 
 /** Mutation root */
 export type MutationUpdate_Rubrica_By_PkArgs = {
-  id?: Maybe<Scalars['String']>;
-  rubrica?: Maybe<RubricaInput>;
+  id: Scalars['String'];
+  profesorId: Scalars['String'];
+};
+
+
+/** Mutation root */
+export type MutationUpdate_Rubrica_Dimension_By_PkArgs = {
+  dimension: DimensionSchemaInput;
+  id: Scalars['String'];
 };
 
 
 /** Mutation root */
 export type MutationUpdate_Seccion_By_PkArgs = {
-  id?: Maybe<Scalars['String']>;
-  seccion?: Maybe<SeccionInput>;
+  id: Scalars['String'];
+  seccion: SeccionInput;
 };
 
 export type Profesor = {
@@ -320,14 +394,16 @@ export type ProfesorSeccionSchemaInput = {
 /** Query root */
 export type Query = {
   __typename?: 'Query';
+  /** Trae todos los alumnos */
+  alumno?: Maybe<Array<Maybe<Alumno>>>;
+  /** Trae un alumno basado en la llave primaria */
+  alumno_by_pk?: Maybe<Alumno>;
   /** Trae todos los usuarios de tipo calidad educativa */
   calidad_educativa?: Maybe<Array<Maybe<CalidadEducativa>>>;
   /** Trae un usuario de tipo calidad educativa basado en la llave primaria */
   calidad_educativa_by_pk?: Maybe<CalidadEducativa>;
   /** Trae todas las calificaciones */
   calificacion?: Maybe<Array<Maybe<Calificacion>>>;
-  /** Trae una calificacion basada en la llave primaria */
-  calificacion_by_pk?: Maybe<Calificacion>;
   /** Trae todas las carreras */
   carrera?: Maybe<Array<Maybe<Carrera>>>;
   /** Trae una carrera basado en la llave primaria */
@@ -338,10 +414,16 @@ export type Query = {
   curso_by_pk?: Maybe<Curso>;
   /** Trae todas las dimensiones */
   dimension?: Maybe<Array<Maybe<Dimension>>>;
-  /** Trae una dimension basada en la llave primaria */
+  /** Trae una dimension basado en la llave primaria */
   dimension_by_pk?: Maybe<Dimension>;
-  /** Brings a alumno */
-  getAlumno?: Maybe<AlumnoSchema>;
+  /** Trae todas las relaciones de dimension usuario */
+  dimension_usuario?: Maybe<Array<Maybe<DimensionUsuario>>>;
+  /** Trae la relacion dimension usuario en base al id */
+  dimension_usuario_by_pk?: Maybe<DimensionUsuario>;
+  /** Trae todas las relaciones de dimension usuario */
+  dimension_usuario_by_rubrica_usuario?: Maybe<Array<Maybe<DimensionUsuario>>>;
+  /** Verifica si la rubrica tiene alguna dimension */
+  existedimension_rubrica_by_pk: Scalars['Boolean'];
   /** Brings a user */
   getUser?: Maybe<UserSchema>;
   /** Trae todos los profesores */
@@ -352,6 +434,12 @@ export type Query = {
   rubrica?: Maybe<Array<Maybe<Rubrica>>>;
   /** Trae una rubrica basada en la llave primaria */
   rubrica_by_pk?: Maybe<Rubrica>;
+  /** Trae todas las relaciones de rubrica usuario */
+  rubrica_usuario?: Maybe<Array<Maybe<RubricaUsuario>>>;
+  /** Trae todas las relaciones de rubrica usuario */
+  rubrica_usuario_by_rubrica?: Maybe<Array<Maybe<RubricaUsuario>>>;
+  /** Trae todas las relaciones de rubrica usuario */
+  rubrica_usuario_by_rubrica_seccion?: Maybe<Array<Maybe<RubricaUsuario>>>;
   /** Trae todas las secciones */
   seccion?: Maybe<Array<Maybe<Seccion>>>;
   /** Trae una seccion basada en la llave primaria */
@@ -360,50 +448,81 @@ export type Query = {
 
 
 /** Query root */
-export type QueryCalidad_Educativa_By_PkArgs = {
-  id?: Maybe<Scalars['String']>;
+export type QueryAlumno_By_PkArgs = {
+  id: Scalars['String'];
 };
 
 
 /** Query root */
-export type QueryCalificacion_By_PkArgs = {
-  id?: Maybe<Scalars['String']>;
+export type QueryCalidad_Educativa_By_PkArgs = {
+  id: Scalars['String'];
 };
 
 
 /** Query root */
 export type QueryCarrera_By_PkArgs = {
-  id?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
 };
 
 
 /** Query root */
 export type QueryCurso_By_PkArgs = {
-  id?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
 };
 
 
 /** Query root */
 export type QueryDimension_By_PkArgs = {
-  id?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+};
+
+
+/** Query root */
+export type QueryDimension_Usuario_By_PkArgs = {
+  id: Scalars['String'];
+};
+
+
+/** Query root */
+export type QueryDimension_Usuario_By_Rubrica_UsuarioArgs = {
+  rubrica_usuario_id: Scalars['String'];
+};
+
+
+/** Query root */
+export type QueryExistedimension_Rubrica_By_PkArgs = {
+  id: Scalars['String'];
 };
 
 
 /** Query root */
 export type QueryProfesor_By_PkArgs = {
-  id?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
 };
 
 
 /** Query root */
 export type QueryRubrica_By_PkArgs = {
-  id?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+};
+
+
+/** Query root */
+export type QueryRubrica_Usuario_By_RubricaArgs = {
+  rubricaId: Scalars['String'];
+};
+
+
+/** Query root */
+export type QueryRubrica_Usuario_By_Rubrica_SeccionArgs = {
+  rubricaId: Scalars['String'];
+  seccionId: Scalars['String'];
 };
 
 
 /** Query root */
 export type QuerySeccion_By_PkArgs = {
-  id?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
 };
 
 export enum RolEnum {
@@ -424,6 +543,7 @@ export type Rubrica = {
   evidencia?: Maybe<Scalars['String']>;
   fecha?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  lastUpdateProfesor?: Maybe<Profesor>;
   nivel?: Maybe<Scalars['Int']>;
   numCritDesemp?: Maybe<Scalars['String']>;
   semana?: Maybe<Scalars['String']>;
@@ -443,6 +563,7 @@ export type RubricaInput = {
   evidencia?: Maybe<Scalars['String']>;
   fecha?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  lastUpdateProfesor?: Maybe<ProfesorInput>;
   nivel?: Maybe<Scalars['Int']>;
   numCritDesemp?: Maybe<Scalars['String']>;
   semana?: Maybe<Scalars['String']>;
@@ -493,6 +614,7 @@ export type UserSchema = {
   __typename?: 'UserSchema';
   codigo?: Maybe<Scalars['String']>;
   correo?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
   nombre?: Maybe<Scalars['String']>;
   tipo?: Maybe<RolEnum>;
 };
@@ -500,18 +622,132 @@ export type UserSchema = {
 export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUserQuery = { __typename?: 'Query', getUser?: { __typename?: 'UserSchema', codigo?: string | null | undefined, correo?: string | null | undefined, nombre?: string | null | undefined, tipo?: RolEnum | null | undefined } | null | undefined };
+export type GetUserQuery = { __typename?: 'Query', getUser?: { __typename?: 'UserSchema', id?: string | null | undefined, codigo?: string | null | undefined, correo?: string | null | undefined, nombre?: string | null | undefined, tipo?: RolEnum | null | undefined } | null | undefined };
 
-export type GetProfesorQueryVariables = Exact<{
-  ID?: Maybe<Scalars['String']>;
+export type GetprofesorbyidQueryVariables = Exact<{
+  ID: Scalars['String'];
 }>;
 
 
-export type GetProfesorQuery = { __typename?: 'Query', profesor_by_pk?: { __typename?: 'Profesor', id?: string | null | undefined, nombre?: string | null | undefined, secciones?: Array<{ __typename?: 'Seccion', codigo?: string | null | undefined, curso?: { __typename?: 'Curso', codigo?: string | null | undefined, nombre?: string | null | undefined, secciones?: Array<{ __typename?: 'Seccion', codigo?: string | null | undefined } | null | undefined> | null | undefined, rubricas?: Array<{ __typename?: 'Rubrica', actividadBase?: string | null | undefined, ciclo?: string | null | undefined, codigo?: string | null | undefined, criterioDeDesempenho?: string | null | undefined, numCritDesemp?: string | null | undefined, evidencia?: string | null | undefined, fecha?: string | null | undefined, semana?: string | null | undefined, semestre?: string | null | undefined, status?: boolean | null | undefined, tipo?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined> | null | undefined } | null | undefined };
+export type GetprofesorbyidQuery = { __typename?: 'Query', profesor_by_pk?: { __typename?: 'Profesor', id?: string | null | undefined, nombre?: string | null | undefined, secciones?: Array<{ __typename?: 'Seccion', id?: string | null | undefined, codigo?: string | null | undefined, curso?: { __typename?: 'Curso', id?: string | null | undefined, codigo?: string | null | undefined, nombre?: string | null | undefined } | null | undefined } | null | undefined> | null | undefined } | null | undefined };
+
+export type GetrubricasbycursoQueryVariables = Exact<{
+  ID: Scalars['String'];
+}>;
+
+
+export type GetrubricasbycursoQuery = { __typename?: 'Query', curso_by_pk?: { __typename?: 'Curso', rubricas?: Array<{ __typename?: 'Rubrica', id?: string | null | undefined, criterioDeDesempenho?: string | null | undefined, status?: boolean | null | undefined } | null | undefined> | null | undefined } | null | undefined };
+
+export type VerifydimensioninrubricaQueryVariables = Exact<{
+  ID: Scalars['String'];
+}>;
+
+
+export type VerifydimensioninrubricaQuery = { __typename?: 'Query', existedimension_rubrica_by_pk: boolean };
+
+export type GetrubricasusuarioQueryVariables = Exact<{
+  ID: Scalars['String'];
+}>;
+
+
+export type GetrubricasusuarioQuery = { __typename?: 'Query', rubrica_usuario_by_rubrica?: Array<{ __typename?: 'RubricaUsuario', id?: string | null | undefined } | null | undefined> | null | undefined };
+
+export type GetdimensionusuariobyrubricausuarioQueryVariables = Exact<{
+  ID: Scalars['String'];
+}>;
+
+
+export type GetdimensionusuariobyrubricausuarioQuery = { __typename?: 'Query', dimension_usuario_by_rubrica_usuario?: Array<{ __typename?: 'DimensionUsuario', descripcion?: string | null | undefined } | null | undefined> | null | undefined };
+
+export type GetrubricaQueryVariables = Exact<{
+  ID: Scalars['String'];
+}>;
+
+
+export type GetrubricaQuery = { __typename?: 'Query', rubrica_by_pk?: { __typename?: 'Rubrica', id?: string | null | undefined, evidencia?: string | null | undefined, actividadBase?: string | null | undefined, ciclo?: string | null | undefined, codigo?: string | null | undefined, criterioDeDesempenho?: string | null | undefined, numCritDesemp?: string | null | undefined, fecha?: string | null | undefined, semana?: string | null | undefined, semestre?: string | null | undefined, status?: boolean | null | undefined, tipo?: string | null | undefined, dimensiones?: Array<{ __typename?: 'Dimension', id?: string | null | undefined, descripcion?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined };
+
+export type GetdimensionbypkQueryVariables = Exact<{
+  ID: Scalars['String'];
+}>;
+
+
+export type GetdimensionbypkQuery = { __typename?: 'Query', dimension_by_pk?: { __typename?: 'Dimension', id?: string | null | undefined, descripcion?: string | null | undefined, calificaciones?: Array<{ __typename?: 'Calificacion', id?: string | null | undefined, descripcion?: string | null | undefined, nota: number, titulo?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined };
+
+export type RubricausuariobyrubricaseccionQueryVariables = Exact<{
+  ID: Scalars['String'];
+  SECCIONID: Scalars['String'];
+}>;
+
+
+export type RubricausuariobyrubricaseccionQuery = { __typename?: 'Query', rubrica_usuario_by_rubrica_seccion?: Array<{ __typename?: 'RubricaUsuario', id?: string | null | undefined, evaluacionTotal: number, alumno?: { __typename?: 'Alumno', id?: string | null | undefined, nombre?: string | null | undefined } | null | undefined } | null | undefined> | null | undefined };
+
+export type CalificaalumnoMutationVariables = Exact<{
+  NOTA: Scalars['Float'];
+  DESC?: Maybe<Scalars['String']>;
+  CALIFICID: Scalars['String'];
+  RUBUSERID: Scalars['String'];
+}>;
+
+
+export type CalificaalumnoMutation = { __typename?: 'Mutation', calificar_alumno?: { __typename?: 'DimensionUsuario', id?: string | null | undefined, descripcion?: string | null | undefined, nota?: number | null | undefined } | null | undefined };
+
+export type UpdaterubricaMutationVariables = Exact<{
+  ID: Scalars['String'];
+  ProfesorId: Scalars['String'];
+}>;
+
+
+export type UpdaterubricaMutation = { __typename?: 'Mutation', update_rubrica_by_pk: boolean };
+
+export type InsertdimensionrubricaMutationVariables = Exact<{
+  ID: Scalars['String'];
+  DIMENSION: DimensionSchemaInput;
+}>;
+
+
+export type InsertdimensionrubricaMutation = { __typename?: 'Mutation', update_rubrica_dimension_by_pk?: { __typename?: 'Dimension', id?: string | null | undefined, calificaciones?: Array<{ __typename?: 'Calificacion', id?: string | null | undefined, descripcion?: string | null | undefined, nota: number, titulo?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined };
+
+export type UpdatedimensionMutationVariables = Exact<{
+  ID: Scalars['String'];
+  NOTA: Scalars['Int'];
+  DESCRIPCION: Scalars['String'];
+  TITLE: Scalars['String'];
+  OPTION: Scalars['Boolean'];
+}>;
+
+
+export type UpdatedimensionMutation = { __typename?: 'Mutation', update_dimensioncalificacion_by_pk?: { __typename?: 'Dimension', id?: string | null | undefined } | null | undefined };
+
+export type GetcarrerasQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetcarrerasQuery = { __typename?: 'Query', carrera?: Array<{ __typename?: 'Carrera', id?: string | null | undefined, nombre?: string | null | undefined } | null | undefined> | null | undefined };
+
+export type GetcursosbycarreraQueryVariables = Exact<{
+  ID: Scalars['String'];
+}>;
+
+
+export type GetcursosbycarreraQuery = { __typename?: 'Query', carrera_by_pk?: { __typename?: 'Carrera', cursos?: Array<{ __typename?: 'Curso', id?: string | null | undefined, nombre?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined };
+
+export type GetallcursosQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetallcursosQuery = { __typename?: 'Query', curso?: Array<{ __typename?: 'Curso', id?: string | null | undefined, nombre?: string | null | undefined, rubricas?: Array<{ __typename?: 'Rubrica', id?: string | null | undefined, status?: boolean | null | undefined } | null | undefined> | null | undefined } | null | undefined> | null | undefined };
+
+export type VerifyMutationVariables = Exact<{
+  ID: Scalars['String'];
+  CALIDAD?: Maybe<Scalars['String']>;
+  BOOL: Scalars['Boolean'];
+}>;
+
+
+export type VerifyMutation = { __typename?: 'Mutation', evaluate_rubrica_by_pk?: { __typename?: 'Rubrica', id?: string | null | undefined } | null | undefined };
 
 export const GetUserDocument = gql`
     query GetUser {
   getUser {
+    id
     codigo
     correo
     nombre
@@ -530,32 +766,18 @@ export const GetUserDocument = gql`
       super(apollo);
     }
   }
-export const GetProfesorDocument = gql`
-    query GetProfesor($ID: String) {
+export const GetprofesorbyidDocument = gql`
+    query GETPROFESORBYID($ID: String!) {
   profesor_by_pk(id: $ID) {
     id
     nombre
     secciones {
+      id
       codigo
       curso {
+        id
         codigo
         nombre
-        secciones {
-          codigo
-        }
-        rubricas {
-          actividadBase
-          ciclo
-          codigo
-          criterioDeDesempenho
-          numCritDesemp
-          evidencia
-          fecha
-          semana
-          semestre
-          status
-          tipo
-        }
       }
     }
   }
@@ -565,8 +787,334 @@ export const GetProfesorDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class GetProfesorGQL extends Apollo.Query<GetProfesorQuery, GetProfesorQueryVariables> {
-    document = GetProfesorDocument;
+  export class GetprofesorbyidGQL extends Apollo.Query<GetprofesorbyidQuery, GetprofesorbyidQueryVariables> {
+    document = GetprofesorbyidDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetrubricasbycursoDocument = gql`
+    query GETRUBRICASBYCURSO($ID: String!) {
+  curso_by_pk(id: $ID) {
+    rubricas {
+      id
+      criterioDeDesempenho
+      status
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetrubricasbycursoGQL extends Apollo.Query<GetrubricasbycursoQuery, GetrubricasbycursoQueryVariables> {
+    document = GetrubricasbycursoDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const VerifydimensioninrubricaDocument = gql`
+    query VERIFYDIMENSIONINRUBRICA($ID: String!) {
+  existedimension_rubrica_by_pk(id: $ID)
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class VerifydimensioninrubricaGQL extends Apollo.Query<VerifydimensioninrubricaQuery, VerifydimensioninrubricaQueryVariables> {
+    document = VerifydimensioninrubricaDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetrubricasusuarioDocument = gql`
+    query GETRUBRICASUSUARIO($ID: String!) {
+  rubrica_usuario_by_rubrica(rubricaId: $ID) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetrubricasusuarioGQL extends Apollo.Query<GetrubricasusuarioQuery, GetrubricasusuarioQueryVariables> {
+    document = GetrubricasusuarioDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetdimensionusuariobyrubricausuarioDocument = gql`
+    query GETDIMENSIONUSUARIOBYRUBRICAUSUARIO($ID: String!) {
+  dimension_usuario_by_rubrica_usuario(rubrica_usuario_id: $ID) {
+    descripcion
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetdimensionusuariobyrubricausuarioGQL extends Apollo.Query<GetdimensionusuariobyrubricausuarioQuery, GetdimensionusuariobyrubricausuarioQueryVariables> {
+    document = GetdimensionusuariobyrubricausuarioDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetrubricaDocument = gql`
+    query GETRUBRICA($ID: String!) {
+  rubrica_by_pk(id: $ID) {
+    id
+    evidencia
+    actividadBase
+    ciclo
+    codigo
+    criterioDeDesempenho
+    numCritDesemp
+    evidencia
+    fecha
+    semana
+    semestre
+    status
+    tipo
+    dimensiones {
+      id
+      descripcion
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetrubricaGQL extends Apollo.Query<GetrubricaQuery, GetrubricaQueryVariables> {
+    document = GetrubricaDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetdimensionbypkDocument = gql`
+    query GETDIMENSIONBYPK($ID: String!) {
+  dimension_by_pk(id: $ID) {
+    id
+    descripcion
+    calificaciones {
+      id
+      descripcion
+      nota
+      titulo
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetdimensionbypkGQL extends Apollo.Query<GetdimensionbypkQuery, GetdimensionbypkQueryVariables> {
+    document = GetdimensionbypkDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const RubricausuariobyrubricaseccionDocument = gql`
+    query RUBRICAUSUARIOBYRUBRICASECCION($ID: String!, $SECCIONID: String!) {
+  rubrica_usuario_by_rubrica_seccion(rubricaId: $ID, seccionId: $SECCIONID) {
+    id
+    evaluacionTotal
+    alumno {
+      id
+      nombre
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class RubricausuariobyrubricaseccionGQL extends Apollo.Query<RubricausuariobyrubricaseccionQuery, RubricausuariobyrubricaseccionQueryVariables> {
+    document = RubricausuariobyrubricaseccionDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CalificaalumnoDocument = gql`
+    mutation CALIFICAALUMNO($NOTA: Float!, $DESC: String, $CALIFICID: String!, $RUBUSERID: String!) {
+  calificar_alumno(
+    nota: $NOTA
+    descripcion: $DESC
+    calificacion_id: $CALIFICID
+    rubrica_usuario_id: $RUBUSERID
+  ) {
+    id
+    descripcion
+    nota
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CalificaalumnoGQL extends Apollo.Mutation<CalificaalumnoMutation, CalificaalumnoMutationVariables> {
+    document = CalificaalumnoDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdaterubricaDocument = gql`
+    mutation UPDATERUBRICA($ID: String!, $ProfesorId: String!) {
+  update_rubrica_by_pk(id: $ID, profesorId: $ProfesorId)
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdaterubricaGQL extends Apollo.Mutation<UpdaterubricaMutation, UpdaterubricaMutationVariables> {
+    document = UpdaterubricaDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const InsertdimensionrubricaDocument = gql`
+    mutation INSERTDIMENSIONRUBRICA($ID: String!, $DIMENSION: DimensionSchemaInput!) {
+  update_rubrica_dimension_by_pk(id: $ID, dimension: $DIMENSION) {
+    id
+    calificaciones {
+      id
+      descripcion
+      nota
+      titulo
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class InsertdimensionrubricaGQL extends Apollo.Mutation<InsertdimensionrubricaMutation, InsertdimensionrubricaMutationVariables> {
+    document = InsertdimensionrubricaDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdatedimensionDocument = gql`
+    mutation UPDATEDIMENSION($ID: String!, $NOTA: Int!, $DESCRIPCION: String!, $TITLE: String!, $OPTION: Boolean!) {
+  update_dimensioncalificacion_by_pk(
+    id: $ID
+    nota: $NOTA
+    descripcion: $DESCRIPCION
+    title: $TITLE
+    option: $OPTION
+  ) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdatedimensionGQL extends Apollo.Mutation<UpdatedimensionMutation, UpdatedimensionMutationVariables> {
+    document = UpdatedimensionDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetcarrerasDocument = gql`
+    query GETCARRERAS {
+  carrera {
+    id
+    nombre
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetcarrerasGQL extends Apollo.Query<GetcarrerasQuery, GetcarrerasQueryVariables> {
+    document = GetcarrerasDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetcursosbycarreraDocument = gql`
+    query GETCURSOSBYCARRERA($ID: String!) {
+  carrera_by_pk(id: $ID) {
+    cursos {
+      id
+      nombre
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetcursosbycarreraGQL extends Apollo.Query<GetcursosbycarreraQuery, GetcursosbycarreraQueryVariables> {
+    document = GetcursosbycarreraDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetallcursosDocument = gql`
+    query GETALLCURSOS {
+  curso {
+    id
+    nombre
+    rubricas {
+      id
+      status
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetallcursosGQL extends Apollo.Query<GetallcursosQuery, GetallcursosQueryVariables> {
+    document = GetallcursosDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const VerifyDocument = gql`
+    mutation VERIFY($ID: String!, $CALIDAD: String, $BOOL: Boolean!) {
+  evaluate_rubrica_by_pk(id: $ID, calidadEducativaId: $CALIDAD, status: $BOOL) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class VerifyGQL extends Apollo.Mutation<VerifyMutation, VerifyMutationVariables> {
+    document = VerifyDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

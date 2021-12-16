@@ -1,370 +1,80 @@
-<div class="main-content">
+<div class="main-content" >
     <img class="flechi1" src="assets/images/flechi.png" style="height:38px ; width: 118px;" />
     <div class="second-content">
         <div class="row">
             <div class="col-2">
                 <h4>Rubricas en espera</h4>
-                <div class="scroll-rubrica">
-                    <div class="accordion accordion-flush" *ngFor="let curso of cursos; let i=index" id="accordion-verification">
+                <div class="scroll-rubrica" *ngIf= "verificaservice.ready">
+                    <div class="accordion accordion-flush" *ngFor="let curso of verificaservice.cursos; let i=index"
+                        id="accordion-verification">
                         <div class="accordion-item">
-                          <h2 class="accordion-header" [id]="'headingOne'+ i">
-                            <button class="accordion-button collapsed" type="button" 
-                            data-bs-toggle="collapse" 
-                            aria-expanded="true" 
-                            [attr.data-bs-target]="'#collapseOne'+i" 
-                            [attr.aria-controls]="'collapseOne'+i">
-                                {{curso.name}}
-                            </button>
-                          </h2>
-                          <div [id]="'collapseOne'+i" class="accordion-collapse collapse" 
-                          [attr.aria-labelledby]="'headingOne'+ i" 
-                          data-bs-parent="accordion-verification">
-                            <div class="accordion-body">
-                                <ul class="list-group" *ngFor="let rubrica of curso.rubricas">
-                                    <li class="list-group-item"
-                                     style="font-size: small;" 
-                                    (click)="getCursoRubrica(curso.id, rubrica.codigo)" 
-                                    *ngIf="rubrica.status == false" >
-                                    {{rubrica.codigo}}
-                                    </li>
-                                </ul>
+                            <h2 class="accordion-header" [id]="'headingOne'+ i">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    aria-expanded="true" [attr.data-bs-target]="'#collapseOne'+i"
+                                    [attr.aria-controls]="'collapseOne'+i">
+                                    {{curso.nombre}}
+                                </button>
+                            </h2>
+                            <div [id]="'collapseOne'+i" class="accordion-collapse collapse"
+                                [attr.aria-labelledby]="'headingOne'+ i" data-bs-parent="accordion-verification">
+                                <div class="accordion-body">
+                                    <ul class="list-group" *ngFor="let rubrica of curso.rubricas; let k = index">
+                                        <li class="list-group-item" style="font-size: small;"
+                                            (click)="verificaservice.getRubrica(rubrica.id); verificaservice.actualrubricaindex(k) "
+                                            *ngIf="rubrica.status == false">
+                                            Rubrica {{k+1}}
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                          </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-10" style="padding-left: 0%; padding-right: 0%;padding-top: 3%;">
-                <form class="form-container" style="border: 1px solid; border-color: gray;">
-                    <!-- Boton Save -->
-                    <div class="row">
-                        <div class="col-12">
-                            <h5>{{curso.name}} - {{rubrica.codigo}} </h5>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-right: 0%;">
-                        <div class="col-11">
-                            <div class="first-rubrica-content">
-                                <div class="second-rubrica-content">
-                                    <div class="row mb-1">
-                                        <div class="col-5">
-                                            <div class="form-outline" style="display: inline;">
-                                                <div class="row form-group">
-                                                    <div class="col-3">
-                                                        <label class="form-label" for="formCurso">Curso: </label>
-                                                    </div>
-                                                    <div class="col-9">
-                                                        <input type="text" id="formCurso" class="col-form-control"
-                                                            placeholder="{{curso.name}}" disabled />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-3">
-                                            <div class="form-outline" style="display: inline;">
-                                                <div class="row form-group">
-                                                    <div class="col-3">
-                                                        <label class="form-label" for="formCiclo">Ciclo: </label>
-                                                    </div>
-                                                    <div class="col-9">
-                                                        <input type="text" id="formCiclo"
-                                                            class="col-form-control input-margin"
-                                                            placeholder="{{rubrica.ciclo}}" disabled />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-outline" style="display: inline;">
-                                                <div class="row form-group">
-                                                    <div class="col-3">
-                                                        <label class="form-label" for="formSemestre">Semestre: </label>
-                                                    </div>
-                                                    <div class="col-9">
-                                                        <input type="text" id="formSemestre" class="col-form-control"
-                                                            placeholder="{{rubrica.semestre}}" disabled />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Actividad, Semana y Fecha input -->
-                                    <div class="row mb-2">
-                                        <div class="col-5">
-                                            <div class="form-outline" style="display: inline;">
-                                                <div class="row form-group">
-                                                    <div class="col-3">
-                                                        <label class="form-label" for="formActividad">Actividad:
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-9">
-                                                        <input type="text" id="formActividad" class="col-form-control"
-                                                            placeholder="{{rubrica.actividad}}" disabled />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-3">
-                                            <div class="form-outline" style="display: inline;">
-                                                <div class="row form-group">
-                                                    <div class="col-3">
-                                                        <label class="form-label" for="formSemana">Semana: </label>
-                                                    </div>
-                                                    <div class="col-9">
-                                                        <input type="text" id="formSemana"
-                                                            class="col-form-control input-margin"
-                                                            placeholder="{{rubrica.semana}}" disabled />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-outline" style="display: inline;">
-                                                <div class="row form-group">
-                                                    <div class="col-3">
-                                                        <label class="form-label" for="formFecha">Fecha: </label>
-                                                    </div>
-                                                    <div class="col-9" style="justify-content: flex-end;">
-                                                        <input type="text" id="formFecha" class="col-form-control"
-                                                            placeholder="{{rubrica.fecha}}" disabled />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Competencia input -->
-                                    <div class="row mb-2">
-                                        <div class="form-outline" style="display: inline;">
-                                            <div class="row form-group">
-                                                <div class="col-2">
-                                                    <label class="form-label" for="formCompetencia">Competencia:
-                                                    </label>
-                                                </div>
-                                                <div class="col-10" style="justify-content: flex-end;">
-                                                    <input type="text" id="formCompetencia" class="col-form-control"
-                                                        placeholder="{{rubrica.criterio}}"
-                                                        style="width: 100%; max-width: 80%;" disabled />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Alumno y Profesor input -->
-                                    <div class="row mb-2">
-                                        <div class="col">
-                                            <div class="form-outline" style="display: inline;">
-                                                <div class="row form-group">
-                                                    <div class="col-2">
-                                                        <label class="form-label" for="formAlumno">Alumno: </label>
-                                                    </div>
-                                                    <div class="col-10" style="justify-content: flex-end;">
-                                                        <select class="col-form-select" id="formAlumno"
-                                                            aria-label="Default select example" disabled>
-                                                            <option selected>{{Alumno}} </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-outline" style="display: inline;">
-                                                <div class="row form-group">
-                                                    <div class="col-2">
-                                                        <label class="form-label" for="formProfesor">Profesor: </label>
-                                                    </div>
-                                                    <div class="col-10" style="justify-content: flex-end;">
-                                                        <input type="text" id="formProfesor" class="col-form-control"
-                                                            placeholder="{{rubrica.profesor}}" disabled />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Checkbox -->
-                                    <div class="row mb-2">
-                                        <div class="col-8">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <label class="form-label" for="form3Example2">Tipo de actividad:
-                                                    </label>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="inlineRadioOptions" id="inlineRadio1" value="option1"
-                                                            disabled [checked]="rubrica.tipo=='proyecto'">
-                                                        <label class="form-check-label"
-                                                            for="inlineRadio1">Proyecto</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="inlineRadioOptions" id="inlineRadio2" value="option2"
-                                                            disabled [checked]="rubrica.tipo=='trabajo'">
-                                                        <label class="form-check-label"
-                                                            for="inlineRadio2">Trabajo</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="inlineRadioOptions" id="inlineRadio3" value="option3"
-                                                            disabled [checked]="rubrica.tipo == 'laboratorio'">
-                                                        <label class="form-check-label"
-                                                            for="inlineRadio3">Laboratorio</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                                    id="formotrotext" value="option4"  disabled
-                                                    [checked]="rubrica.tipo != 'laboratorio' && rubrica.tipo != 'trabajo' && rubrica.tipo != 'proyecto'">
-                                                <div class="row form-group">
-                                                    <div class="col-2" style="padding-left: 0%;">
-                                                        <label class="form-check-label" for="formotrotext">Otros:</label>
-                                                    </div>
-                                                    <div class="col-10" style="justify-content: flex-end;">
-                                                        <input type="text" id="formotrotext" class="col-form-control"
-                                                            *ngIf="rubrica.tipo != 'laboratorio' && rubrica.tipo != 'trabajo' && rubrica.tipo != 'proyecto' ; else defaultotros" 
-                                                            placeholder="{{rubrica.tipo}} " disabled />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-2" style="width: 100%">
-                                        <label class="form-label" for="form3Example2"
-                                            style="display:block; text-align:center;">COMPETENCIAS </label>
-                                    </div>
-                                </div>
-                                <div class="third-rubrica-content">
-                                    <div class="row mb-4 third-rubrica-row">
-                                        <div class="col-11">
-                                            <div class="row">
-                                                <div class="col-1 center">
-                                                    <label class="form-label">CD </label>
-                                                </div>
-                                                <div class="col center">
-                                                    <label class="form-label">DIMENSION </label>
-                                                </div>
-                                                <div class="col center">
-                                                    <label class="form-label">EXCELENTE </label>
-                                                </div>
-                                                <div class="col center">
-                                                    <label class="form-label">BUENO </label>
-                                                </div>
-                                                <div class="col center">
-                                                    <label class="form-label">EN DESARROLLO </label>
-                                                </div>
-                                                <div class="col center">
-                                                    <label class="form-label">NO ACEPTABLE </label>
-                                                </div>
-                                                <div class="col-1 center">
-                                                    <label class="form-label">NOTA </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="third-rubrica-content">
-                                    <div class="row mb-4" style="align-items: center; display: inline-flexbox;">
-                                        <div class="col-11">
-                                            <div class="row mb-4" style="align-items: center; display: inline-flexbox;" *ngFor="let dim of rubrica.dimensiones">
-                                                    <div class="col-1">
-                                                      <button type="button" class="btn btn-light" style="overflow: auto;" disabled>{{rubrica.cd}}</button>
-                                                    </div>
-                                                    <div class="col center" >
-                                                      <button type="button" class="btn btn-light" style="overflow: auto;" disabled> {{dim.dim}} </button>
-                                                    </div>
-                                                    <div class="col center" >
-                                                      <button type="button" class="btn btn-light" style="overflow: auto;" disabled>{{dim.excelente}} </button>
-                                                    </div>
-                                                    <div class="col center" >
-                                                      <button type="button" class="btn btn-light" style="overflow: auto;" disabled>{{dim.bueno}} </button>
-                                                    </div>
-                                                    <div class="col center" >
-                                                      <button type="button" class="btn btn-light" style="overflow: auto;" disabled>{{dim.endesarrollo}} </button>
-                                                    </div>
-                                                    <div class="col center" >
-                                                      <button type="button" class="btn btn-light" style="overflow: auto;" disabled>{{dim.noaceptable}} </button>
-                                                    </div>
-                                                    <div class="col-1 center" >
-                                                      <button type="button" class="btn btn-light" style="overflow: auto;" disabled> </button>
-                                                    </div>
-                                              </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-1" style="padding-left:0% ; padding-right: 0%;">
-                            <button type="button" class="btn btn-primary aceptar-rubrica"
-                                style="width: 90%; margin-top: 20%;" data-bs-toggle="modal"
-                                data-bs-target="#modalaccept">
-                                Aceptar
-                            </button>
-                            <button type="button" class="btn btn-primary denegar-rubrica"
-                                style="width: 90%;  margin-top: 20%;" data-bs-toggle="modal"
-                                data-bs-target="#modaldenied">
-                                Denegar
-                            </button>
-                        </div>
-                    </div>
-                </form>
+            <div class="col-10" style="padding-left: 0%; padding-right: 0%;padding-top: 3%;" *ngIf= "verificaservice.rubricaready">
+                <app-rubrica-calidad></app-rubrica-calidad>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Default checkbox -->
-<ng-template #defaultotros>
-    <input type="text" id="formotrotext" class="col-form-control"
-        placeholder="... " disabled />
-</ng-template>
+
 
 <!-- Modals -->
 <div class="modal fade" id="modalaccept" tabindex="-1" aria-labelledby="accept" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="accept">Aceptar Rubrica</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="accept">Aceptar Rubrica</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Confirme para aceptar rubrica
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary"
+                    (click)="verificaservice.acceptRubric()">Confirmar</button>
+            </div>
         </div>
-        <div class="modal-body">
-          Confirme para aceptar rubrica 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" 
-          class="btn btn-primary"
-          (click)="acceptRubric()">Confirmar</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
-  <div class="modal fade" id="modaldenied" tabindex="-2" aria-labelledby="denied" aria-hidden="true">
+<div class="modal fade" id="modaldenied" tabindex="-2" aria-labelledby="denied" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="denied">Denegar Rubrica</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="denied">Denegar Rubrica</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Confirme para denegar rubrica
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary"
+                    (click)="verificaservice.deniedRubric()">Confirmar</button>
+            </div>
         </div>
-        <div class="modal-body">
-            Confirme para denegar rubrica
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" 
-          class="btn btn-primary"
-          (click)="deniedRubric()" >Confirmar</button>
-        </div>
-      </div>
     </div>
-  </div>
-  
+</div>

@@ -7,7 +7,6 @@ import { setContext } from '@apollo/client/link/context';
 import { environment } from '@environment/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserService } from '@shared/services/user.service';
-import { ShowcursosprofesorService } from '@shared/services/showcursosprofesor.service';
 
 const uri = environment.serverPath + '/graphql';
 
@@ -49,6 +48,19 @@ export function createApollo(httpLink: HttpLink, userService: UserService) {
   const cache = new InMemoryCache();
 
   return {
+    defaultOptions: {
+      watchQuery: {
+        fetchPolicy: 'cache-and-network',
+        errorPolicy: 'ignore',
+      },
+      query: {
+        fetchPolicy: 'network-only',
+        errorPolicy: 'all',
+      },
+      mutate: {
+        errorPolicy: 'all'
+      }
+    },
     link,
     cache,
   };
@@ -64,4 +76,4 @@ export function createApollo(httpLink: HttpLink, userService: UserService) {
     },
   ],
 })
-export class GraphQLModule {}
+export class GraphQLModule { }

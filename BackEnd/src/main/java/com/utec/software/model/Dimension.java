@@ -1,11 +1,15 @@
 package com.utec.software.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,17 +30,27 @@ public class Dimension extends PanacheEntityBase {
 
     private String descripcion;
 
-    @ManyToOne
+    @LazyCollection(LazyCollectionOption.TRUE)
+    @ManyToOne(targetEntity = Rubrica.class, optional = false)
+    @JoinColumn(name = "rubrica_id")
     private Rubrica rubrica;
 
-    @OneToMany(mappedBy = "dimension",fetch = FetchType.LAZY)
-    private List<Calificacion> calficaciones;
+    @LazyCollection(LazyCollectionOption.TRUE)
+    @OneToMany(mappedBy = "dimension")
+    private List<Calificacion> calificaciones;
 
 
-    public Dimension(){}
-
+    public Dimension() {}
     public void updateAttributes(Dimension dimension){
         this.descripcion = dimension.descripcion == null ? this.descripcion : dimension.descripcion;
+    }
+    public void changeAttributes(Dimension dimension, boolean option){
+        if (option){
+            this.descripcion = dimension.descripcion == null ? this.descripcion : dimension.descripcion;
+        }
+        else{
+            this.calificaciones = dimension.calificaciones == null ? this.calificaciones : dimension.calificaciones;
+        }
 
     }
 }

@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Profesor } from '@shared/interfaces/profesor';
-import { ShowcursosprofesorService } from '@shared/services/showcursosprofesor.service';
-import { CursosprofesorService } from '@shared/services/cursosprofesor.service';
-
-import { Curso } from '@shared/interfaces/curso';
-import { CURSOS } from '@shared/mocksdata/mockCursoData';
-
+import { NotificationService } from '@shared/services/notification.service';
+import { ProfesordashboardService } from '@shared/services/profesordashboard.service';
+import { UserService } from '@shared/services/user.service';
 
 @Component({
   selector: 'app-professor-dashboard',
@@ -13,18 +10,21 @@ import { CURSOS } from '@shared/mocksdata/mockCursoData';
   styleUrls: ['./professor-dashboard.component.scss'],
 })
 export class ProfessorDashboardComponent implements OnInit {
-  profesor: Profesor;
-  cursos: Curso[] = Array<Curso>();
+  profesor: Profesor = { id: null };
+  // cursos: Curso[] = Array<Curso>();
 
-  constructor(private profesorservice: ShowcursosprofesorService) {}
-  ngOnInit(): void {
-    this.getProfesor();
+  constructor(
+    public profesorservice: ProfesordashboardService,
+    private user: UserService
+  ) {
+    this.user.userEmmiter.subscribe((usr) => {
+      if (usr == null) {
+        return;
+      }
+      this.profesorservice.getProfesorCursos();
+    });
   }
-  getProfesor(){
-    this.profesorservice.getProfesorCursos()
-      .subscribe(cursos => 
-        {
-          console.log(cursos);
-          this.cursos = cursos});
+
+  ngOnInit(): void {
   }
 }

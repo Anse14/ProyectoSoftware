@@ -1,7 +1,6 @@
+import { Calificacion } from "./califacaciones";
 export interface Dimension {
-    dim:string;
-    excelente:string;
-    bueno:string;
-    endesarrollo:string;
-    noaceptable:string;
+    id?: string;
+    descripcion?:string;
+    calificaciones?: Calificacion[];
 }
