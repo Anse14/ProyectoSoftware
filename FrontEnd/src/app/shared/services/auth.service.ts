@@ -15,12 +15,6 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root',
 })
 export class AuthService {
-  // user = {
-  //   idToken: '',
-  //   email: '',
-  //   rol: RolEnum.Alumno,
-  // };
-
   constructor(
     private http: HttpClient,
     private socialAuthService: SocialAuthService,

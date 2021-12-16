@@ -14,31 +14,18 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { PrincipalComponent } from './pages/principal/principal.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { ProfessorComponent } from './pages/professor/professor.component';
-import { CourseCardComponent } from './components/course-card/course-card.component';
-import { ProfessorDashboardComponent } from './pages/professor/professor-dashboard/professor-dashboard.component';
-import { RubricaComponent } from './pages/rubrica/rubrica.component';
-import { RubricaCreationComponent } from './pages/rubrica/rubrica-creation/rubrica-creation.component';
-import { AlumnoComponent } from './pages/alumno/alumno.component';
 
-import { GraphQLModule } from './graphql.module';
-import { NebularModule } from './nebular.module';
+import { GraphQLModule } from './shared/modules/graphql.module';
+import { NebularModule } from './shared/modules/nebular.module';
 import { GoogleLoginProvider, SocialLoginModule } from 'angularx-social-login';
-import { CalidadComponent } from './pages/calidad/calidad.component';
-import { CalidadDashboardComponent } from './pages/calidad/calidad-dashboard/calidad-dashboard.component';
-import { CalidadVerificacionComponent } from './pages/calidad/calidad-verificacion/calidad-verificacion.component';
 
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { CoursesViewComponent } from './pages/professor/courses-view/courses-view.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import { GraficaCalidadComponent } from './pages/calidad/grafica-calidad/grafica-calidad.component';
-import { RubricaCalificarComponent } from './pages/rubrica/rubrica-calificar/rubrica-calificar.component';
 import { LoadingComponent } from './components/loading/loading.component';
-import { RubricaCalidadComponent } from './pages/calidad/rubrica-calidad/rubrica-calidad.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -49,19 +36,6 @@ export function tokenGetter() {
     AppComponent,
     PrincipalComponent,
     DashboardComponent,
-    AlumnoComponent,
-    ProfessorComponent,
-    CourseCardComponent,
-    ProfessorDashboardComponent,
-    RubricaComponent,
-    RubricaCreationComponent,
-    RubricaCalificarComponent,
-    CalidadComponent,
-    CalidadDashboardComponent,
-    CoursesViewComponent,
-    GraficaCalidadComponent,
-    RubricaCalidadComponent,
-    CalidadVerificacionComponent,
     LoadingComponent
   ],
   imports: [
@@ -82,7 +56,6 @@ export function tokenGetter() {
         tokenGetter: tokenGetter,
         authScheme: 'Bearer ',
         allowedDomains: [environment.serverPath.replace('http://', '')],
-        // disallowedRoutes: [environment.serverPath + "/auth/*"],
       },
     }),
     MatExpansionModule,
