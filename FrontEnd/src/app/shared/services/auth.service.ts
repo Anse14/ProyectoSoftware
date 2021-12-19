@@ -32,19 +32,17 @@ export class AuthService {
       });
   }
 
-  loginWithGoogle(token: string) {
-    this.http
+  async loginWithGoogle(token: string) {
+    let res: any = await this.http
       .post(environment.serverPath + '/auth/google-login', { token: token })
-      .subscribe((res: any) => {
-        console.log(res);
-        if (res.status == 0) {
-          localStorage.setItem('access_token', res.token);
-          localStorage.setItem('refresh_token', res.refresh);
-          this.userService.user.idToken = token;
-          this.userService.user.email = res.email;
-          this.continueLogin();
-        }
-      });
+      .toPromise();
+    if (res.status == 0) {
+      localStorage.setItem('access_token', res.token);
+      localStorage.setItem('refresh_token', res.refresh);
+      this.userService.user.idToken = token;
+      this.userService.user.email = res.email;
+      this.continueLogin();
+    }
   }
 
   async logout() {
@@ -59,17 +57,19 @@ export class AuthService {
       }
     }
 
-    this.http.get(environment.serverPath + '/logout').subscribe((res) => {
-      if (this.userService.user.idToken != '') {
-        this.socialAuthService.signOut();
-        this.userService.user.idToken = '';
-      }
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('refresh_token');
-      this.userService.user.email = '';
-      this.router.navigateByUrl('/');
-      this.userService.userEmmiter.next(null);
-    });
+    let res = await this.http
+      .get(environment.serverPath + '/logout')
+      .toPromise();
+
+    if (this.userService.user.idToken != '') {
+      this.socialAuthService.signOut();
+      this.userService.user.idToken = '';
+    }
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    this.userService.user.email = '';
+    this.router.navigateByUrl('/');
+    this.userService.userEmmiter.next(null);
   }
 
   async fetchUser(): Promise<ApolloQueryResult<GetUserQuery>> {
@@ -87,13 +87,13 @@ export class AuthService {
   }
 
   continueLogin() {
-    this.fetchUser().then(data => {
+    this.fetchUser().then((data) => {
       if (data.data.getUser.tipo == RolEnum.Profesor) {
         this.router.navigateByUrl('/profesor/dashboard');
       }
       if (data.data.getUser.tipo == RolEnum.Calidad) {
         this.router.navigateByUrl('/calidad/dashboard');
       }
-    })
+    });
   }
 }

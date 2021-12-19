@@ -97,6 +97,9 @@ query GETRUBRICA($ID: String!){
       id
       descripcion
     }
+    curso {
+      id
+    }
   }  
 }
 

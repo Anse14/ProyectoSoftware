@@ -32,6 +32,7 @@ export class RubricaService {
       status: data.data.rubrica_by_pk.status,
       tipo: data.data.rubrica_by_pk.tipo,
       dimensiones: ([] = []),
+      curso: { id: data.data.rubrica_by_pk.curso.id },
     });
 
     for (let i of data.data.rubrica_by_pk.dimensiones) {

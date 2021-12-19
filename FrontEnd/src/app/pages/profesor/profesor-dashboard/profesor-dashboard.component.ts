@@ -3,28 +3,39 @@ import { Router } from '@angular/router';
 import { CursosService } from '@shared/services/cursos.service';
 import { ProfesorService } from '@shared/services/profesor.service';
 import { UserService } from '@shared/services/user.service';
+import {
+  OnDestroyMixin,
+  untilComponentDestroyed,
+} from '@w11k/ngx-componentdestroyed';
 
 @Component({
   selector: 'app-profesor-dashboard',
   templateUrl: './profesor-dashboard.component.html',
   styleUrls: ['./profesor-dashboard.component.scss'],
 })
-export class ProfesorDashboardComponent implements OnInit {
+export class ProfesorDashboardComponent
+  extends OnDestroyMixin
+  implements OnInit
+{
   constructor(
     private userService: UserService,
     private profesorService: ProfesorService,
     public cursosService: CursosService,
     private router: Router
   ) {
-    userService.userEmmiter.subscribe((data) => {
-      if (data == null) {
-        return;
-      }
-      profesorService.getProfesor();
-    });
+    super();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userService.userEmmiter
+      .pipe(untilComponentDestroyed(this))
+      .subscribe((data) => {
+        if (data == null) {
+          return;
+        }
+        this.profesorService.getProfesor();
+      });
+  }
 
   getColor(i: number): string {
     const colors = [

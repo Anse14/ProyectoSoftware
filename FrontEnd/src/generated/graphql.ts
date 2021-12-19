@@ -671,7 +671,7 @@ export type GetrubricaQueryVariables = Exact<{
 }>;
 
 
-export type GetrubricaQuery = { __typename?: 'Query', rubrica_by_pk?: { __typename?: 'Rubrica', id?: string | null | undefined, evidencia?: string | null | undefined, actividadBase?: string | null | undefined, ciclo?: string | null | undefined, codigo?: string | null | undefined, criterioDeDesempenho?: string | null | undefined, numCritDesemp?: string | null | undefined, fecha?: string | null | undefined, semana?: string | null | undefined, semestre?: string | null | undefined, status?: boolean | null | undefined, tipo?: string | null | undefined, dimensiones?: Array<{ __typename?: 'Dimension', id?: string | null | undefined, descripcion?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined };
+export type GetrubricaQuery = { __typename?: 'Query', rubrica_by_pk?: { __typename?: 'Rubrica', id?: string | null | undefined, evidencia?: string | null | undefined, actividadBase?: string | null | undefined, ciclo?: string | null | undefined, codigo?: string | null | undefined, criterioDeDesempenho?: string | null | undefined, numCritDesemp?: string | null | undefined, fecha?: string | null | undefined, semana?: string | null | undefined, semestre?: string | null | undefined, status?: boolean | null | undefined, tipo?: string | null | undefined, dimensiones?: Array<{ __typename?: 'Dimension', id?: string | null | undefined, descripcion?: string | null | undefined } | null | undefined> | null | undefined, curso?: { __typename?: 'Curso', id?: string | null | undefined } | null | undefined } | null | undefined };
 
 export type GetdimensionbypkQueryVariables = Exact<{
   ID: Scalars['String'];
@@ -918,6 +918,9 @@ export const GetrubricaDocument = gql`
     dimensiones {
       id
       descripcion
+    }
+    curso {
+      id
     }
   }
 }
