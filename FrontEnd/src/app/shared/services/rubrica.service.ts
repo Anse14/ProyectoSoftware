@@ -1,6 +1,18 @@
 import { Injectable } from '@angular/core';
-import { GetdimensionbypkGQL, GetrubricaGQL, Rubrica } from '@graphql';
+import { Router } from '@angular/router';
+import {
+  Calificacion,
+  DimensionSchemaInput,
+  GetdimensionbypkGQL,
+  GetrubricaGQL,
+  InsertdimensionrubricaGQL,
+  Rubrica,
+  UpdatedimensionGQL,
+  UpdaterubricaGQL,
+} from '@graphql';
 import { BehaviorSubject } from 'rxjs';
+import { CursosService } from './cursos.service';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +23,13 @@ export class RubricaService {
 
   constructor(
     private getRubrica: GetrubricaGQL,
-    private getDimensionByPk: GetdimensionbypkGQL
+    private getDimensionByPk: GetdimensionbypkGQL,
+    private inserdimension: InsertdimensionrubricaGQL,
+    private updatedimension: UpdatedimensionGQL,
+    private saverubrica: UpdaterubricaGQL,
+    private notificationService: NotificationService,
+    private router: Router,
+    private cursoService: CursosService,
   ) {}
 
   async updateRubrica(id: string) {
@@ -68,6 +86,53 @@ export class RubricaService {
       this.existdimensions = false;
     }
 
-    return this.rubrica;
+    return this.rubrica.value;
+  }
+
+  async insertDimension(
+    rubricaid: string,
+    dimensioninput: DimensionSchemaInput,
+    rubrica: Rubrica
+  ) {
+    var dimension: any = {
+      __typename: 'Dimension',
+      id: '',
+      descripcion: '',
+      calificaciones: Array<Calificacion>(3),
+    };
+
+    let data = await this.inserdimension
+      .mutate({ ID: rubricaid, DIMENSION: dimensioninput })
+      .toPromise();
+
+    dimension.id = data.data.update_rubrica_dimension_by_pk.id;
+    dimension.descripcion = dimensioninput.descripcion;
+    dimension.calificaciones =
+      data.data.update_rubrica_dimension_by_pk.calificaciones;
+    rubrica.dimensiones.push(dimension);
+
+    return rubrica;
+  }
+
+  async updateDimension(puntaje, descripcion, title, bool, dimensionid) {
+    return await this.updatedimension
+      .mutate({
+        ID: dimensionid,
+        NOTA: Number(puntaje),
+        DESCRIPCION: descripcion,
+        TITLE: title,
+        OPTION: bool,
+      })
+      .toPromise();
+  }
+
+  async saveRubrica(rubricaId, userId) {
+    let data = await this.saverubrica
+      .mutate({ ID: rubricaId, ProfesorId: userId })
+      .toPromise();
+    if (data.data.update_rubrica_by_pk.valueOf() == true) {
+      this.notificationService.success("Se guardo correctamente la rubrica");
+      this.router.navigate(['/professor/course-view', this.cursoService.curso.value.id]);
+    }
   }
 }
