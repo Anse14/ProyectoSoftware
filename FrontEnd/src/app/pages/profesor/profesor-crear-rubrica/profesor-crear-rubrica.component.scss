@@ -1,0 +1,135 @@
+.main-rubrica-content {
+  padding-left: 4%;
+  padding-right: 4%;
+  padding-top: 2%;
+  padding-bottom: 1%;
+  height: 100%;
+}
+
+.first-rubrica-content {
+  padding-right: 8%;
+  padding-left: 2%;
+  padding-top: 5%;
+}
+
+.second-rubrica-content {
+  margin-right: 7%;
+}
+.third-rubrica-content {
+  margin-right: 0%;
+}
+.criterios-rubrica-content {
+  padding-right: 7%;
+}
+
+.main-form {
+  height: 50%;
+  justify-content: center;
+}
+
+.save-rubrica {
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #00bfff;
+  border-color: #00bfff;
+}
+
+html {
+  height: 100%;
+}
+
+.icon {
+  font-family: "icomoon" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.button-icon {
+  border-color: darkgray;
+}
+
+/* Radios */
+.form-check-input:disabled {
+  opacity: 1;
+}
+
+.form-check-input:disabled ~ .form-check-label,
+.form-check-input[disabled] ~ .form-check-label {
+  opacity: 1;
+}
+
+.form-check-input:checked {
+  background-color: #00bfff;
+  border-color: #00bfff;
+}
+
+.parent-dim {
+  display: flex;
+  flex-direction: column;
+}
+
+.child-desc {
+  flex: 90%;
+}
+
+.child-punt {
+  flex: 10%;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: white;
+  opacity: 1;
+}
+
+.vertical-center {
+  margin: 0;
+  top: 50%;
+  position: relative;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.icon2 {
+  font-family: "icomoon" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: inline-block;
+  vertical-align: bottom;
+  height: 50%;
+}
+
+.button-icon2 {
+  margin-top: 20%;
+  border-color: darkgray;
+}
+
+.icon3 {
+  font-family: "icomoon" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: inline-block;
+  vertical-align: bottom;
+}

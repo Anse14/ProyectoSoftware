@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@shared/guards/auth.guard';
 import { PrincipalComponent } from './pages/principal/principal.component';
 import { ProfesorCoursesViewComponent } from './pages/profesor/profesor-courses-view/profesor-courses-view.component';
+import { ProfesorCrearRubricaComponent } from './pages/profesor/profesor-crear-rubrica/profesor-crear-rubrica.component';
 import { ProfesorDashboardComponent } from './pages/profesor/profesor-dashboard/profesor-dashboard.component';
 import { ProfesorComponent } from './pages/profesor/profesor.component';
 
@@ -29,6 +30,10 @@ const routes: Routes = [
       {
         path: 'course-view/:id',
         component: ProfesorCoursesViewComponent
+      },
+      {
+        path: 'crear-rubrica/:id',
+        component: ProfesorCrearRubricaComponent
       }
     ]
   }

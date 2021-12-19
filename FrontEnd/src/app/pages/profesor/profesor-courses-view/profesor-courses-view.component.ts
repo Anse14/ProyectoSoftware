@@ -38,7 +38,8 @@ export class ProfesorCoursesViewComponent implements OnInit {
 
   async ngOnInit() {
     let id = this.route.snapshot.paramMap.get('id');
-    let [labels, dataset] = await this.cursosService.getCurso(id);
+    await this.cursosService.getCurso(id);
+    let [labels, dataset] = await this.cursosService.getData();
     this.barChartData.labels = labels;
     this.barChartData.datasets = dataset;
     this.graphLoad = true;

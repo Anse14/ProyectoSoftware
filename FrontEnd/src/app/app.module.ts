@@ -23,6 +23,8 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { ProfesorComponent } from './pages/profesor/profesor.component';
 import { ProfesorDashboardComponent } from './pages/profesor/profesor-dashboard/profesor-dashboard.component';
 import { ProfesorCoursesViewComponent } from './pages/profesor/profesor-courses-view/profesor-courses-view.component';
+import { ProfesorCrearRubricaComponent } from './pages/profesor/profesor-crear-rubrica/profesor-crear-rubrica.component';
+import { ProfesorCalificarRubricaComponent } from './pages/profesor/profesor-calificar-rubrica/profesor-calificar-rubrica.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -36,6 +38,8 @@ export function tokenGetter() {
     ProfesorComponent,
     ProfesorDashboardComponent,
     ProfesorCoursesViewComponent,
+    ProfesorCrearRubricaComponent,
+    ProfesorCalificarRubricaComponent,
   ],
   imports: [
     BrowserModule,

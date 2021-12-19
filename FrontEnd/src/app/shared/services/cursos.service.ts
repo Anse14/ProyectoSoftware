@@ -29,7 +29,7 @@ export class CursosService {
       if (curso.id == id) {
         this.curso.next(curso);
         this.curso.value.rubricas = data.data.curso_by_pk.rubricas;
-        return await this.getData();
+        return;
       }
     }
 
@@ -39,7 +39,7 @@ export class CursosService {
       rubricas: data.data.curso_by_pk.rubricas,
     };
     this.curso.next(curso);
-    return await this.getData();
+    return;
   }
 
   async getData() {
