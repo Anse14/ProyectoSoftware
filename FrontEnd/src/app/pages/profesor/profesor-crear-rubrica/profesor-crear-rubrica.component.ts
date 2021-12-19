@@ -153,7 +153,7 @@ export class ProfesorCrearRubricaComponent
       for (let i = 0; i < dim.calificaciones.length - 1; i++) {
         if (dim.calificaciones[i].nota > dim.calificaciones[i + 1].nota) {
         } else {
-          alert('Insertar otros puntajes');
+          this.notificationService.error('Insertar otros puntajes');
           return false;
         }
       }

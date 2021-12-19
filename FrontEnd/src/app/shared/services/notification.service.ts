@@ -8,10 +8,10 @@ export class NotificationService {
   constructor(private toastrService: NbToastrService) {}
 
   success(message: string) {
-    this.toastrService.success('success', message);
+    this.toastrService.success('', message);
   }
 
   error(message: string) {
-    this.toastrService.danger('danger', message);
+    this.toastrService.danger('', message);
   }
 }
