@@ -5,5 +5,6 @@ export interface User {
   idToken: string,
   email: string,
   codigo: string,
+  nombre: string,
   rol: RolEnum
 }

@@ -1,0 +1,33 @@
+<div class="container-fluid h-100">
+  <div class="row h-100">
+    <div
+      *ngFor="let curso of cursosService.cursos; let i = index"
+      class="col-6 d-flex align-items-center"
+    >
+      <div
+        class="container m-5 px-0 cont-border"
+        [style.border-color]="getColor(i)"
+        (click)="goToCourseView(curso.id)"
+      >
+        <div class="row">
+          <div class="col-1 cod-curso" [style.background-color]="getColor(i)">
+            <div>
+              {{ curso.codigo }}
+            </div>
+          </div>
+          <div class="col-11 text-center p-5">
+            <h4>{{ curso.nombre }}</h4>
+            <div
+              *ngFor="let aula of curso.secciones"
+              class="row justify-content-center"
+            >
+              <div class="col text-center">
+                {{ aula.codigo }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

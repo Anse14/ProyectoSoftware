@@ -7,6 +7,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { RolEnum } from '@graphql';
+import { AuthService } from '@shared/services/auth.service';
 import { UserService } from '@shared/services/user.service';
 import { Observable } from 'rxjs';
 
@@ -14,7 +15,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router, private user: UserService) {}
+  constructor(
+    private router: Router,
+    private user: UserService,
+    private auth: AuthService
+  ) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -28,7 +33,7 @@ export class AuthGuard implements CanActivate {
       this.verifyAccessToken(
         (token) => {
           rvalue = false;
-          this.router.navigateByUrl(this.getNextRoute());
+          this.auth.continueLogin();
         },
         () => {
           rvalue = true;
@@ -38,6 +43,14 @@ export class AuthGuard implements CanActivate {
       this.verifyAccessToken(
         (token) => {
           rvalue = true;
+          if (this.user.user.id == '') {
+            this.auth.fetchUser().then((data) => {
+              let next = this.getNextRoute();
+              if (next != route.url.toString()) {
+                this.router.navigateByUrl(`${next}/dashboard`);
+              }
+            });
+          }
         },
         () => {
           rvalue = false;
@@ -59,14 +72,11 @@ export class AuthGuard implements CanActivate {
 
   getNextRoute(): string {
     if (this.user.user.rol == RolEnum.Profesor) {
-      return '/professor/dashboard';
-    }
-    if (this.user.user.rol == RolEnum.Alumno) {
-      return '/professor/dashboard';
+      return 'profesor';
     }
     if (this.user.user.rol == RolEnum.Calidad) {
-      return '/professor/dashboard';
+      return 'calidad';
     }
-    return '/dashboard';
+    return '/';
   }
 }

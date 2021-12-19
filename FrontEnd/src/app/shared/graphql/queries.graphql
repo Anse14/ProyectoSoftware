@@ -34,12 +34,24 @@ query GETPROFESORBYID($ID: String!) {
 
 #QUERY FOR COURSEVIEW 
 
-query GETRUBRICASBYCURSO($ID: String!) {
+query GetCursoRubricasByPk($ID: String!) {
   curso_by_pk(id: $ID){
     rubricas {
       id,
       criterioDeDesempenho,
       status,
+    }
+  }
+}
+
+query GetCursoByPk($ID: String!) {
+  curso_by_pk(id: $ID){
+    id
+    codigo
+    nombre
+    secciones {
+      id
+      codigo
     }
   }
 }
@@ -57,7 +69,7 @@ query GETRUBRICASUSUARIO($ID: String!){
 }
 
 #QUERY FOR GET DIMENSIONES USUARIO BY GET RUBRICAUSUARIO
-query GETDIMENSIONUSUARIOBYRUBRICAUSUARIO($ID: String!){
+query GetDimensionUsuarioByRubricaUsuario($ID: String!){
   dimension_usuario_by_rubrica_usuario(rubrica_usuario_id: $ID){
     descripcion,
   }
@@ -104,7 +116,7 @@ query GETDIMENSIONBYPK($ID: String!){
 }
 
 #GETALUMNOSTOCALIFICATE
-query RUBRICAUSUARIOBYRUBRICASECCION($ID: String!,$SECCIONID: String!)  {
+query rubricaUsuarioByRubricaSeccion($ID: String!,$SECCIONID: String!)  {
   rubrica_usuario_by_rubrica_seccion(rubricaId: $ID, seccionId: $SECCIONID) {
     id,
     evaluacionTotal,

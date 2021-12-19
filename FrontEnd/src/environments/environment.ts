@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   cliendId:
     '260697162666-8ji995p83k842hbipsuir8ovogbhcrhf.apps.googleusercontent.com',
-  serverPath: 'https://meowproyecto-software.herokuapp.com',
+  serverPath: 'http://localhost:8000',
 };
 
 /*

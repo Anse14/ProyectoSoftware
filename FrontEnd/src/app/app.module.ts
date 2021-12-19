@@ -1,31 +1,28 @@
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { JwtModule } from '@auth0/angular-jwt';
-import { NbThemeModule, NbToastrModule } from '@nebular/theme';
+import { NbSidebarModule, NbThemeModule, NbToastrModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ChartModule } from 'angular2-chartjs';
+import { GoogleLoginProvider, SocialLoginModule } from 'angularx-social-login';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { environment } from '../environments/environment';
-import { PrincipalComponent } from './pages/principal/principal.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 import { GraphQLModule } from './shared/modules/graphql.module';
 import { NebularModule } from './shared/modules/nebular.module';
-import { GoogleLoginProvider, SocialLoginModule } from 'angularx-social-login';
 
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
+import { PrincipalComponent } from './pages/principal/principal.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { ProfesorComponent } from './pages/profesor/profesor.component';
+import { ProfesorDashboardComponent } from './pages/profesor/profesor-dashboard/profesor-dashboard.component';
+import { ProfesorCoursesViewComponent } from './pages/profesor/profesor-courses-view/profesor-courses-view.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -35,8 +32,10 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     PrincipalComponent,
-    DashboardComponent,
-    LoadingComponent
+    LoadingComponent,
+    ProfesorComponent,
+    ProfesorDashboardComponent,
+    ProfesorCoursesViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +46,7 @@ export function tokenGetter() {
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'corporate' }),
     NbToastrModule.forRoot(),
+    NbSidebarModule.forRoot(),
     NbEvaIconsModule,
     NebularModule,
     SocialLoginModule,
@@ -58,13 +58,6 @@ export function tokenGetter() {
         allowedDomains: [environment.serverPath.replace('http://', '')],
       },
     }),
-    MatExpansionModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatMenuModule,
-    MatButtonModule,
   ],
   providers: [
     {

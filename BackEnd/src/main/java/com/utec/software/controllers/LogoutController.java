@@ -67,28 +67,11 @@ public class LogoutController {
     @GET
     @Path("/test")
     @Transactional
-    public DimensionUsuario test() {
-        var nota = 20.0f;
-        var descripcion = "Calificacioooooon";
-        var calificacion_id = "0080dccd-502f-4516-a4a6-8400526f03e3";
-        var rubrica_usuario_id = UUID.fromString("3ddf18a4-9595-4f72-acb5-aa7b96996356");
-        var dimensionUsuario = new DimensionUsuario();
-        EntityGraph<Calificacion> graphCalificacion = em.createEntityGraph(Calificacion.class);
-        graphCalificacion.addAttributeNodes("dimension");
-
-        var calificacion = dbService.findById(graphCalificacion, Calificacion.class, calificacion_id);
-        var rubricaUsuario = (RubricaUsuario)RubricaUsuario.findById(rubrica_usuario_id);
-
-        if(descripcion != null) {
-            dimensionUsuario.setDescripcion(descripcion);
-        }
-
-        dimensionUsuario.setNota(nota);
-        dimensionUsuario.setCalificacion(calificacion);
-        dimensionUsuario.setRubricaUsuario(rubricaUsuario);
-        dimensionUsuario.setDimension(calificacion.getDimension());
-
-        dimensionUsuario.persist();
-        return dimensionUsuario;
+    public List<DimensionUsuario> test() {
+        return dbService.findByRelation(
+                em.createEntityGraph(DimensionUsuario.class),
+                DimensionUsuario.class,
+                new Pair<>("rubricaUsuario", UUID.fromString("8e662928-5d65-11ec-bf63-0242ac130002"))
+        );
     }
 }

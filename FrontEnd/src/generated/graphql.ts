@@ -631,12 +631,19 @@ export type GetprofesorbyidQueryVariables = Exact<{
 
 export type GetprofesorbyidQuery = { __typename?: 'Query', profesor_by_pk?: { __typename?: 'Profesor', id?: string | null | undefined, nombre?: string | null | undefined, secciones?: Array<{ __typename?: 'Seccion', id?: string | null | undefined, codigo?: string | null | undefined, curso?: { __typename?: 'Curso', id?: string | null | undefined, codigo?: string | null | undefined, nombre?: string | null | undefined } | null | undefined } | null | undefined> | null | undefined } | null | undefined };
 
-export type GetrubricasbycursoQueryVariables = Exact<{
+export type GetCursoRubricasByPkQueryVariables = Exact<{
   ID: Scalars['String'];
 }>;
 
 
-export type GetrubricasbycursoQuery = { __typename?: 'Query', curso_by_pk?: { __typename?: 'Curso', rubricas?: Array<{ __typename?: 'Rubrica', id?: string | null | undefined, criterioDeDesempenho?: string | null | undefined, status?: boolean | null | undefined } | null | undefined> | null | undefined } | null | undefined };
+export type GetCursoRubricasByPkQuery = { __typename?: 'Query', curso_by_pk?: { __typename?: 'Curso', rubricas?: Array<{ __typename?: 'Rubrica', id?: string | null | undefined, criterioDeDesempenho?: string | null | undefined, status?: boolean | null | undefined } | null | undefined> | null | undefined } | null | undefined };
+
+export type GetCursoByPkQueryVariables = Exact<{
+  ID: Scalars['String'];
+}>;
+
+
+export type GetCursoByPkQuery = { __typename?: 'Query', curso_by_pk?: { __typename?: 'Curso', id?: string | null | undefined, codigo?: string | null | undefined, nombre?: string | null | undefined, secciones?: Array<{ __typename?: 'Seccion', id?: string | null | undefined, codigo?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined };
 
 export type VerifydimensioninrubricaQueryVariables = Exact<{
   ID: Scalars['String'];
@@ -652,12 +659,12 @@ export type GetrubricasusuarioQueryVariables = Exact<{
 
 export type GetrubricasusuarioQuery = { __typename?: 'Query', rubrica_usuario_by_rubrica?: Array<{ __typename?: 'RubricaUsuario', id?: string | null | undefined } | null | undefined> | null | undefined };
 
-export type GetdimensionusuariobyrubricausuarioQueryVariables = Exact<{
+export type GetDimensionUsuarioByRubricaUsuarioQueryVariables = Exact<{
   ID: Scalars['String'];
 }>;
 
 
-export type GetdimensionusuariobyrubricausuarioQuery = { __typename?: 'Query', dimension_usuario_by_rubrica_usuario?: Array<{ __typename?: 'DimensionUsuario', descripcion?: string | null | undefined } | null | undefined> | null | undefined };
+export type GetDimensionUsuarioByRubricaUsuarioQuery = { __typename?: 'Query', dimension_usuario_by_rubrica_usuario?: Array<{ __typename?: 'DimensionUsuario', descripcion?: string | null | undefined } | null | undefined> | null | undefined };
 
 export type GetrubricaQueryVariables = Exact<{
   ID: Scalars['String'];
@@ -673,13 +680,13 @@ export type GetdimensionbypkQueryVariables = Exact<{
 
 export type GetdimensionbypkQuery = { __typename?: 'Query', dimension_by_pk?: { __typename?: 'Dimension', id?: string | null | undefined, descripcion?: string | null | undefined, calificaciones?: Array<{ __typename?: 'Calificacion', id?: string | null | undefined, descripcion?: string | null | undefined, nota: number, titulo?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined };
 
-export type RubricausuariobyrubricaseccionQueryVariables = Exact<{
+export type RubricaUsuarioByRubricaSeccionQueryVariables = Exact<{
   ID: Scalars['String'];
   SECCIONID: Scalars['String'];
 }>;
 
 
-export type RubricausuariobyrubricaseccionQuery = { __typename?: 'Query', rubrica_usuario_by_rubrica_seccion?: Array<{ __typename?: 'RubricaUsuario', id?: string | null | undefined, evaluacionTotal: number, alumno?: { __typename?: 'Alumno', id?: string | null | undefined, nombre?: string | null | undefined } | null | undefined } | null | undefined> | null | undefined };
+export type RubricaUsuarioByRubricaSeccionQuery = { __typename?: 'Query', rubrica_usuario_by_rubrica_seccion?: Array<{ __typename?: 'RubricaUsuario', id?: string | null | undefined, evaluacionTotal: number, alumno?: { __typename?: 'Alumno', id?: string | null | undefined, nombre?: string | null | undefined } | null | undefined } | null | undefined> | null | undefined };
 
 export type CalificaalumnoMutationVariables = Exact<{
   NOTA: Scalars['Float'];
@@ -794,8 +801,8 @@ export const GetprofesorbyidDocument = gql`
       super(apollo);
     }
   }
-export const GetrubricasbycursoDocument = gql`
-    query GETRUBRICASBYCURSO($ID: String!) {
+export const GetCursoRubricasByPkDocument = gql`
+    query GetCursoRubricasByPk($ID: String!) {
   curso_by_pk(id: $ID) {
     rubricas {
       id
@@ -809,8 +816,32 @@ export const GetrubricasbycursoDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class GetrubricasbycursoGQL extends Apollo.Query<GetrubricasbycursoQuery, GetrubricasbycursoQueryVariables> {
-    document = GetrubricasbycursoDocument;
+  export class GetCursoRubricasByPkGQL extends Apollo.Query<GetCursoRubricasByPkQuery, GetCursoRubricasByPkQueryVariables> {
+    document = GetCursoRubricasByPkDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetCursoByPkDocument = gql`
+    query GetCursoByPk($ID: String!) {
+  curso_by_pk(id: $ID) {
+    id
+    codigo
+    nombre
+    secciones {
+      id
+      codigo
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetCursoByPkGQL extends Apollo.Query<GetCursoByPkQuery, GetCursoByPkQueryVariables> {
+    document = GetCursoByPkDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -850,8 +881,8 @@ export const GetrubricasusuarioDocument = gql`
       super(apollo);
     }
   }
-export const GetdimensionusuariobyrubricausuarioDocument = gql`
-    query GETDIMENSIONUSUARIOBYRUBRICAUSUARIO($ID: String!) {
+export const GetDimensionUsuarioByRubricaUsuarioDocument = gql`
+    query GetDimensionUsuarioByRubricaUsuario($ID: String!) {
   dimension_usuario_by_rubrica_usuario(rubrica_usuario_id: $ID) {
     descripcion
   }
@@ -861,8 +892,8 @@ export const GetdimensionusuariobyrubricausuarioDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class GetdimensionusuariobyrubricausuarioGQL extends Apollo.Query<GetdimensionusuariobyrubricausuarioQuery, GetdimensionusuariobyrubricausuarioQueryVariables> {
-    document = GetdimensionusuariobyrubricausuarioDocument;
+  export class GetDimensionUsuarioByRubricaUsuarioGQL extends Apollo.Query<GetDimensionUsuarioByRubricaUsuarioQuery, GetDimensionUsuarioByRubricaUsuarioQueryVariables> {
+    document = GetDimensionUsuarioByRubricaUsuarioDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -927,8 +958,8 @@ export const GetdimensionbypkDocument = gql`
       super(apollo);
     }
   }
-export const RubricausuariobyrubricaseccionDocument = gql`
-    query RUBRICAUSUARIOBYRUBRICASECCION($ID: String!, $SECCIONID: String!) {
+export const RubricaUsuarioByRubricaSeccionDocument = gql`
+    query rubricaUsuarioByRubricaSeccion($ID: String!, $SECCIONID: String!) {
   rubrica_usuario_by_rubrica_seccion(rubricaId: $ID, seccionId: $SECCIONID) {
     id
     evaluacionTotal
@@ -943,8 +974,8 @@ export const RubricausuariobyrubricaseccionDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class RubricausuariobyrubricaseccionGQL extends Apollo.Query<RubricausuariobyrubricaseccionQuery, RubricausuariobyrubricaseccionQueryVariables> {
-    document = RubricausuariobyrubricaseccionDocument;
+  export class RubricaUsuarioByRubricaSeccionGQL extends Apollo.Query<RubricaUsuarioByRubricaSeccionQuery, RubricaUsuarioByRubricaSeccionQueryVariables> {
+    document = RubricaUsuarioByRubricaSeccionDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

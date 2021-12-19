@@ -62,7 +62,7 @@ public class DimensionUsuarioResolver {
         return dbService.findByRelation(
                 graph,
                 DimensionUsuario.class,
-                new Pair<>("rubricaUsuario", rubrica_usuario_id)
+                new Pair<>("rubricaUsuario", UUID.fromString(rubrica_usuario_id))
         );
     }
 }
