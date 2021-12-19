@@ -132,7 +132,7 @@ export class RubricaService {
       .toPromise();
     if (data.data.update_rubrica_by_pk.valueOf() == true) {
       this.notificationService.success("Se guardo correctamente la rubrica");
-      this.router.navigate(['/professor/course-view', this.cursoService.curso.value.id]);
+      this.router.navigate(['/profesor/course-view', this.cursoService.curso.value.id]);
     }
   }
 }

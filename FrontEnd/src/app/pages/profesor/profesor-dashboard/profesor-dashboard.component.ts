@@ -17,6 +17,16 @@ export class ProfesorDashboardComponent
   extends OnDestroyMixin
   implements OnInit
 {
+  colors = [
+    '#FF3F3F',
+    '#FFEB3F',
+    '#FF993F',
+    '#46FF3F',
+    '#3FE8FF',
+    '#3FAFFF',
+    '#853FFF',
+  ];
+
   constructor(
     private userService: UserService,
     private profesorService: ProfesorService,
@@ -24,6 +34,14 @@ export class ProfesorDashboardComponent
     private router: Router
   ) {
     super();
+    this.shuffleArray(this.colors);
+  }
+
+  shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
   }
 
   ngOnInit(): void {
@@ -38,16 +56,7 @@ export class ProfesorDashboardComponent
   }
 
   getColor(i: number): string {
-    const colors = [
-      '#FF3F3F',
-      '#FFEB3F',
-      '#FF993F',
-      '#46FF3F',
-      '#3FE8FF',
-      '#3FAFFF',
-      '#853FFF',
-    ];
-    return colors[i % colors.length];
+    return this.colors[i % this.colors.length];
   }
 
   goToCourseView(id: string) {
