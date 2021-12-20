@@ -42,7 +42,7 @@ const routes: Routes = [
   },
   {
     path: 'calidad',
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     component: CalidadComponent,
     children: [
       {
