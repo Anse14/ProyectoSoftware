@@ -1,0 +1,79 @@
+<div class="main-container">
+  <p class="titulo">
+    <img class="flechi1" src="assets/images/flechi.png" /> Resultados
+  </p>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="filtros">
+        <h3>Filtros</h3>
+        <div class="listFiltros" *ngFor="let filtro of filtros">
+          <p class="tiposFiltro">{{ filtro.titulo }}</p>
+          <div class="listOpciones">
+            <div class="form-check" *ngFor="let opcion of filtro.lista">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="flexRadioSemestre"
+                id="flexsemestre"
+                checked
+              />
+              <label class="form-check-label" for="flexsemestre">{{
+                opcion
+              }}</label>
+            </div>
+          </div>
+        </div>
+        <div class="listFiltros">
+          <p class="tiposFiltro">Carreras</p>
+          <div class="listOpciones">
+            <div
+              class="form-check"
+              *ngFor="let carrera of carreraService.carreras; let i = index"
+            >
+              <input
+                class="form-check-input"
+                type="radio"
+                name="flexRadioCarrera"
+                [id]="'flexcarrera' + i"
+                (change)="cursosService.getCursosByCarreraId(carrera.id)"
+              />
+              <label class="form-check-label" [for]="'flexcarrera' + i">{{
+                carrera.nombre
+              }}</label>
+            </div>
+          </div>
+        </div>
+        <div class="listFiltros">
+          <p class="tiposFiltro">Cursos</p>
+          <div class="listOpciones">
+            <div
+              class="form-check"
+              *ngFor="let curso of cursosService.cursos; let j = index"
+            >
+              <input
+                class="form-check-input"
+                type="radio"
+                name="flexRadioCurso"
+                [id]="'flexcurso' + j"
+                (change)="getCursosByCursos(curso.id)"
+              />
+              <label class="form-check-label" [for]="'flexcurso' + j">
+                {{ curso.nombre }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <p style="text-align: center; background-color: rgb(161, 214, 250)">
+        ESTADÍSTICA DE DESEMPEÑO - CS - TEORÍA DE LA COMPUTACIÓN
+      </p>
+      <app-grafica
+        [barChartOptions]="barChartOptions"
+        [barChartType]="barChartType"
+        [barChartData]="barChartData"
+      ></app-grafica>
+    </div>
+  </div>
+</div>

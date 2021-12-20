@@ -25,6 +25,11 @@ import { ProfesorDashboardComponent } from './pages/profesor/profesor-dashboard/
 import { ProfesorCoursesViewComponent } from './pages/profesor/profesor-courses-view/profesor-courses-view.component';
 import { ProfesorCrearRubricaComponent } from './pages/profesor/profesor-crear-rubrica/profesor-crear-rubrica.component';
 import { ProfesorCalificarRubricaComponent } from './pages/profesor/profesor-calificar-rubrica/profesor-calificar-rubrica.component';
+import { CalidadComponent } from './pages/calidad/calidad.component';
+import { CalidadDashboardComponent } from './pages/calidad/calidad-dashboard/calidad-dashboard.component';
+import { GraficaComponent } from './components/grafica/grafica.component';
+import { CalidadVerificacionComponent } from './pages/calidad/calidad-verificacion/calidad-verificacion.component';
+import { CalidadRubricaComponent } from './pages/calidad/calidad-verificacion/calidad-rubrica/calidad-rubrica.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -40,6 +45,11 @@ export function tokenGetter() {
     ProfesorCoursesViewComponent,
     ProfesorCrearRubricaComponent,
     ProfesorCalificarRubricaComponent,
+    CalidadComponent,
+    CalidadDashboardComponent,
+    GraficaComponent,
+    CalidadVerificacionComponent,
+    CalidadRubricaComponent,
   ],
   imports: [
     BrowserModule,

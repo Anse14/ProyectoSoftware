@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import {
   Curso,
+  GetallcursosGQL,
   GetCursoByPkGQL,
   GetCursoRubricasByPkGQL,
+  GetcursosbycarreraGQL,
   GetDimensionUsuarioByRubricaUsuarioGQL,
+  GetrubricasusuarioGQL,
   RubricaUsuarioByRubricaSeccionGQL,
 } from '@graphql';
 import { BehaviorSubject } from 'rxjs';
@@ -17,17 +20,28 @@ export class CursosService {
 
   constructor(
     private getCursoByPk: GetCursoByPkGQL,
+    private getRubricasByCurso: GetCursoRubricasByPkGQL,
+    private getCursosByCarrera: GetcursosbycarreraGQL,
     private getCursoRubricasByPk: GetCursoRubricasByPkGQL,
+    private getrubricausuario: GetrubricasusuarioGQL,
+    private getcursos: GetallcursosGQL,
     private rubrica_usuario_by_rubrica_seccion: RubricaUsuarioByRubricaSeccionGQL,
     private getDimensionUsuarioByRubricaUsuario: GetDimensionUsuarioByRubricaUsuarioGQL
   ) {}
+
+  async getAllCursos() {
+    this.cursos = [];
+    let data = await this.getcursos.fetch().toPromise();
+
+    this.cursos = [...data.data.curso];
+  }
 
   async getCurso(id: string) {
     let data = await this.getCursoRubricasByPk.fetch({ ID: id }).toPromise();
 
     for (let curso of this.cursos) {
       if (curso.id == id) {
-        this.curso.next(curso);
+        this.curso.next({...curso});
         this.curso.value.rubricas = data.data.curso_by_pk.rubricas;
         return;
       }
@@ -89,5 +103,79 @@ export class CursosService {
     });
 
     return [labels, datasets];
+  }
+
+  async getCursosByCarreraId(id: string) {
+    let data = await this.getCursosByCarrera.fetch({ ID: id }).toPromise();
+    this.cursos = [...data.data.carrera_by_pk.cursos];
+    this.cursos = this.cursos.sort((a, b): number => {
+      if (a.nombre < b.nombre) return -1;
+      if (b.nombre < a.nombre) return 1;
+      return 0;
+    });
+  }
+
+  async getCursosByCursos(id: string) {
+    var labels: string[] = [];
+    var datagood: number[] = [];
+    var databad: number[] = [];
+
+    let data = await this.getRubricasByCurso.fetch({ ID: id }).toPromise();
+
+    for (let rubrica of data.data.curso_by_pk.rubricas) {
+      var integer: number = 1;
+      labels.push('Rubrica ' + integer.toString());
+      integer++;
+      var god: number = 0;
+      var bad: number = 0;
+
+      let rubricasdata = await this.getrubricausuario
+        .fetch({ ID: rubrica.id })
+        .toPromise();
+
+      for (let rubricauser of rubricasdata.data.rubrica_usuario_by_rubrica) {
+        let dimensionesdata = await this.getDimensionUsuarioByRubricaUsuario
+          .fetch({ ID: rubricauser.id })
+          .toPromise();
+
+        for (let dimuser of dimensionesdata.data
+          .dimension_usuario_by_rubrica_usuario) {
+          if (
+            dimuser.descripcion == 'Bueno' ||
+            dimuser.descripcion == 'Excelente'
+          )
+            god++;
+          else bad++;
+        }
+      }
+      datagood.push(god);
+      databad.push(bad);
+    }
+
+    return [
+      {
+        data: datagood,
+        label: 'Bueno - Excelente',
+        backgroundColor: ['#C997C6', '#C997C6', '#C997C6', '#C997C6'],
+      },
+      {
+        data: databad,
+        label: 'En desarrollo - No aceptable',
+        backgroundColor: ['#FFEE93', '#FFEE93', '#FFEE93', '#FFEE93'],
+      },
+    ];
+  }
+
+  filterCursosByRubrica() {
+    var newcursos: Curso[] = [];
+    for (let curso of this.cursos) {
+      for (let rubrica of curso.rubricas) {
+        if (rubrica.status == false) {
+          newcursos.push(curso);
+          break;
+        }
+      }
+    }
+    this.cursos = newcursos;
   }
 }
