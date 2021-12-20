@@ -80,7 +80,9 @@
                 <textarea
                   type="text"
                   class="form-control"
-                  placeholder="{{ rubricaService.rubrica.value?.actividadBase }}"
+                  placeholder="{{
+                    rubricaService.rubrica.value?.actividadBase
+                  }}"
                   aria-label="Curso"
                   aria-describedby="basic-addon1"
                   disabled
@@ -389,13 +391,7 @@
                   <button
                     type="button"
                     class="btn btn-outline-secondary col-3 button-icon"
-                    (click)="
-                      submitPuntaje(
-                        newnota.value,
-                        cal.titulo,
-                        dim.id
-                      )
-                    "
+                    (click)="submitPuntaje(newnota.value, cal.titulo, dim.id)"
                   >
                     <nb-icon icon="save-outline" class="icon"> </nb-icon>
                   </button>
@@ -407,14 +403,15 @@
                   class="btn btn-light"
                   style="overflow: auto"
                   disabled
-                ></button>
+                > - </button>
               </div>
               <div class="col-1">
                 <button
                   class="btn btn-primary button-icon2 center p-2"
                   type="button"
                   data-bs-toggle="modal"
-                  data-bs-target="#modal-create-dimension"
+                  data-bs-target="#modal-change-dimension"
+                  (click)="update(k, dim.id)"
                 >
                   <nb-icon icon="edit-outline" class="icon2"> </nb-icon>
                 </button>
@@ -426,6 +423,7 @@
     </div>
   </form>
 </div>
+
 
 <!-- Default checkbox -->
 <ng-template #defaultotros>
@@ -458,18 +456,135 @@
         ></button>
       </div>
       <div class="modal-body">
-        Presione Guardar para mandarlo a verificar (No podra modificar la rubrica)
+        Presione Guardar para mandarlo a verificar (No podra modificar la
+        rubrica)
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          (click)="verificate()"
-        >
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="verificate()">
           Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="modal-change-dimension"
+  tabindex="-1"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  aria-labelledby="change-dimension"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="change-dimension">
+          Dimensiones y Calificadores
+        </h5>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Dimension Nueva</label>
+            <div class="row">
+              <div class="col-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Descripcion de dimension"
+                  [(ngModel)]="newDimension.description"
+                  name = "modify-description"
+                />
+              </div>
+              <button type="button" class="btn btn-primary col-2">
+                Guardar Cambios
+              </button>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Excelente</label>
+            <div class="row">
+              <div class="col-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Descripcion de excelente"
+                  [(ngModel)]="newDimension.excellent"
+                  name = "modify-excellent"
+                />
+              </div>
+              <button type="button" class="btn btn-primary col-2" 
+              (click)="changeCalificacion(newDimension.excellent, 'Excelente')">
+                Guardar Cambios
+              </button>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Bueno</label>
+            <div class="row">
+              <div class="col-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Descripcion de bueno"
+                  [(ngModel)]="newDimension.good"
+                  name = "modify-good"
+                />
+              </div>
+              <button type="button" class="btn btn-primary col-2"
+              (click)="changeCalificacion(newDimension.good, 'Bueno')">
+                Guardar Cambios
+              </button>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">En desarrollo</label>
+            <div class="row">
+              <div class="col-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Descripcion de en desarrollo"
+                  [(ngModel)]="newDimension.inProcess"
+                  name = "modify-inprocess"
+                />
+              </div>
+              <button type="button" class="btn btn-primary col-2" 
+              (click)="changeCalificacion(newDimension.inProcess, 'En desarrollo')">
+                Guardar Cambios
+              </button>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">No aceptable</label>
+            <div class="row">
+              <div class="col-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Descripcion de no aceptable"
+                  [(ngModel)]="newDimension.notAceptable"
+                  name = "modify-notaceptable"
+                />
+              </div>
+              <button type="button" class="btn btn-primary col-2"
+              (click)="changeCalificacion(newDimension.notAceptable, 'No aceptable')">
+                Guardar Cambios
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" 
+        (click)="emptynewDImension()"
+        data-bs-dismiss="modal">
+          Cerrar
         </button>
       </div>
     </div>
@@ -481,6 +596,7 @@
   class="modal fade"
   id="modal-create-dimension"
   tabindex="-1"
+  
   aria-labelledby="new-dimension"
   aria-hidden="true"
 >
@@ -500,7 +616,7 @@
               class="form-control"
               placeholder="Descripcion de dimension"
               [(ngModel)]="newDimension.description"
-              name="something"
+              name = "create-description"
             />
           </div>
           <div class="mb-3">
@@ -510,7 +626,7 @@
               class="form-control"
               placeholder="Descripcion de excelente"
               [(ngModel)]="newDimension.excellent"
-              name="something2"
+              name = "create-excellent"
             />
           </div>
           <div class="mb-3">
@@ -520,7 +636,7 @@
               class="form-control"
               placeholder="Descripcion de bueno"
               [(ngModel)]="newDimension.good"
-              name="something3"
+              name = "create-good"
             />
           </div>
           <div class="mb-3">
@@ -530,7 +646,7 @@
               class="form-control"
               placeholder="Descripcion de en desarrollo"
               [(ngModel)]="newDimension.inProcess"
-              name="something4"
+              name = "create-inprocess"
             />
           </div>
           <div class="mb-3">
@@ -540,21 +656,17 @@
               class="form-control"
               placeholder="Descripcion de no aceptable"
               [(ngModel)]="newDimension.notAceptable"
-              name="something5"
+              name = "create-notaceptable"
             />
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
+          Cerrar
         </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          (click)="saveDimension()"
-        >
-          Save changes
+        <button type="button" class="btn btn-primary" (click)="saveDimension()">
+          Guardar Cambios
         </button>
       </div>
     </div>

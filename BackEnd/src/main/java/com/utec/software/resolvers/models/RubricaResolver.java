@@ -142,6 +142,7 @@ public class RubricaResolver {
                 if (Objects.equals(calificacion.getTitulo(), title)) {
                     calificacion.update(nota, descripcion, option);
                     calificacion.persist();
+                    break;
                 }
             }
             return actual;
@@ -166,12 +167,6 @@ public class RubricaResolver {
             if (status) {
                 rubrica.setStatus(true);
             } else {
-                for (Dimension dimension : rubrica.getDimensiones()) {
-                    for (Calificacion calificacion : dimension.getCalificaciones()) {
-                        calificacion.delete();
-                    }
-                    dimension.delete();
-                }
                 rubrica.setStatus(null);
                 rubrica.setDimensiones(new ArrayList<>());
             }

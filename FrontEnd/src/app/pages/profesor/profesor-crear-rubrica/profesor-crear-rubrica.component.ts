@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Calificacion, Rubrica } from '@graphql';
 import { CursosService } from '@shared/services/cursos.service';
 import { NotificationService } from '@shared/services/notification.service';
@@ -20,6 +20,7 @@ export class ProfesorCrearRubricaComponent
   implements OnInit
 {
   newDimension = {
+    id: '',
     description: '',
     excellent: '',
     good: '',
@@ -35,6 +36,7 @@ export class ProfesorCrearRubricaComponent
     public cursoService: CursosService,
     public userService: UserService,
     private route: ActivatedRoute,
+    private router: Router,
     private notificationService: NotificationService
   ) {
     super();
@@ -63,6 +65,21 @@ export class ProfesorCrearRubricaComponent
         this.rowsCompetencia = Math.round(str.length / 130);
       });
   }
+
+  async changeCalificacion(newdescription: string, titulo:string) {
+    this.rubricaService.updateDimension(0, newdescription, titulo, true, this.newDimension.id);
+  }
+
+  async update(pos: number, id: string){
+    this.newDimension.id = id;
+    const data = this.rubricaService.rubrica.value.dimensiones[pos];
+    this.newDimension.description = data.descripcion;
+    this.newDimension.excellent = data.calificaciones[0].descripcion;
+    this.newDimension.good = data.calificaciones[1].descripcion;
+    this.newDimension.inProcess = data.calificaciones[2].descripcion;
+    this.newDimension.notAceptable = data.calificaciones[3].descripcion;
+  }
+
 
   async saveDimension() {
     var dimensioninput: any = {
@@ -103,7 +120,12 @@ export class ProfesorCrearRubricaComponent
       )
     );
 
+    this.emptynewDImension();
+  }
+
+  emptynewDImension(){
     this.newDimension = {
+      id: '',
       description: '',
       excellent: '',
       good: '',
@@ -152,6 +174,8 @@ export class ProfesorCrearRubricaComponent
       maxPuntaje = dim.calificaciones[0].nota + maxPuntaje;
       for (let i = 0; i < dim.calificaciones.length - 1; i++) {
         if (dim.calificaciones[i].nota > dim.calificaciones[i + 1].nota) {
+          this.router.navigate(['/profesor/course-view', this.cursoService.curso.value.id]);
+          this.notificationService.success('Se guardo la rubrica correctamente');
         } else {
           this.notificationService.error('Insertar otros puntajes');
           return false;
@@ -175,4 +199,6 @@ export class ProfesorCrearRubricaComponent
     this.notificationService.error('Por favor ingrese al menos 4 dimensiones');
     return false;
   }
+
+
 }

@@ -1,7 +1,7 @@
 overwrite: true
 documents: "src/**/*.graphql"
 schema:
-  - http://0.0.0.0:8000/graphql/schema.graphql:
+  - http://localhost:8000/graphql/schema.graphql:
       headers:
         authorization: ycro6myze6
 generates:
