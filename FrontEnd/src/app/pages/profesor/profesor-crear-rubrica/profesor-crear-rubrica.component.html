@@ -80,7 +80,9 @@
                 <textarea
                   type="text"
                   class="form-control"
-                  placeholder="{{ rubricaService.rubrica.value?.actividadBase }}"
+                  placeholder="{{
+                    rubricaService.rubrica.value?.actividadBase
+                  }}"
                   aria-label="Curso"
                   aria-describedby="basic-addon1"
                   disabled
@@ -389,13 +391,7 @@
                   <button
                     type="button"
                     class="btn btn-outline-secondary col-3 button-icon"
-                    (click)="
-                      submitPuntaje(
-                        newnota.value,
-                        cal.titulo,
-                        dim.id
-                      )
-                    "
+                    (click)="submitPuntaje(newnota.value, cal.titulo, dim.id)"
                   >
                     <nb-icon icon="save-outline" class="icon"> </nb-icon>
                   </button>
@@ -458,17 +454,14 @@
         ></button>
       </div>
       <div class="modal-body">
-        Presione Guardar para mandarlo a verificar (No podra modificar la rubrica)
+        Presione Guardar para mandarlo a verificar (No podra modificar la
+        rubrica)
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          (click)="verificate()"
-        >
+        <button type="button" class="btn btn-primary" (click)="verificate()">
           Guardar
         </button>
       </div>
@@ -549,11 +542,7 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          (click)="saveDimension()"
-        >
+        <button type="button" class="btn btn-primary" (click)="saveDimension()">
           Save changes
         </button>
       </div>

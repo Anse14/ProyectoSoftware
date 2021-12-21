@@ -4,14 +4,16 @@ import {
   NbCardModule, 
   NbIconModule,
   NbToastrModule,
-  NbSidebarModule
+  NbSidebarModule,
+  NbSelectModule
 } from '@nebular/theme';
 
 @NgModule({
   exports: [
     NbLayoutModule,
     NbCardModule,
-    NbIconModule
+    NbIconModule,
+    NbSelectModule
   ]
 })
 export class NebularModule {}
