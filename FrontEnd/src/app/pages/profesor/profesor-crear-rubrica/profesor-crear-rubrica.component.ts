@@ -200,5 +200,4 @@ export class ProfesorCrearRubricaComponent
     return false;
   }
 
-
 }

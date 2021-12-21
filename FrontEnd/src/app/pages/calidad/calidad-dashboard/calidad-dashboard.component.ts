@@ -78,8 +78,8 @@ export class CalidadDashboardComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  async getCursosByCursos(id: string) {
-    let data = await this.cursosService.getCursosByCursos(id);
+  async getdatacurso(id: string) {
+    let data = await this.cursosService.getdataofCurso(id);
 
     for (let d of data) {
       this.barChartData.datasets.push(d);

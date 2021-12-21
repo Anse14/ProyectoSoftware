@@ -35,7 +35,7 @@
                 type="radio"
                 name="flexRadioCarrera"
                 [id]="'flexcarrera' + i"
-                (change)="cursosService.getCursosByCarreraId(carrera.id)"
+                (change)="cursosService.getcursosbycarreraid(carrera.id)"
               />
               <label class="form-check-label" [for]="'flexcarrera' + i">{{
                 carrera.nombre
@@ -55,7 +55,7 @@
                 type="radio"
                 name="flexRadioCurso"
                 [id]="'flexcurso' + j"
-                (change)="getCursosByCursos(curso.id)"
+                (change)="getdatacurso(curso.id)"
               />
               <label class="form-check-label" [for]="'flexcurso' + j">
                 {{ curso.nombre }}
