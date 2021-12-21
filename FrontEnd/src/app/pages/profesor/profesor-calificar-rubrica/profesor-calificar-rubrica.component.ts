@@ -26,6 +26,14 @@ export class ProfesorCalificarRubricaComponent
   toggle = false;
   selectedBtn: string;
   califsDimensiones = [];
+  califsDimensionesPosic = [];
+
+  resultados = {
+    exelente: 0,
+    bueno: 0,
+    enDesarrollo: 0,
+    noAceptable: 0,
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -59,6 +67,7 @@ export class ProfesorCalificarRubricaComponent
         );
         this.rowsActividad = Math.round(str.length / 130);
         this.califsDimensiones = rubrica.dimensiones.map(() => '');
+        this.califsDimensionesPosic = [...this.califsDimensiones];
       });
   }
 
@@ -68,7 +77,6 @@ export class ProfesorCalificarRubricaComponent
 
   setRubricaUsuario(ru: RubricaUsuario) {
     this.rubricaUsuario = ru;
-    console.log(ru);
   }
 
   setPuntaje(calificacion: Calificacion, k: number) {
@@ -76,6 +84,45 @@ export class ProfesorCalificarRubricaComponent
       this.notificationService.error('Debe de seleccionar un alumno primero');
       return;
     }
+
+    if (this.califsDimensiones[k] == calificacion.id) {
+      return;
+    }
+
+    if (this.califsDimensionesPosic[k] != '') {
+      switch (this.califsDimensionesPosic[k].titulo) {
+        case 'Excelente':
+          this.resultados.exelente -= this.califsDimensionesPosic[k].nota;
+          break;
+        case 'Bueno':
+          this.resultados.bueno -= this.califsDimensionesPosic[k].nota;
+          break;
+        case 'En desarrollo':
+          this.resultados.enDesarrollo -= this.califsDimensionesPosic[k].nota;
+          break;
+        case 'No aceptable':
+          this.resultados.noAceptable -= this.califsDimensionesPosic[k].nota;
+          break;
+      }
+    }
+
+    this.califsDimensionesPosic[k] = calificacion;
+    switch (calificacion.titulo) {
+      case 'Excelente':
+        this.resultados.exelente += calificacion.nota;
+        break;
+      case 'Bueno':
+        this.resultados.bueno += calificacion.nota;
+        break;
+      case 'En desarrollo':
+        this.resultados.enDesarrollo += calificacion.nota;
+        break;
+      case 'No aceptable':
+        this.resultados.noAceptable += calificacion.nota;
+        break;
+    }
+
+    console.log(calificacion);
     this.califsDimensiones[k] = calificacion.id;
     this.calificacionService.calificate(
       calificacion.nota,

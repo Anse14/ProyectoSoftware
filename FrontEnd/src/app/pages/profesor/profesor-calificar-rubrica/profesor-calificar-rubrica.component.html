@@ -382,6 +382,7 @@
                 <div
                   class="col center parent-dim"
                   *ngFor="let cal of dim.calificaciones; let c = index"
+                  (click)="setPuntaje(cal, k)"
                 >
                   <button
                     type="button"
@@ -391,7 +392,6 @@
                     [ngClass]="{
                       activeBtn: califsDimensiones[k] == cal.id
                     }"
-                    (click)="setPuntaje(cal, k)"
                   >
                     {{ cal.descripcion }}
                   </button>
@@ -430,17 +430,14 @@
               <form>
                 <div class="form-group row">
                   <label
-                    for="inputExcelente"
                     class="col-sm-8 col-form-label text-center"
                   >
                     Excelente</label
                   >
                   <div class="col-sm-3">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="inputExcelente"
-                    />
+                    <nb-card class="form-control">
+                      {{ resultados.exelente }}
+                    </nb-card>
                   </div>
                 </div>
 
@@ -452,7 +449,9 @@
                     Bueno</label
                   >
                   <div class="col-sm-3">
-                    <input type="text" class="form-control" id="inputBueno" />
+                    <nb-card class="form-control">
+                      {{ resultados.bueno }}
+                    </nb-card>
                   </div>
                 </div>
 
@@ -464,11 +463,9 @@
                     En Desarrollo</label
                   >
                   <div class="col-sm-3">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="inputEnDesarrollo"
-                    />
+                    <nb-card class="form-control">
+                      {{ resultados.enDesarrollo }}
+                    </nb-card>
                   </div>
                 </div>
 
@@ -480,11 +477,9 @@
                     No Aceptable</label
                   >
                   <div class="col-sm-3">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="inputNoAceptable"
-                    />
+                    <nb-card class="form-control">
+                      {{ resultados.noAceptable }}
+                    </nb-card>
                   </div>
                 </div>
               </form>

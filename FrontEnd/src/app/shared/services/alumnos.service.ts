@@ -20,7 +20,6 @@ export class AlumnosService {
   ) {}
 
   async getAlumnos() {
-    let alumnosMap = new Map();
     this.alumnos = [];
 
     for (let curso of this.cursoService.curso.value?.secciones) {
@@ -32,12 +31,8 @@ export class AlumnosService {
         .toPromise();
 
       data.data.rubrica_usuario_by_rubrica_seccion?.forEach((ru) => {
-        alumnosMap.set(ru.alumno.id, {...ru});
+        this.alumnos.push(ru);
       });
     }
-
-    alumnosMap.forEach((key, value) => {
-      this.alumnos.push(value);
-    });
   }
 }
