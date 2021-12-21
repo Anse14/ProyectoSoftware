@@ -36,12 +36,18 @@ export class CursosService {
     this.cursos = [...data.data.curso];
   }
 
+  getcursosbycarreraid(id: string) {
+    this.getCursosByCarrera.fetch({ ID: id }).subscribe((data) => {
+      this.cursos = data.data.carrera_by_pk.cursos;
+    });
+  }
+
   async getCurso(id: string) {
     let data = await this.getCursoRubricasByPk.fetch({ ID: id }).toPromise();
 
     for (let curso of this.cursos) {
       if (curso.id == id) {
-        this.curso.next({...curso});
+        this.curso.next({ ...curso });
         this.curso.value.rubricas = data.data.curso_by_pk.rubricas;
         return;
       }
@@ -105,17 +111,53 @@ export class CursosService {
     return [labels, datasets];
   }
 
-  async getCursosByCarreraId(id: string) {
-    let data = await this.getCursosByCarrera.fetch({ ID: id }).toPromise();
-    this.cursos = [...data.data.carrera_by_pk.cursos];
-    this.cursos = this.cursos.sort((a, b): number => {
-      if (a.nombre < b.nombre) return -1;
-      if (b.nombre < a.nombre) return 1;
-      return 0;
-    });
+  async getData2(id: string) {
+    var labels: string[] = [];
+    var datagood: number[] = [];
+    var databad: number[] = [];
+    var integer: number = 1;
+    labels.push('Rubrica ' + integer.toString());
+    integer++;
+    var god: number = 0;
+    var bad: number = 0;
+
+    let rubricasdata = await this.getrubricausuario
+      .fetch({ ID: id })
+      .toPromise();
+
+    for (let rubricauser of rubricasdata.data.rubrica_usuario_by_rubrica) {
+      let dimensionesdata = await this.getDimensionUsuarioByRubricaUsuario
+        .fetch({ ID: rubricauser.id })
+        .toPromise();
+
+      for (let dimuser of dimensionesdata.data
+        .dimension_usuario_by_rubrica_usuario) {
+        if (
+          dimuser.descripcion == 'Bueno' ||
+          dimuser.descripcion == 'Excelente'
+        )
+          god++;
+        else bad++;
+      }
+    }
+    datagood.push(god);
+    databad.push(bad);
+
+    return [
+      {
+        data: datagood,
+        label: 'Bueno - Excelente',
+        backgroundColor: ['#C997C6', '#C997C6', '#C997C6', '#C997C6'],
+      },
+      {
+        data: databad,
+        label: 'En desarrollo - No aceptable',
+        backgroundColor: ['#FFEE93', '#FFEE93', '#FFEE93', '#FFEE93'],
+      },
+    ];
   }
 
-  async getCursosByCursos(id: string) {
+  async getdataofCurso(id: string) {
     var labels: string[] = [];
     var datagood: number[] = [];
     var databad: number[] = [];
