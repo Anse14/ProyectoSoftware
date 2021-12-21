@@ -58,20 +58,20 @@ public class LogoutController {
         return false;
     }
 
-    @Inject
-    EntityManager em;
-
-    @Inject
-    DBService dbService;
-
-    @GET
-    @Path("/test")
-    @Transactional
-    public List<DimensionUsuario> test() {
-        return dbService.findByRelation(
-                em.createEntityGraph(DimensionUsuario.class),
-                DimensionUsuario.class,
-                new Pair<>("rubricaUsuario", UUID.fromString("8e662928-5d65-11ec-bf63-0242ac130002"))
-        );
-    }
+//    @Inject
+//    EntityManager em;
+//
+//    @Inject
+//    DBService dbService;
+//
+//    @GET
+//    @Path("/test")
+//    @Transactional
+//    public List<DimensionUsuario> test() {
+//        return dbService.findByRelation(
+//                em.createEntityGraph(DimensionUsuario.class),
+//                DimensionUsuario.class,
+//                new Pair<>("rubricaUsuario", UUID.fromString("8e662928-5d65-11ec-bf63-0242ac130002"))
+//        );
+//    }
 }
