@@ -92,16 +92,16 @@ export class ProfesorCalificarRubricaComponent
     if (this.califsDimensionesPosic[k] != '') {
       switch (this.califsDimensionesPosic[k].titulo) {
         case 'Excelente':
-          this.resultados.exelente -= this.califsDimensionesPosic[k].nota;
+          this.resultados.exelente -= 1;
           break;
         case 'Bueno':
-          this.resultados.bueno -= this.califsDimensionesPosic[k].nota;
+          this.resultados.bueno -= 1;
           break;
         case 'En desarrollo':
-          this.resultados.enDesarrollo -= this.califsDimensionesPosic[k].nota;
+          this.resultados.enDesarrollo -= 1;
           break;
         case 'No aceptable':
-          this.resultados.noAceptable -= this.califsDimensionesPosic[k].nota;
+          this.resultados.noAceptable -= 1;
           break;
       }
     }
@@ -109,16 +109,16 @@ export class ProfesorCalificarRubricaComponent
     this.califsDimensionesPosic[k] = calificacion;
     switch (calificacion.titulo) {
       case 'Excelente':
-        this.resultados.exelente += calificacion.nota;
+        this.resultados.exelente += 1;
         break;
       case 'Bueno':
-        this.resultados.bueno += calificacion.nota;
+        this.resultados.bueno += 1;
         break;
       case 'En desarrollo':
-        this.resultados.enDesarrollo += calificacion.nota;
+        this.resultados.enDesarrollo += 1;
         break;
       case 'No aceptable':
-        this.resultados.noAceptable += calificacion.nota;
+        this.resultados.noAceptable += 1;
         break;
     }
 
