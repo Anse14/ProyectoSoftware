@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -105,6 +106,8 @@ export class ProfesorCalificarRubricaComponent
       }
       this.rubricaUsuario = ru;
     } else {
+      this.califsDimensionesPosic =
+        this.rubricaService.rubrica.value.dimensiones.map(() => '');
       const dimusers = data.data.dimension_usuario_by_rubrica_usuario;
       var i = 0;
       for (let dim of this.rubricaService.rubrica.value.dimensiones) {
@@ -121,10 +124,11 @@ export class ProfesorCalificarRubricaComponent
   }
 
   getDisableSelect() {
-    return (
-      this.rubricaUsuario &&
-      this.califsDimensionesPosic.some((iter) => typeof iter != 'object')
-    );
+    let bool = false;
+    for (let i of this.califsDimensionesPosic) {
+      if (i == '') bool = true;
+    }
+    return this.rubricaUsuario && bool;
   }
   getMessage() {
     if (this.getDisableSelect()) {
