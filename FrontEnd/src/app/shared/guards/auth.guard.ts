@@ -72,7 +72,7 @@ export class AuthGuard implements CanActivate {
 
   getNextRoute(): string {
     if (this.user.user.rol == RolEnum.Profesor) {
-      return 'calidad';
+      return 'professor';
     }
     if (this.user.user.rol == RolEnum.Calidad) {
       return 'calidad';
