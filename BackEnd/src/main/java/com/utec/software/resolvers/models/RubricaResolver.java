@@ -112,7 +112,7 @@ public class RubricaResolver {
             Dimension dim = new Dimension();
             dim.setDescripcion(dimension.getDescripcion());
             dim.setRubrica(actual.get());
-            dim.persistAndFlush();
+            dim.persist();
 
             List<Calificacion> calificaciones = new ArrayList<>();
             for (Calificacion calificacion : dimension.getCalficaciones()) {

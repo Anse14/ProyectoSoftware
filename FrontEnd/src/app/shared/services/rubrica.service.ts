@@ -29,7 +29,7 @@ export class RubricaService {
     private saverubrica: UpdaterubricaGQL,
     private notificationService: NotificationService,
     private router: Router,
-    private cursoService: CursosService,
+    private cursoService: CursosService
   ) {}
 
   async updateRubrica(id: string) {
@@ -131,8 +131,11 @@ export class RubricaService {
       .mutate({ ID: rubricaId, ProfesorId: userId })
       .toPromise();
     if (data.data.update_rubrica_by_pk.valueOf() == true) {
-      this.notificationService.success("Se guardo correctamente la rubrica");
-      this.router.navigate(['/profesor/course-view', this.cursoService.curso.value.id]);
+      this.notificationService.success('Se guardo correctamente la rubrica');
+      this.router.navigate([
+        '/profesor/course-view',
+        this.cursoService.curso.value.id,
+      ]);
     }
   }
 }

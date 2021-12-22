@@ -32,7 +32,6 @@ export function createApollo(httpLink: HttpLink, userService: UserService) {
       if (status == 0) {
         token = localStorage.getItem('access_token');
       } else {
-        console.log(status)
         return {};
       }
     }
