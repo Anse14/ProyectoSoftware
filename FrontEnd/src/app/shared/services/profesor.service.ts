@@ -18,13 +18,14 @@ export class ProfesorService {
 
   async getProfesor() {
     let data = await this.getProfesorById
-      .fetch({ ID: this.userService.user.id })
+      .fetch({ ID: "032fa7ac-4400-4766-a3ce-412cda17c012" })
       .toPromise();
     let cursosMap = new Map();
     this.cursosService.cursos = [];
 
     for (let seccion of data.data.profesor_by_pk.secciones) {
       if (!cursosMap.has(seccion.curso.codigo)) {
+        console.log(seccion.id);
         let curso: Curso = {
           id: seccion.curso.id,
           codigo: seccion.curso.codigo,

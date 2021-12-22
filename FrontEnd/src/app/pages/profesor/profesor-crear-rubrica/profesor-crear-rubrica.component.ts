@@ -174,7 +174,6 @@ export class ProfesorCrearRubricaComponent
       maxPuntaje = dim.calificaciones[0].nota + maxPuntaje;
       for (let i = 0; i < dim.calificaciones.length - 1; i++) {
         if (dim.calificaciones[i].nota > dim.calificaciones[i + 1].nota) {
-          this.router.navigate(['/profesor/course-view', this.cursoService.curso.value.id]);
           this.notificationService.success('Se guardo la rubrica correctamente');
         } else {
           this.notificationService.error('Insertar otros puntajes');

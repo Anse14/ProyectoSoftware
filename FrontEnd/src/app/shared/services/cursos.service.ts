@@ -79,18 +79,22 @@ export class CursosService {
           .toPromise();
         for (let rubricauser of rubricasdata.data
           .rubrica_usuario_by_rubrica_seccion) {
-          let dimensionesdata = await this.getDimensionUsuarioByRubricaUsuario
+          var dimensionesdata = await this.getDimensionUsuarioByRubricaUsuario
             .fetch({ ID: rubricauser.id })
-            .toPromise();
-          for (let dimuser of dimensionesdata.data
-            .dimension_usuario_by_rubrica_usuario) {
-            if (
-              dimuser.descripcion == 'Bueno' ||
-              dimuser.descripcion == 'Excelente'
-            )
-              god++;
-            else bad++;
-          }
+            .toPromise()
+            .then((data) => {
+              if (data.data.dimension_usuario_by_rubrica_usuario != null) {
+                for (let dimuser of data.data
+                  .dimension_usuario_by_rubrica_usuario) {
+                  if (
+                    dimuser.descripcion == 'Bueno' ||
+                    dimuser.descripcion == 'Excelente'
+                  )
+                    god++;
+                  else bad++;
+                }
+              }
+            });
         }
       }
       datagood.push(god);
@@ -126,19 +130,19 @@ export class CursosService {
       .toPromise();
 
     for (let rubricauser of rubricasdata.data.rubrica_usuario_by_rubrica) {
-      let dimensionesdata = await this.getDimensionUsuarioByRubricaUsuario
+      const dimensionesdata = await this.getDimensionUsuarioByRubricaUsuario
         .fetch({ ID: rubricauser.id })
-        .toPromise();
-
-      for (let dimuser of dimensionesdata.data
-        .dimension_usuario_by_rubrica_usuario) {
-        if (
-          dimuser.descripcion == 'Bueno' ||
-          dimuser.descripcion == 'Excelente'
-        )
-          god++;
-        else bad++;
-      }
+        .toPromise()
+        .then((data) => {
+          for (let dimuser of data.data.dimension_usuario_by_rubrica_usuario) {
+            if (
+              dimuser.descripcion == 'Bueno' ||
+              dimuser.descripcion == 'Excelente'
+            )
+              god++;
+            else bad++;
+          }
+        });
     }
     datagood.push(god);
     databad.push(bad);
@@ -176,7 +180,7 @@ export class CursosService {
         .toPromise();
 
       for (let rubricauser of rubricasdata.data.rubrica_usuario_by_rubrica) {
-        let dimensionesdata = await this.getDimensionUsuarioByRubricaUsuario
+        const dimensionesdata = await this.getDimensionUsuarioByRubricaUsuario
           .fetch({ ID: rubricauser.id })
           .toPromise();
 
@@ -219,5 +223,13 @@ export class CursosService {
       }
     }
     this.cursos = newcursos;
+  }
+
+  //////ESTA FUNCION DEBERIA ESTAR AQUI ?
+  async getDimensionesUser(id: string) {
+    console.log(id);
+    return this.getDimensionUsuarioByRubricaUsuario
+      .fetch({ ID: id })
+      .toPromise();
   }
 }

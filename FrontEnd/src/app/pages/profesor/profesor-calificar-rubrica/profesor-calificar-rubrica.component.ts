@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Calificacion, Rubrica, RubricaUsuario } from '@graphql';
+import {
+  Calificacion,
+  GetDimensionUsuarioByRubricaUsuarioGQL,
+  Rubrica,
+  RubricaUsuario,
+} from '@graphql';
 import { AlumnosService } from '@shared/services/alumnos.service';
 import { CalificacionService } from '@shared/services/calificacion.service';
 import { CursosService } from '@shared/services/cursos.service';
@@ -35,6 +40,8 @@ export class ProfesorCalificarRubricaComponent
     noAceptable: 0,
   };
 
+  calificacionesArray = ['excelente', 'bueno', 'en desarrollo', 'no aceptable'];
+
   constructor(
     private route: ActivatedRoute,
     public rubricaService: RubricaService,
@@ -42,7 +49,8 @@ export class ProfesorCalificarRubricaComponent
     public alumnosService: AlumnosService,
     public cursoService: CursosService,
     public calificacionService: CalificacionService,
-    public notificationService: NotificationService
+    public notificationService: NotificationService,
+    private getDimensionUsuarioByRubricaUsuario: GetDimensionUsuarioByRubricaUsuarioGQL
   ) {
     super();
   }
@@ -71,20 +79,86 @@ export class ProfesorCalificarRubricaComponent
       });
   }
 
+  getResultado(pos: number): number {
+    console.log(this.califsDimensionesPosic);
+    return this.califsDimensionesPosic.filter(
+      (iter) =>
+        typeof iter == 'object' &&
+        iter.titulo.toLowerCase() == this.calificacionesArray[pos]
+    ).length;
+  }
   enableDisableRule() {
     this.toggle = !this.toggle;
   }
 
-  setRubricaUsuario(ru: RubricaUsuario) {
-    this.rubricaUsuario = ru;
+  async setRubricaUsuario(ru: RubricaUsuario) {
+    const data = await this.cursoService.getDimensionesUser(ru.id);
+    if (data == null) {
+      console.log('97');
+      this.califsDimensionesPosic =
+        this.rubricaService.rubrica.value.dimensiones.map(() => '');
+
+      if (
+        this.rubricaUsuario &&
+        this.califsDimensionesPosic.some((iter) => typeof iter != 'object')
+      ) {
+        this.notificationService.error(
+          'Debe de terminar de calificar al alumno primero'
+        );
+        return;
+      }
+      this.rubricaUsuario = ru;
+    } else {
+      console.log('111');
+      this.califsDimensionesPosic = [
+        'excelente',
+        'excelente',
+        'excelente',
+        'excelente',
+        'excelente',
+      ];
+      this.rubricaUsuario = ru;
+    }
   }
 
-  setPuntaje(calificacion: Calificacion, k: number) {
+  getDisableSelect() {
+    return (
+      this.rubricaUsuario &&
+      this.califsDimensionesPosic.some((iter) => typeof iter != 'object')
+    );
+  }
+  getMessage() {
+    if (this.getDisableSelect()) {
+      this.notificationService.error(
+        'Debe de terminar de calificar al alumno primero'
+      );
+    }
+  }
+
+  getPorcentaje(pos: number): number {
+    const excelente = this.getResultado(0);
+    const bueno = this.getResultado(1);
+    const enDesarrollo = this.getResultado(2);
+    const noAceptable = this.getResultado(3);
+    if (pos == 0) {
+      return (
+        ((excelente + bueno) * 100) /
+        this.rubricaService.rubrica.value?.dimensiones.length
+      );
+    } else {
+      return (
+        ((enDesarrollo + noAceptable) * 100) /
+        this.rubricaService.rubrica.value?.dimensiones.length
+      );
+    }
+  }
+
+  setPuntaje(calificacion: Calificacion, k: number, title: string) {
     if (this.rubricaUsuario == null) {
       this.notificationService.error('Debe de seleccionar un alumno primero');
       return;
     }
-
+    /*
     if (this.califsDimensiones[k] == calificacion.id) {
       return;
     }
@@ -106,7 +180,6 @@ export class ProfesorCalificarRubricaComponent
       }
     }
 
-    this.califsDimensionesPosic[k] = calificacion;
     switch (calificacion.titulo) {
       case 'Excelente':
         this.resultados.exelente += 1;
@@ -120,13 +193,14 @@ export class ProfesorCalificarRubricaComponent
       case 'No aceptable':
         this.resultados.noAceptable += 1;
         break;
-    }
+    }*/
+    this.califsDimensionesPosic[k] = calificacion;
 
     console.log(calificacion);
     this.califsDimensiones[k] = calificacion.id;
     this.calificacionService.calificate(
       calificacion.nota,
-      '',
+      title,
       calificacion.id,
       this.rubricaUsuario.id
     );
