@@ -29,7 +29,7 @@ export class RubricaService {
     private saverubrica: UpdaterubricaGQL,
     private notificationService: NotificationService,
     private router: Router,
-    private cursoService: CursosService,
+    private cursoService: CursosService
   ) {}
 
   async updateRubrica(id: string) {
@@ -101,10 +101,13 @@ export class RubricaService {
       calificaciones: Array<Calificacion>(3),
     };
 
+    console.log({ ID: rubricaid, DIMENSION: dimensioninput });
+
     let data = await this.inserdimension
       .mutate({ ID: rubricaid, DIMENSION: dimensioninput })
       .toPromise();
 
+    console.log(data);
     dimension.id = data.data.update_rubrica_dimension_by_pk.id;
     dimension.descripcion = dimensioninput.descripcion;
     dimension.calificaciones =
@@ -131,8 +134,11 @@ export class RubricaService {
       .mutate({ ID: rubricaId, ProfesorId: userId })
       .toPromise();
     if (data.data.update_rubrica_by_pk.valueOf() == true) {
-      this.notificationService.success("Se guardo correctamente la rubrica");
-      this.router.navigate(['/profesor/course-view', this.cursoService.curso.value.id]);
+      this.notificationService.success('Se guardo correctamente la rubrica');
+      this.router.navigate([
+        '/profesor/course-view',
+        this.cursoService.curso.value.id,
+      ]);
     }
   }
 }

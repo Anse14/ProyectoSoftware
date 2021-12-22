@@ -15,5 +15,7 @@ export class ProfesorComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  logout() {}
+  logout() {
+    this.authService.logout();
+  }
 }
