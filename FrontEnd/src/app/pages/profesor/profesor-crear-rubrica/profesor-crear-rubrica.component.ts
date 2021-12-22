@@ -157,10 +157,15 @@ export class ProfesorCrearRubricaComponent
       this.rubricaService.rubrica.value.id
     );
     if (this.verificatePuntajes()) {
+      this.notificationService.success('Se guardo la rubrica correctamente');
       this.rubricaService.saveRubrica(
         this.rubricaService.rubrica.value.id,
         this.userService.user.id
       );
+      this.router.navigate([
+        '/profesor/course-view',
+        this.rubricaService.rubrica.value.id,
+      ]);
     }
   }
 
@@ -183,9 +188,6 @@ export class ProfesorCrearRubricaComponent
       maxPuntaje = dim.calificaciones[0].nota + maxPuntaje;
       for (let i = 0; i < dim.calificaciones.length - 1; i++) {
         if (dim.calificaciones[i].nota > dim.calificaciones[i + 1].nota) {
-          this.notificationService.success(
-            'Se guardo la rubrica correctamente'
-          );
         } else {
           this.notificationService.error('Insertar otros puntajes');
           return false;
