@@ -74,8 +74,6 @@ export class ProfesorCalificarRubricaComponent
           rubrica.numCritDesemp + rubrica.criterioDeDesempenho
         );
         this.rowsActividad = Math.round(str.length / 130);
-        console.log(rubrica.dimensiones);
-        console.log(rubrica.dimensiones.length);
 
         this.califsDimensiones = rubrica.dimensiones.map(() => '');
         this.califsDimensionesPosic = [...this.califsDimensiones];
@@ -197,7 +195,6 @@ export class ProfesorCalificarRubricaComponent
     }*/
     this.califsDimensionesPosic[k] = calificacion.titulo;
 
-    console.log(calificacion);
     this.califsDimensiones[k] = calificacion.id;
     this.calificacionService.calificate(
       calificacion.nota,

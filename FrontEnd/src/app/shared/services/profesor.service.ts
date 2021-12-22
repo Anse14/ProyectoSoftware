@@ -25,7 +25,6 @@ export class ProfesorService {
 
     for (let seccion of data.data.profesor_by_pk.secciones) {
       if (!cursosMap.has(seccion.curso.codigo)) {
-        console.log(seccion.id);
         let curso: Curso = {
           id: seccion.curso.id,
           codigo: seccion.curso.codigo,

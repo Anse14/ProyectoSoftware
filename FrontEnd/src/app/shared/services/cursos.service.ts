@@ -218,7 +218,6 @@ export class CursosService {
 
   //////ESTA FUNCION DEBERIA ESTAR AQUI ?
   async getDimensionesUser(id: string) {
-    console.log(id);
     return this.getDimensionUsuarioByRubricaUsuario
       .fetch({ ID: id })
       .toPromise();

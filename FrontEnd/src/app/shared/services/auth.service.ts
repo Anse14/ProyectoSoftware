@@ -28,21 +28,17 @@ export class AuthService {
     this.socialAuthService
       .signIn(GoogleLoginProvider.PROVIDER_ID)
       .then((data: SocialUser) => {
-        console.log(data.idToken);
         this.loginWithGoogle(data.idToken);
       });
   }
 
   async loginWithGoogle(token: string) {
-    console.log('line 50');
     let res: any = await this.http
       .post(environment.serverPath + '/auth/google-login', { token: token })
       .toPromise();
-    console.log('line 40', res.status);
     if (res.status == 0) {
       localStorage.setItem('access_token', res.token);
       localStorage.setItem('refresh_token', res.refresh);
-      console.log(res.refresh);
       this.userService.user.idToken = token;
       this.userService.user.email = res.email;
       this.continueLogin();

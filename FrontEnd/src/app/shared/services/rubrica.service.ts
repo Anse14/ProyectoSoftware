@@ -101,13 +101,10 @@ export class RubricaService {
       calificaciones: Array<Calificacion>(3),
     };
 
-    console.log({ ID: rubricaid, DIMENSION: dimensioninput });
-
     let data = await this.inserdimension
       .mutate({ ID: rubricaid, DIMENSION: dimensioninput })
       .toPromise();
 
-    console.log(data);
     dimension.id = data.data.update_rubrica_dimension_by_pk.id;
     dimension.descripcion = dimensioninput.descripcion;
     dimension.calificaciones =
