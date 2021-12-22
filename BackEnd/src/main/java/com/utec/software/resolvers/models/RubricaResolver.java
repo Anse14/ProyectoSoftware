@@ -10,7 +10,6 @@ import org.eclipse.microprofile.graphql.*;
 import javax.inject.Inject;
 import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
-import javax.persistence.Subgraph;
 import javax.transaction.Transactional;
 import java.util.*;
 

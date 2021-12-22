@@ -22,29 +22,29 @@ public class AuthController {
     @Path("/refresh")
     @Transactional
     public RefreshApi refresh(RefreshApi req) {
-        Optional<RefreshToken> refresh = RefreshToken.findByIdOptional(req.email);
+        Optional<RefreshToken> refresh = RefreshToken.findByIdOptional(req.getEmail());
         if(refresh.isEmpty()) {
             return new RefreshApi("", "", 1);
         }
-        if(!refresh.get().getToken().equals(req.refresh)) {
-            return new RefreshApi(req.email, "", 2);
+        if(!refresh.get().getToken().equals(req.getRefresh())) {
+            return new RefreshApi(req.getEmail(), "", 2);
         }
 
-        final String token = authService.genAccessToken(req.email);
+        final String token = authService.genAccessToken(req.getEmail());
 
-        return new RefreshApi(req.email, token, 0);
+        return new RefreshApi(req.getEmail(), token, 0);
     }
 
     @POST
     @Path("/google-login")
     @Transactional
     public GLoginApi glogin(GLoginApi usr) throws GeneralSecurityException, IOException {
-        if(usr.token.equals("")) {
+        if(usr.getToken().equals("")) {
             return new GLoginApi("", 1, "", "");
         }
         GoogleIdToken idToken = null;
         try {
-            idToken = authService.verifyGtoken(usr.token);
+            idToken = authService.verifyGtoken(usr.getToken());
         } catch(IllegalArgumentException err) {
             return new GLoginApi("", 3, "", "");
         }

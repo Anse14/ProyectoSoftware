@@ -4,7 +4,6 @@ import com.utec.software.model.*;
 import com.utec.software.services.DBService;
 import io.quarkus.vertx.http.runtime.CurrentVertxRequest;
 import io.smallrye.graphql.api.Context;
-import io.smallrye.mutiny.tuples.Tuple2;
 import oracle.ucp.util.Pair;
 import org.eclipse.microprofile.graphql.*;
 

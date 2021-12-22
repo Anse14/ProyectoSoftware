@@ -1,7 +1,6 @@
 package com.utec.software.resolvers.models;
 
 import com.utec.software.model.DimensionUsuario;
-import com.utec.software.model.RubricaUsuario;
 import com.utec.software.services.DBService;
 import io.quarkus.vertx.http.runtime.CurrentVertxRequest;
 import io.smallrye.graphql.api.Context;

@@ -160,6 +160,11 @@
             </chart>
           </nb-card-body>
         </div>
+        <div class="container double" id="grafico" *ngIf="!graphLoad">
+          <nb-card-body>
+            <app-loading></app-loading>
+          </nb-card-body>
+        </div>
       </div>
     </div>
   </div>

@@ -1,10 +1,13 @@
 package com.utec.software.api;
 
+import lombok.Data;
+
+@Data
 public class RefreshApi {
-    public String email;
-    public String refresh;
-    public String token;
-    public Integer status;
+    private String email;
+    private String refresh;
+    private String token;
+    private Integer status;
 
     public RefreshApi(String email, String token, Integer status) {
         this.email = email;

@@ -1,6 +1,5 @@
 package com.utec.software.resolvers.models;
 
-import com.utec.software.model.Alumno;
 import com.utec.software.model.Carrera;
 import com.utec.software.services.DBService;
 import io.quarkus.vertx.http.runtime.CurrentVertxRequest;

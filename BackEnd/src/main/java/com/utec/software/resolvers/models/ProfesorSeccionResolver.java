@@ -11,7 +11,6 @@ import org.eclipse.microprofile.graphql.*;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.UUID;
 
 @GraphQLApi
