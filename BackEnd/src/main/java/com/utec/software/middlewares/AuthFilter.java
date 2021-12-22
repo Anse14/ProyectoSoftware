@@ -28,12 +28,12 @@ public class AuthFilter {
 
         if(token == null) {
             // DEBUG CODE
-            rc.request().headers().add("email", "jorge.gonzales@utec.edu.pe");
-            rc.next();
-            return;
+//            rc.request().headers().add("email", "jorge.gonzales@utec.edu.pe");
+//            rc.next();
+//            return;
             // END OF DEBUG CODE
-            // rc.fail(405);
-            // return;
+             rc.fail(405);
+             return;
         }
 
         if(Objects.equals(token, masterKey)) {

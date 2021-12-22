@@ -18,7 +18,7 @@ export class ProfesorService {
 
   async getProfesor() {
     let data = await this.getProfesorById
-      .fetch({ ID: "032fa7ac-4400-4766-a3ce-412cda17c012" })
+      .fetch({ ID: this.userService.user.id })
       .toPromise();
     let cursosMap = new Map();
     this.cursosService.cursos = [];

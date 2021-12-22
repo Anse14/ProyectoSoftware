@@ -55,19 +55,19 @@ export class ProfesorCalificarRubricaComponent
     super();
   }
 
-  ngOnInit(): void {
-    this.rubricaService.updateRubrica(this.route.snapshot.paramMap.get('id'));
-
+  async ngOnInit() {
+    await this.rubricaService.updateRubrica(
+      this.route.snapshot.paramMap.get('id')
+    );
+    await this.cursoService.getCurso(
+      this.rubricaService.rubrica.value.curso.id
+    );
+    await this.alumnosService.getAlumnos();
     this.rubricaService.rubrica
       .pipe(untilComponentDestroyed(this))
       .subscribe(async (rubrica: Rubrica) => {
         if (rubrica == null) {
           return;
-        }
-
-        if (this.cursoService.curso.value == null) {
-          await this.cursoService.getCurso(rubrica.curso.id);
-          await this.alumnosService.getAlumnos();
         }
 
         var str = new String(
