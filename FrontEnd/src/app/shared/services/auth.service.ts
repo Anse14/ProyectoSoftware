@@ -89,7 +89,7 @@ export class AuthService {
   continueLogin() {
     this.fetchUser().then((data) => {
       if (data.data.getUser.tipo == RolEnum.Profesor) {
-        this.router.navigateByUrl('/professor/dashboard');
+        this.router.navigateByUrl('/profesor/dashboard');
       }
       if (data.data.getUser.tipo == RolEnum.Calidad) {
         this.router.navigateByUrl('/calidad/dashboard');
