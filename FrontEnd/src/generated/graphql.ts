@@ -657,7 +657,7 @@ export type GetrubricasusuarioQueryVariables = Exact<{
 }>;
 
 
-export type GetrubricasusuarioQuery = { __typename?: 'Query', rubrica_usuario_by_rubrica?: Array<{ __typename?: 'RubricaUsuario', id?: string | null | undefined } | null | undefined> | null | undefined };
+export type GetrubricasusuarioQuery = { __typename?: 'Query', rubrica_usuario_by_rubrica?: Array<{ __typename?: 'RubricaUsuario', id?: string | null | undefined, dimensionUsuarios?: Array<{ __typename?: 'DimensionUsuario', descripcion?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined> | null | undefined };
 
 export type GetDimensionUsuarioByRubricaUsuarioQueryVariables = Exact<{
   ID: Scalars['String'];
@@ -686,7 +686,7 @@ export type RubricaUsuarioByRubricaSeccionQueryVariables = Exact<{
 }>;
 
 
-export type RubricaUsuarioByRubricaSeccionQuery = { __typename?: 'Query', rubrica_usuario_by_rubrica_seccion?: Array<{ __typename?: 'RubricaUsuario', id?: string | null | undefined, evaluacionTotal: number, alumno?: { __typename?: 'Alumno', id?: string | null | undefined, nombre?: string | null | undefined } | null | undefined } | null | undefined> | null | undefined };
+export type RubricaUsuarioByRubricaSeccionQuery = { __typename?: 'Query', rubrica_usuario_by_rubrica_seccion?: Array<{ __typename?: 'RubricaUsuario', id?: string | null | undefined, evaluacionTotal: number, alumno?: { __typename?: 'Alumno', id?: string | null | undefined, nombre?: string | null | undefined } | null | undefined, dimensionUsuarios?: Array<{ __typename?: 'DimensionUsuario', descripcion?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined> | null | undefined };
 
 export type CalificaalumnoMutationVariables = Exact<{
   NOTA: Scalars['Float'];
@@ -867,6 +867,9 @@ export const GetrubricasusuarioDocument = gql`
     query GETRUBRICASUSUARIO($ID: String!) {
   rubrica_usuario_by_rubrica(rubricaId: $ID) {
     id
+    dimensionUsuarios {
+      descripcion
+    }
   }
 }
     `;
@@ -975,6 +978,9 @@ export const RubricaUsuarioByRubricaSeccionDocument = gql`
     alumno {
       id
       nombre
+    }
+    dimensionUsuarios {
+      descripcion
     }
   }
 }

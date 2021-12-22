@@ -1,4 +1,7 @@
-<div class="container-fluid main-container" *ngIf="cursosService.curso.value != null">
+<div
+  class="container-fluid main-container"
+  *ngIf="cursosService.curso.value != null"
+>
   <div class="row text-center colorname">
     <div class="col-2 colorcourse">
       <h1>{{ cursosService.curso.value.codigo }}</h1>
@@ -35,7 +38,10 @@
         <div class="accordion accordion-flush" id="accordionWeeks">
           <div
             class="accordion-item"
-            *ngFor="let rubrica of cursosService.curso.value.rubricas; let i = index"
+            *ngFor="
+              let rubrica of cursosService.curso.value.rubricas;
+              let i = index
+            "
           >
             <h2 class="accordion-header" [id]="'flush-heading-' + i">
               <button
@@ -115,10 +121,18 @@
       <div class="row p-3">
         <h3>Secciones</h3>
         <ul
-          *ngFor="let seccion of cursosService.curso.value.secciones; let j = index"
+          *ngFor="
+            let seccion of cursosService.curso.value.secciones;
+            let j = index
+          "
         >
           <li>
-            {{ seccion.codigo }}
+            <input
+              class="btn btn-primary"
+              type="button"
+              value="{{ seccion.codigo }}"
+              (click)="loadgraphic(seccion.id)"
+            />
           </li>
         </ul>
       </div>
@@ -136,11 +150,7 @@
             />
           </div>
         </div>
-        <div
-          class="container double"
-          id="grafico"
-          *ngIf="graphLoad"
-        >
+        <div class="container double" id="grafico" *ngIf="graphLoad">
           <nb-card-body>
             <chart
               [data]="barChartData"

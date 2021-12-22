@@ -61,6 +61,9 @@ query VERIFYDIMENSIONINRUBRICA($ID: String!) {
 query GETRUBRICASUSUARIO($ID: String!) {
   rubrica_usuario_by_rubrica(rubricaId: $ID) {
     id
+    dimensionUsuarios {
+      descripcion
+    }
   }
 }
 
@@ -126,6 +129,9 @@ query rubricaUsuarioByRubricaSeccion($ID: String!, $SECCIONID: String!) {
     alumno {
       id
       nombre
+    }
+    dimensionUsuarios {
+      descripcion
     }
   }
 }

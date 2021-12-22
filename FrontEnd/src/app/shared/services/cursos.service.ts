@@ -62,59 +62,6 @@ export class CursosService {
     return;
   }
 
-  async getData() {
-    var labels: string[] = [];
-    var datagood: number[] = [];
-    var databad: number[] = [];
-
-    var integer: number = 1;
-    for (let i of this.curso.value.rubricas) {
-      labels.push('Rubrica ' + integer.toString());
-      integer++;
-      var god: number = 0;
-      var bad: number = 0;
-      for (let sec of this.curso.value.secciones) {
-        let rubricasdata = await this.rubrica_usuario_by_rubrica_seccion
-          .fetch({ ID: i.id, SECCIONID: sec.id })
-          .toPromise();
-        for (let rubricauser of rubricasdata.data
-          .rubrica_usuario_by_rubrica_seccion) {
-          var dimensionesdata = await this.getDimensionUsuarioByRubricaUsuario
-            .fetch({ ID: rubricauser.id })
-            .toPromise()
-            .then((data) => {
-              if (data.data.dimension_usuario_by_rubrica_usuario != null) {
-                for (let dimuser of data.data
-                  .dimension_usuario_by_rubrica_usuario) {
-                  if (
-                    dimuser.descripcion == 'Bueno' ||
-                    dimuser.descripcion == 'Excelente'
-                  )
-                    god++;
-                  else bad++;
-                }
-              }
-            });
-        }
-      }
-      datagood.push(god);
-      databad.push(bad);
-    }
-    let datasets = [];
-    datasets.push({
-      data: datagood,
-      label: 'Bueno - Excelente',
-      backgroundColor: ['#C997C6', '#C997C6', '#C997C6', '#C997C6'],
-    });
-    datasets.push({
-      data: databad,
-      label: 'En desarrollo - No aceptable',
-      backgroundColor: ['#FFEE93', '#FFEE93', '#FFEE93', '#FFEE93'],
-    });
-
-    return [labels, datasets];
-  }
-
   async getData2(id: string) {
     var labels: string[] = [];
     var datagood: number[] = [];
@@ -159,6 +106,50 @@ export class CursosService {
         backgroundColor: ['#FFEE93', '#FFEE93', '#FFEE93', '#FFEE93'],
       },
     ];
+  }
+
+  async getgraficaofCursoPrototype1(seccionid: string) {
+    var labels: string[] = [];
+    var datagood: number[] = [];
+    var databad: number[] = [];
+    for (let i of this.curso.value.rubricas) {
+      var integer: number = 1;
+      labels.push('Rubrica ' + integer.toString());
+      integer++;
+      var god: number = 0;
+      var bad: number = 0;
+      let rubricasdata = await this.rubrica_usuario_by_rubrica_seccion
+        .fetch({ ID: i.id, SECCIONID: seccionid })
+        .toPromise();
+
+      for (let rubricauser of rubricasdata.data
+        .rubrica_usuario_by_rubrica_seccion) {
+        for (let dimuser of rubricauser.dimensionUsuarios) {
+          if (
+            dimuser.descripcion == 'Bueno' ||
+            dimuser.descripcion == 'Excelente'
+          )
+            god++;
+          else bad++;
+        }
+      }
+      datagood.push(god);
+      databad.push(bad);
+    }
+
+    let datasets = [];
+    datasets.push({
+      data: datagood,
+      label: 'Bueno - Excelente',
+      backgroundColor: ['#C997C6', '#C997C6', '#C997C6', '#C997C6'],
+    });
+    datasets.push({
+      data: databad,
+      label: 'En desarrollo - No aceptable',
+      backgroundColor: ['#FFEE93', '#FFEE93', '#FFEE93', '#FFEE93'],
+    });
+
+    return [labels, datasets];
   }
 
   async getdataofCurso(id: string) {
