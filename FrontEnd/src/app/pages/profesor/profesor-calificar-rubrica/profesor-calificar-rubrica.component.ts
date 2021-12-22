@@ -74,17 +74,17 @@ export class ProfesorCalificarRubricaComponent
           rubrica.numCritDesemp + rubrica.criterioDeDesempenho
         );
         this.rowsActividad = Math.round(str.length / 130);
+        console.log(rubrica.dimensiones);
+        console.log(rubrica.dimensiones.length);
+
         this.califsDimensiones = rubrica.dimensiones.map(() => '');
         this.califsDimensionesPosic = [...this.califsDimensiones];
       });
   }
 
   getResultado(pos: number): number {
-    console.log(this.califsDimensionesPosic);
     return this.califsDimensionesPosic.filter(
-      (iter) =>
-        typeof iter == 'object' &&
-        iter.titulo.toLowerCase() == this.calificacionesArray[pos]
+      (iter) => iter.toLowerCase() == this.calificacionesArray[pos]
     ).length;
   }
   enableDisableRule() {
@@ -94,10 +94,8 @@ export class ProfesorCalificarRubricaComponent
   async setRubricaUsuario(ru: RubricaUsuario) {
     const data = await this.cursoService.getDimensionesUser(ru.id);
     if (data == null) {
-      console.log('97');
       this.califsDimensionesPosic =
         this.rubricaService.rubrica.value.dimensiones.map(() => '');
-
       if (
         this.rubricaUsuario &&
         this.califsDimensionesPosic.some((iter) => typeof iter != 'object')
@@ -109,14 +107,17 @@ export class ProfesorCalificarRubricaComponent
       }
       this.rubricaUsuario = ru;
     } else {
-      console.log('111');
-      this.califsDimensionesPosic = [
-        'excelente',
-        'excelente',
-        'excelente',
-        'excelente',
-        'excelente',
-      ];
+      const dimusers = data.data.dimension_usuario_by_rubrica_usuario;
+      var i = 0;
+      for (let dim of this.rubricaService.rubrica.value.dimensiones) {
+        for (let dimuser of dimusers) {
+          if (dimuser.dimension.id == dim.id) {
+            this.califsDimensionesPosic[i] = dimuser.descripcion;
+            this.califsDimensiones[i] = dimuser.calificacion.id;
+            i++;
+          }
+        }
+      }
       this.rubricaUsuario = ru;
     }
   }
@@ -194,7 +195,7 @@ export class ProfesorCalificarRubricaComponent
         this.resultados.noAceptable += 1;
         break;
     }*/
-    this.califsDimensionesPosic[k] = calificacion;
+    this.califsDimensionesPosic[k] = calificacion.titulo;
 
     console.log(calificacion);
     this.califsDimensiones[k] = calificacion.id;

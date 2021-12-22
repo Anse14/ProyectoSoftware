@@ -664,7 +664,7 @@ export type GetDimensionUsuarioByRubricaUsuarioQueryVariables = Exact<{
 }>;
 
 
-export type GetDimensionUsuarioByRubricaUsuarioQuery = { __typename?: 'Query', dimension_usuario_by_rubrica_usuario?: Array<{ __typename?: 'DimensionUsuario', descripcion?: string | null | undefined } | null | undefined> | null | undefined };
+export type GetDimensionUsuarioByRubricaUsuarioQuery = { __typename?: 'Query', dimension_usuario_by_rubrica_usuario?: Array<{ __typename?: 'DimensionUsuario', descripcion?: string | null | undefined, dimension?: { __typename?: 'Dimension', id?: string | null | undefined } | null | undefined, calificacion?: { __typename?: 'Calificacion', id?: string | null | undefined } | null | undefined } | null | undefined> | null | undefined };
 
 export type GetrubricaQueryVariables = Exact<{
   ID: Scalars['String'];
@@ -884,6 +884,12 @@ export const GetrubricasusuarioDocument = gql`
 export const GetDimensionUsuarioByRubricaUsuarioDocument = gql`
     query GetDimensionUsuarioByRubricaUsuario($ID: String!) {
   dimension_usuario_by_rubrica_usuario(rubrica_usuario_id: $ID) {
+    dimension {
+      id
+    }
+    calificacion {
+      id
+    }
     descripcion
   }
 }

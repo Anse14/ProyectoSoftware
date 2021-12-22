@@ -1,5 +1,4 @@
-
-#QUERY FOR LOGIN 
+#QUERY FOR LOGIN
 
 query GetUser {
   getUser {
@@ -11,11 +10,10 @@ query GetUser {
   }
 }
 
-
 #QUERYS FOR PROFESOR DASHBOARD
 
 query GETPROFESORBYID($ID: String!) {
-  profesor_by_pk(id: $ID){
+  profesor_by_pk(id: $ID) {
     id
     nombre
     secciones {
@@ -30,22 +28,20 @@ query GETPROFESORBYID($ID: String!) {
   }
 }
 
-
-
-#QUERY FOR COURSEVIEW 
+#QUERY FOR COURSEVIEW
 
 query GetCursoRubricasByPk($ID: String!) {
-  curso_by_pk(id: $ID){
+  curso_by_pk(id: $ID) {
     rubricas {
-      id,
-      criterioDeDesempenho,
-      status,
+      id
+      criterioDeDesempenho
+      status
     }
   }
 }
 
 query GetCursoByPk($ID: String!) {
-  curso_by_pk(id: $ID){
+  curso_by_pk(id: $ID) {
     id
     codigo
     nombre
@@ -56,73 +52,77 @@ query GetCursoByPk($ID: String!) {
   }
 }
 
-#BORRAR MAYBE 
-query VERIFYDIMENSIONINRUBRICA($ID: String!){
+#BORRAR MAYBE
+query VERIFYDIMENSIONINRUBRICA($ID: String!) {
   existedimension_rubrica_by_pk(id: $ID)
 }
 
 #QUERY FOR GET RUBRICAS_USUARIO
-query GETRUBRICASUSUARIO($ID: String!){
-  rubrica_usuario_by_rubrica(rubricaId: $ID){
+query GETRUBRICASUSUARIO($ID: String!) {
+  rubrica_usuario_by_rubrica(rubricaId: $ID) {
     id
   }
 }
 
 #QUERY FOR GET DIMENSIONES USUARIO BY GET RUBRICAUSUARIO
-query GetDimensionUsuarioByRubricaUsuario($ID: String!){
-  dimension_usuario_by_rubrica_usuario(rubrica_usuario_id: $ID){
-    descripcion,
+query GetDimensionUsuarioByRubricaUsuario($ID: String!) {
+  dimension_usuario_by_rubrica_usuario(rubrica_usuario_id: $ID) {
+    dimension {
+      id
+    }
+    calificacion {
+      id
+    }
+    descripcion
   }
 }
 
 #QUERY FOR CREATE-RUBRICA
 
-
-query GETRUBRICA($ID: String!){
-  rubrica_by_pk(id: $ID){
-    id,
-    evidencia,
-    actividadBase,
-    ciclo,
-    codigo,
-    criterioDeDesempenho,
-    numCritDesemp,
-    evidencia,
-    fecha,
-    semana,
-    semestre,
-    status,
-    tipo,  
-    dimensiones{
+query GETRUBRICA($ID: String!) {
+  rubrica_by_pk(id: $ID) {
+    id
+    evidencia
+    actividadBase
+    ciclo
+    codigo
+    criterioDeDesempenho
+    numCritDesemp
+    evidencia
+    fecha
+    semana
+    semestre
+    status
+    tipo
+    dimensiones {
       id
       descripcion
     }
     curso {
       id
     }
-  }  
+  }
 }
 
-
-#QUERY FOR CREATE-RUBRICA AND CALIFICATE-RUBRICA 
-query GETDIMENSIONBYPK($ID: String!){
-  dimension_by_pk(id: $ID){
-    id,
-    descripcion,
-    calificaciones{
-      id,
-      descripcion,
-      nota,
+#QUERY FOR CREATE-RUBRICA AND CALIFICATE-RUBRICA
+query GETDIMENSIONBYPK($ID: String!) {
+  dimension_by_pk(id: $ID) {
+    id
+    descripcion
+    calificaciones {
+      id
+      descripcion
+      nota
       titulo
     }
   }
 }
 
 #GETALUMNOSTOCALIFICATE
-query rubricaUsuarioByRubricaSeccion($ID: String!,$SECCIONID: String!)  {
+query rubricaUsuarioByRubricaSeccion($ID: String!, $SECCIONID: String!) {
   rubrica_usuario_by_rubrica_seccion(rubricaId: $ID, seccionId: $SECCIONID) {
-    id,
-    evaluacionTotal,
+    id
+    evaluacionTotal
     alumno {
       id
       nombre
@@ -131,10 +131,20 @@ query rubricaUsuarioByRubricaSeccion($ID: String!,$SECCIONID: String!)  {
 }
 
 #CALIFICATEALUMNO
-mutation CALIFICAALUMNO($NOTA: Float!, $DESC: String, $CALIFICID: String!, $RUBUSERID: String!) {
-  calificar_alumno(nota: $NOTA, descripcion: $DESC, calificacion_id: $CALIFICID, rubrica_usuario_id: $RUBUSERID){
-    id,
-    descripcion,
+mutation CALIFICAALUMNO(
+  $NOTA: Float!
+  $DESC: String
+  $CALIFICID: String!
+  $RUBUSERID: String!
+) {
+  calificar_alumno(
+    nota: $NOTA
+    descripcion: $DESC
+    calificacion_id: $CALIFICID
+    rubrica_usuario_id: $RUBUSERID
+  ) {
+    id
+    descripcion
     nota
   }
 }
@@ -144,65 +154,73 @@ mutation UPDATERUBRICA($ID: String!, $ProfesorId: String!) {
   update_rubrica_by_pk(id: $ID, profesorId: $ProfesorId)
 }
 
-
 #INSERT DIMENSION IN RUBRICA
-mutation INSERTDIMENSIONRUBRICA($ID: String!, $DIMENSION: DimensionSchemaInput!) {
-   update_rubrica_dimension_by_pk(id:$ID, dimension:$DIMENSION) {
+mutation INSERTDIMENSIONRUBRICA(
+  $ID: String!
+  $DIMENSION: DimensionSchemaInput!
+) {
+  update_rubrica_dimension_by_pk(id: $ID, dimension: $DIMENSION) {
     id
-    calificaciones{
-      id,
-      descripcion,
-      nota,
+    calificaciones {
+      id
+      descripcion
+      nota
       titulo
     }
   }
 }
 
 #UPDATE DIMENSIONES
-mutation UPDATEDIMENSION($ID: String!, $NOTA: Int! , $DESCRIPCION: String!, $TITLE: String!, $OPTION: Boolean!){
-  update_dimensioncalificacion_by_pk(id: $ID, nota:$NOTA, descripcion: $DESCRIPCION, title: $TITLE, option:$OPTION){
+mutation UPDATEDIMENSION(
+  $ID: String!
+  $NOTA: Int!
+  $DESCRIPCION: String!
+  $TITLE: String!
+  $OPTION: Boolean!
+) {
+  update_dimensioncalificacion_by_pk(
+    id: $ID
+    nota: $NOTA
+    descripcion: $DESCRIPCION
+    title: $TITLE
+    option: $OPTION
+  ) {
     id
   }
 }
 
-
-
-
 #QUERYS FOR CALIDAD EDUCATIVA RESULTADOS
-query GETCARRERAS{
-  carrera{
+query GETCARRERAS {
+  carrera {
     id
     nombre
   }
 }
 
-
-query GETCURSOSBYCARRERA($ID: String!){
-  carrera_by_pk(id: $ID){
-    cursos{
-    	id,
-      nombre,
-  	}
+query GETCURSOSBYCARRERA($ID: String!) {
+  carrera_by_pk(id: $ID) {
+    cursos {
+      id
+      nombre
+    }
   }
 }
 
-
 #QUERY FOR CALIDAD EDUCATIVA VERIFICACION
 
-
-query GETALLCURSOS{
-  curso{
-    id,
-    nombre,
-    rubricas{
+query GETALLCURSOS {
+  curso {
+    id
+    nombre
+    rubricas {
       id
       status
     }
   }
 }
 
-mutation VERIFY($ID: String!, $CALIDAD: String, $BOOL: Boolean!){
-  evaluate_rubrica_by_pk(id:$ID , calidadEducativaId: $CALIDAD, status: $BOOL){
+mutation VERIFY($ID: String!, $CALIDAD: String, $BOOL: Boolean!) {
+  evaluate_rubrica_by_pk(id: $ID, calidadEducativaId: $CALIDAD, status: $BOOL) {
     id
   }
 }
