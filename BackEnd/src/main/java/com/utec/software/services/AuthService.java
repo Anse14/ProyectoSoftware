@@ -11,7 +11,6 @@ import com.utec.software.model.Alumno;
 import com.utec.software.model.CalidadEducativa;
 import com.utec.software.model.Profesor;
 import com.utec.software.model.RefreshToken;
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.context.ApplicationScoped;

@@ -3,7 +3,6 @@ package com.utec.software.resolvers.models;
 import com.utec.software.model.Profesor;
 import com.utec.software.services.DBService;
 import io.quarkus.vertx.http.runtime.CurrentVertxRequest;
-import io.smallrye.common.constraint.NotNull;
 import io.smallrye.graphql.api.Context;
 import org.eclipse.microprofile.graphql.*;
 
@@ -11,9 +10,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @GraphQLApi

@@ -1,12 +1,16 @@
 package com.utec.software.api;
 
-public class LoginApi {
-    public String email;
-    public String password;
+import lombok.Data;
 
-    public Integer status;
-    public String token;
-    public String refresh;
+@Data
+public class LoginApi {
+    private String email;
+    private String password;
+
+    private Integer status;
+
+    private String token;
+    private String refresh;
 
     public LoginApi(String email, Integer status, String token, String refresh) {
         this.email = email;

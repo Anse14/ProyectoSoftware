@@ -1,11 +1,14 @@
 package com.utec.software.api;
 
-public class GLoginApi {
-    public String email;
+import lombok.Data;
 
-    public Integer status;
-    public String token;
-    public String refresh;
+@Data
+public class GLoginApi {
+    private String email;
+
+    private Integer status;
+    private String token;
+    private String refresh;
 
 
     public GLoginApi(String email, Integer status, String token, String refresh) {

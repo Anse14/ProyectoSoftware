@@ -1,7 +1,6 @@
 package com.utec.software.resolvers.models;
 
 import com.utec.software.model.Calificacion;
-import com.utec.software.model.Dimension;
 import com.utec.software.services.DBService;
 import io.quarkus.vertx.http.runtime.CurrentVertxRequest;
 import io.smallrye.graphql.api.Context;
