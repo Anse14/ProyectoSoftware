@@ -66,11 +66,21 @@ export class ProfesorCrearRubricaComponent
       });
   }
 
-  async changeCalificacion(newdescription: string, titulo:string) {
-    this.rubricaService.updateDimension(0, newdescription, titulo, true, this.newDimension.id);
+  changeDescription() {
+    this.notificationService.error('Funcion no implementada aun');
   }
 
-  async update(pos: number, id: string){
+  changeCalificacion(newdescription: string, titulo: string) {
+    this.rubricaService.updateDimension(
+      0,
+      newdescription,
+      titulo,
+      true,
+      this.newDimension.id
+    );
+  }
+
+  async update(pos: number, id: string) {
     this.newDimension.id = id;
     const data = this.rubricaService.rubrica.value.dimensiones[pos];
     this.newDimension.description = data.descripcion;
@@ -79,7 +89,6 @@ export class ProfesorCrearRubricaComponent
     this.newDimension.inProcess = data.calificaciones[2].descripcion;
     this.newDimension.notAceptable = data.calificaciones[3].descripcion;
   }
-
 
   async saveDimension() {
     var dimensioninput: any = {
@@ -119,11 +128,11 @@ export class ProfesorCrearRubricaComponent
         this.rubricaService.rubrica.value
       )
     );
-
+    this.rubricaService.updateRubrica(this.rubricaService.rubrica.value.id);
     this.emptynewDImension();
   }
 
-  emptynewDImension(){
+  emptynewDImension() {
     this.newDimension = {
       id: '',
       description: '',
@@ -174,7 +183,9 @@ export class ProfesorCrearRubricaComponent
       maxPuntaje = dim.calificaciones[0].nota + maxPuntaje;
       for (let i = 0; i < dim.calificaciones.length - 1; i++) {
         if (dim.calificaciones[i].nota > dim.calificaciones[i + 1].nota) {
-          this.notificationService.success('Se guardo la rubrica correctamente');
+          this.notificationService.success(
+            'Se guardo la rubrica correctamente'
+          );
         } else {
           this.notificationService.error('Insertar otros puntajes');
           return false;
@@ -198,5 +209,4 @@ export class ProfesorCrearRubricaComponent
     this.notificationService.error('Por favor ingrese al menos 4 dimensiones');
     return false;
   }
-
 }

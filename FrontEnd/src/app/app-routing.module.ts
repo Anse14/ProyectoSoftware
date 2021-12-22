@@ -61,8 +61,8 @@ const routes: Routes = [
       },
       {
         path: 'verificacion',
-        component: CalidadVerificacionComponent
-      }
+        component: CalidadVerificacionComponent,
+      },
     ],
   },
 ];
